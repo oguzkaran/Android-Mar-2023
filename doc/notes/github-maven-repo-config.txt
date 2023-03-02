@@ -1,0 +1,15 @@
+git clone https://github.com/oguzkaran/android-may-2022-maven-repo
+
+git config --global user.email "oguzkaran@csystem.org"
+
+
+mvn install:install-file -DgroupId=org.csystem -DartifactId=org-csystem-util-math -Dversion=35.0.0 -Dfile=../jars/org-csystem-util-math-35.0.0.jar -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=. -DcreateChecksum=true
+
+git add -A . && git commit -m "released version 35.0.0"
+
+git push
+
+
+'https://raw.github.com/oguzkaran/android-may-2022-maven-repo/main'
+
+git add :/
