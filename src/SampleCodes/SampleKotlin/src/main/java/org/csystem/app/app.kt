@@ -1,31 +1,13 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Bir fonksiyonu çağıran fonksiyon (caller) ile çağrılan fonksiyon (callee) aynı pakette ise paket ismi kullanılmasa
-    da olur. Yani aynı .kt uzantılı dosyada bulunan veya farklı dosyada fakat aynı paket altında bulunan fonksiyonlar
-    doğrudan çağrılabilir
+    Kotlin 1.6 ile birlikte klavyeden enter basılana kadar girilen yazıyı bir String olarak okuyan readln fonkiyonu
+    eklenmiştir
 ----------------------------------------------------------------------------------------------------------------------*/
-package org.csystem.app
+package csd
 
 fun main()
 {
-    val a: Int = 10
-    val b: Int = 20
-    val c = a.plus(b)
+    print("Bir sayı giriniz:")
+    val a = readln().toInt()
 
-    println("Hello, World")
-    foo()
-    println("Goodbye, World")
+    println("${a * a}")
 }
-
-fun foo()
-{
-    println("foo")
-    bar()
-}
-
-
-fun bar()
-{
-    println("bar")
-}
-
-
