@@ -3,10 +3,8 @@ package org.csystem.app;
 public class App {
     public static void main(String[] args)
     {
-        {
-            int a = 10;
+        String s = null;
 
-            System.out.println(a);
-        }
+        s.toLowerCase();
     }
 }

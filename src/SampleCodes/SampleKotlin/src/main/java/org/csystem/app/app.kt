@@ -1,13 +1,12 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Kotlin 1.6 ile birlikte klavyeden enter basılana kadar girilen yazıyı bir String olarak okuyan readln fonkiyonu
-    eklenmiştir
+    Kotlin' de gerçek sayı sabitleri üstel olarak yazılabilir. Sayının değeri ne olursa olsun üstel olarak yazılan
+    sabitler Double türdendir
 ----------------------------------------------------------------------------------------------------------------------*/
-package csd
+package org.csystem.app
 
 fun main()
 {
-    print("Bir sayı giriniz:")
-    val a = readln().toInt()
+    val avogadroNumber: Double = 6.02E23
 
-    println("${a * a}")
+    println("Avogadro Number = $avogadroNumber")
 }
