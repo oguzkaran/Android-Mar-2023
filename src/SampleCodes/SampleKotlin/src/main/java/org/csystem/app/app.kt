@@ -1,53 +1,63 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: Parametresi ile aldığı bir sayının basamaklarının basamak sayıncı kuvvetleri toplamının
-    kendisine eşit olup olmadığını test eden isArmstrong isimli fonksiyonu yazınız ve aşağıdaki kod ile test ediniz. Fonksiyon
-    negatif değerler için false değerini döndürecektir
-
-    Açıklama: Kuvvet alma işlemi için bir önceki örnekte yazılan pow fonksiyonu kullanılacaktır
+    Yukarıdaki iki fonksiyonun basit bir karşılaştırması
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main() = runIsArmstrongTest()
-
-fun runIsArmstrongTest()
+fun main()
 {
-    while (true) {
-        print("Bir sayı giriniz::")
-        val a = readln().toInt()
+    println(if (isPrime(1_000_003)) "Asal" else "Asal değil")
+    println(if (isPrimeSlow(1_000_003)) "Asal" else "Asal değil")
+}
 
-        if (a == 0)
-            break;
+fun isPrimeSlow(a: Int) : Boolean
+{
+    if (a <= 1)
+        return false
 
-        println(if (isArmstrong(a)) "Armstrong sayısı" else "Armstrong sayısı değil")
+    val halfValue = a / 2
+
+    var count = 0
+
+    for (i in 2..halfValue) {
+        ++count
+        if (a % i == 0)
+            return false
     }
 
-    println("Tekrar yapıyor musunuz?")
+    println("isPrimeSlow:count=$count")
+    return true
 }
 
-fun isArmstrong(value: Int) : Boolean
+fun isPrime(a: Long) : Boolean
 {
-    TODO("TODO")
-}
+    if (a <= 1)
+        return false
 
-fun countDigits(value: Int) : Int
-{
-    var count = 0
-    var temp = value
+    if (a % 2 == 0L)
+        return a == 2L
 
-    do {
+    if (a % 3 == 0L)
+        return a == 3L
+
+    if (a % 5 == 0L)
+        return a == 5L
+
+    if (a % 7 == 0L)
+        return a == 7L
+
+    var i = 11L
+
+    var count = 0L
+
+    while (i * i <= a) {
         ++count
-        temp /= 10
-    } while (temp != 0)
+        if (a % i == 0L)
+            return false
 
-    return count
-}
+        i += 2
+    }
 
-fun pow(a: Int, b: Int) : Int
-{
-    var result = 1
+    println("isPrime:count=$count")
 
-    for (i in 1..b)
-        result *= a
-
-    return result
+    return true
 }
