@@ -1,18 +1,19 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: Parametresi ile aldığı Int türden bir sayının basamakları toplamını döndüren sumDigits metodunu
-    yazınız ve aşağıdaki kod ile test ediniz
+    Sınıf Çalışması: Parametresi ile aldığı Int türden bir sayının tersini döndüren reversed isimli fonksiyonu yazınız
+    ve aşağıdaki kod ile test ediniz.
+    Algoritma: 123 -> 3 -> 3 * 10 + 2 = 32 -> 32 * 10 + 1 = 321
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main() = runCountDigitsTest()
+fun main() = runReversedTest()
 
-fun runCountDigitsTest()
+fun runReversedTest()
 {
     while (true) {
         print("Bir sayı giriniz:")
         val value = readln().toInt()
 
-        println("$value sayısının basamakları toplamı:${sumDigits(value)}")
+        println("$value sayısının tersi:${reversed(value)}")
 
         if (value == 0)
             break
@@ -21,7 +22,7 @@ fun runCountDigitsTest()
     println("Tekrar yapıyor musunuz?")
 }
 
-fun sumDigits(value: Int) : Int
+fun reversed(value: Int) : Int
 {
     TODO("TODO")
 }
