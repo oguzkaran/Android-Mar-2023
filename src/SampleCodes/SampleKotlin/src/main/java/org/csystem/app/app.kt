@@ -12,16 +12,13 @@ fun main() = runIsArmstrongTest()
 fun runIsArmstrongTest()
 {
     while (true) {
-        print("Tabanı giriniz:")
+        print("Bir sayı giriniz::")
         val a = readln().toInt()
 
         if (a == 0)
             break;
 
-        print("Üssü giriniz:")
-        val b = readLine()!!.toInt()
-
-        println("pow($a, $b) = ${pow(a, b)}")
+        println(if (isArmstrong(a)) "Armstrong sayısı" else "Armstrong sayısı değil")
     }
 
     println("Tekrar yapıyor musunuz?")
