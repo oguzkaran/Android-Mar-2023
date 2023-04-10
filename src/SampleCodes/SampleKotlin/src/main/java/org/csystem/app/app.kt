@@ -1,37 +1,42 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: Klavyeden alınan a ve b Int türden değerleri için [a, b] aralığında tek ve çift sayıları
-    ayrı ayrı toplayan programı yazınız.
-    Örnekte isEven fonksiyonun "capture" yaptığına dikkat ediniz
+    Sınıf Çalışması: Klavyeden katsayıları girilen ikinci dereceden bir denklemin köklerini bulan programı yazınız.
+    Açıklamalar:
+        - if expression yerine when expression kullanılacaktır
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main() = runApplication()
+fun main() = runApp()
 
-fun runApplication()
+fun runApp()
 {
     print("a?")
-    val a = readln().toInt()
+    val a = readln().toDouble()
 
     print("b?")
-    val b = readln().toInt()
+    val b = readln().toDouble()
 
-    findTotals(a, b)
+    print("c?")
+    val c = readln().toDouble()
+
+    println(findRoots(a, b, c))
 }
 
-fun findTotals(a: Int, b: Int)
+fun calculateDelta(a: Double, b: Double, c: Double) = b * b - 4 * a * c
+
+fun findRoots(a: Double, b: Double, c: Double) : String
 {
-    var evenTotal = 0
-    var oddTotal = 0
+    val delta = calculateDelta(a, b, c)
 
-    for (n in a..b) {
-        fun isEven() = n % 2 == 0
-
-        if (isEven())
-            evenTotal += n
-        else
-            oddTotal += n
+    fun calculateRoots() : String
+    {
+        val sqrtDelta = Math.sqrt(delta)
+        return "x1 = ${(-b + sqrtDelta) / (2 * a)}, x2 = ${(-b - sqrtDelta) / (2 * a)}"
     }
 
-    print("Çift sayıların toplamı:$evenTotal")
-    print("Tek sayıların toplamı:$oddTotal")
+    return if (delta > 0)
+        calculateRoots()
+    else if (delta == 0.0)
+        "x1 = x2 = ${-b / (2 * a)}"
+    else
+        "No real root"
 }
