@@ -1,63 +1,57 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Yukarıdaki iki fonksiyonun basit bir karşılaştırması
+    Sınıf Çalışması: Parametresi ile aldığı Int türden bir n sayısı için n-inci asal sayıyı döndüren getPrime isimli
+    fonksiyonu yazınız ve aşağıdaki kod ile test ediniz. Fonksiyon n'nin pozitif olmayabn değerleri için kontrol
+    yapmayacaktır
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main()
+fun main() = runGetPrimeTest()
+
+fun runGetPrimeTest()
 {
-    println(if (isPrime(1_000_003)) "Asal" else "Asal değil")
-    println(if (isPrimeSlow(1_000_003)) "Asal" else "Asal değil")
-}
+    while (true) {
+        print("Bir sayı giriniz:")
+        val n = readln().toInt()
 
-fun isPrimeSlow(a: Int) : Boolean
-{
-    if (a <= 1)
-        return false
+        if (n <= 0)
+            break
 
-    val halfValue = a / 2
-
-    var count = 0
-
-    for (i in 2..halfValue) {
-        ++count
-        if (a % i == 0)
-            return false
+        println("${n}. asal sayı: ${getPrime(n)}")
     }
 
-    println("isPrimeSlow:count=$count")
-    return true
+    println("Tekrar yapıyor musunuz?")
 }
 
-fun isPrime(a: Long) : Boolean
+fun getPrime(n: Int) : Long
 {
-    if (a <= 1)
+    TODO()
+}
+
+
+fun isPrime(value: Long) : Boolean
+{
+    if (value <= 1)
         return false
 
-    if (a % 2 == 0L)
-        return a == 2L
+    if (value % 2 == 0L)
+        return value == 2L
 
-    if (a % 3 == 0L)
-        return a == 3L
+    if (value % 3 == 0L)
+        return value == 3L
 
-    if (a % 5 == 0L)
-        return a == 5L
+    if (value % 5 == 0L)
+        return value == 5L
 
-    if (a % 7 == 0L)
-        return a == 7L
+    if (value % 7 == 0L)
+        return value == 7L
 
     var i = 11L
 
-    var count = 0L
-
-    while (i * i <= a) {
-        ++count
-        if (a % i == 0L)
+    while (i * i <= value) {
+        if (value % i == 0L)
             return false
-
         i += 2
     }
-
-    println("isPrime:count=$count")
 
     return true
 }
