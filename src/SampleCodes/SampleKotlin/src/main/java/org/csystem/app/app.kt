@@ -1,57 +1,37 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: Parametresi ile aldığı Int türden bir n sayısı için n-inci asal sayıyı döndüren getPrime isimli
-    fonksiyonu yazınız ve aşağıdaki kod ile test ediniz. Fonksiyon n'nin pozitif olmayabn değerleri için kontrol
-    yapmayacaktır
+    Sınıf Çalışması: Klavyeden alınan a ve b Int türden değerleri için [a, b] aralığında tek ve çift sayıları
+    ayrı ayrı toplayan programı yazınız.
+    Örnekte isEven fonksiyonun "capture" yaptığına dikkat ediniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main() = runGetPrimeTest()
+fun main() = runApplication()
 
-fun runGetPrimeTest()
+fun runApplication()
 {
-    while (true) {
-        print("Bir sayı giriniz:")
-        val n = readln().toInt()
+    print("a?")
+    val a = readln().toInt()
 
-        if (n <= 0)
-            break
+    print("b?")
+    val b = readln().toInt()
 
-        println("${n}. asal sayı: ${getPrime(n)}")
-    }
-
-    println("Tekrar yapıyor musunuz?")
+    findTotals(a, b)
 }
 
-fun getPrime(n: Int) : Long
+fun findTotals(a: Int, b: Int)
 {
-    TODO()
-}
+    var evenTotal = 0
+    var oddTotal = 0
 
+    for (n in a..b) {
+        fun isEven() = n % 2 == 0
 
-fun isPrime(value: Long) : Boolean
-{
-    if (value <= 1)
-        return false
-
-    if (value % 2 == 0L)
-        return value == 2L
-
-    if (value % 3 == 0L)
-        return value == 3L
-
-    if (value % 5 == 0L)
-        return value == 5L
-
-    if (value % 7 == 0L)
-        return value == 7L
-
-    var i = 11L
-
-    while (i * i <= value) {
-        if (value % i == 0L)
-            return false
-        i += 2
+        if (isEven())
+            evenTotal += n
+        else
+            oddTotal += n
     }
 
-    return true
+    print("Çift sayıların toplamı:$evenTotal")
+    print("Tek sayıların toplamı:$oddTotal")
 }
