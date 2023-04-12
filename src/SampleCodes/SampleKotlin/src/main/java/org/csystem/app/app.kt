@@ -1,13 +1,27 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    İki Char toplama işlemine sokulamaz. Yani Char türünün Char türden parametreli toplama (plus) operatör fonksiyonu yoktur
+    Sınıf Çalışması: Klavyeden sıfır girilene kadar alınan Int türden sayıların ortalamasını bulup ekrana yazdıran
+    programı yazınız
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main(args:Array<String>)
-{
-    val c1 = 'D'
-    val c2 = 'Z'
+fun main() = runAverageApplication()
 
-    println(c1.minus(c2))
-    println(c1 - c2)
+fun runAverageApplication()
+{
+    var sum = 0
+    var count = 0
+    println("Sayıları girmeye başlayınız:")
+
+    while (true) {
+        val a = readln().toInt()
+
+        if (a == 0)
+            break
+
+        sum += a; ++count
+    }
+
+    println("Ortalama:${sum.toDouble() / count}")
+    println("Tekrar yapıyor musunuz?")
 }
+
