@@ -1,13 +1,32 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    İki Char toplama işlemine sokulamaz. Yani Char türünün Char türden parametreli toplama (plus) operatör fonksiyonu yoktur
+    Aşağıdaki örnekte default ctor primary ctor yapılmıştır
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main(args:Array<String>)
+fun main()
 {
-    val c1 = 'D'
-    val c2 = 'Z'
+    var s1 = Sample(10)
+    println("---------------------------")
+    var s2 = Sample(4.5)
+    println("---------------------------")
+    var s3 = Sample()
+    println("---------------------------")
 
-    println(c1.minus(c2))
-    println(c1 - c2)
+    //...
+}
+
+class Sample() {
+    init {
+        println("primary constructor")
+    }
+
+    constructor(b: Double) : this()
+    {
+        println("constructor(Double)")
+    }
+
+    constructor(b: Int) : this(b.toDouble())
+    {
+        println("constructor(Int)")
+    }
 }
