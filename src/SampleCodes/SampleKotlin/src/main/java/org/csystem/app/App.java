@@ -6,15 +6,3 @@ class App {
 
     }
 }
-
-class Test {
-    public Test(int a)
-    {
-        //...
-    }
-
-    public Test(double a)
-    {
-        //...
-    }
-}

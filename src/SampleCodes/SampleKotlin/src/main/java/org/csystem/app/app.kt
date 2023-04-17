@@ -1,32 +1,23 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örnekte default ctor primary ctor yapılmıştır
+    Point sınıfı ve test kodu
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
 fun main()
 {
-    var s1 = Sample(10)
-    println("---------------------------")
-    var s2 = Sample(4.5)
-    println("---------------------------")
-    var s3 = Sample()
-    println("---------------------------")
+    val p1 = Point(234.0, -456.7)
+    val p2 = Point(230.0, -453.7)
 
-    //...
+    println("Distance: ${p1.distance(p2)}");
+    println("Distance: ${p1.distance()}");
+
 }
 
-class Sample() {
-    init {
-        println("primary constructor")
-    }
-
-    constructor(b: Double) : this()
-    {
-        println("constructor(Double)")
-    }
-
-    constructor(b: Int) : this(b.toDouble())
-    {
-        println("constructor(Int)")
-    }
+class Point(var x: Double = 0.0, var y: Double = 0.0) {
+    constructor(x: Int, y: Int) : this(x.toDouble(), y.toDouble()) //optional
+    fun distance(a: Double = 0.0, b: Double = 0.0) = kotlin.math.sqrt((x - a) * (x - a) + (y - b) * (y - b))
+    fun distance(other: Point) = distance(other.x, other.y)
 }
+
+
+
