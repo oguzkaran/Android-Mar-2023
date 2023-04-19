@@ -1,25 +1,31 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Anahtar Notlar: java.util paketindeki Random sınıfıyla kotlin.random paketindeki Random object'inin içsel algoritmaları
-    aynı olmak zorunda değildir
+    Sınıf Çalışması: Parametresi ile aldığı iki yazıdan birincisi içerisinde ikincisinden kaç tane olduğunu döndüren
+    countString isimli fonksiyonu ignoreCase parametresi de içerecek şekilde yazınız
 ----------------------------------------------------------------------------------------------------------------------*/
-package org.csystem.app
+package org.csystem.app;
 
 import kotlin.random.Random
 
-fun main()
+fun main() = runCountStringTest()
+
+
+fun runCountStringTest()
 {
-    print("Tohum değerini giriniz:")
-    val seed = readln().toLong()
-    val r = Random(seed)
-    val rj = java.util.Random(seed)
+    while (true) {
+        print("Input the first text:")
+        val s1 = readln()
 
-    for (i in 1..10)
-        print("${r.nextInt(99) + 1} ")
+        print("Input the second text:")
+        val s2 = readln()
 
-    println()
+        val ignoreCase = Random.nextBoolean()
 
-    for (i in 1..10)
-        print("${rj.nextInt(99) + 1} ")
+        println(if (ignoreCase) "case insensitive" else "case sensitive")
+        println("Count:${countString(s1, s2, ignoreCase)}")
+    }
+}
 
-    println()
+fun countString(s1: String, s2: String, ignoreCase: Boolean = false) : Int
+{
+    TODO()
 }
