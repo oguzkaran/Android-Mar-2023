@@ -1,17 +1,25 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: Bir karmaşık sayıyı temsil eden Complex isimli immutable sınıfı yazınız.
-    Sınıf karmaşık sayının 0 + 0i sayısına uzaklığı olan Norm bilgisini de verecektir
-    |a + bi| = sqrt(a * a + b * b)
+    Anahtar Notlar: java.util paketindeki Random sınıfıyla kotlin.random paketindeki Random object'inin içsel algoritmaları
+    aynı olmak zorunda değildir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.math.Complex
+import kotlin.random.Random
 
 fun main()
 {
-    val z = Complex(3.4, 5.6)
-    val zc = z.conjugate;
+    print("Tohum değerini giriniz:")
+    val seed = readln().toLong()
+    val r = Random(seed)
+    val rj = java.util.Random(seed)
 
-    println("|${z.real} + i.${z.imag}| = ${z.norm}")
-    println("|${zc.real} + i.${zc.imag}| = ${zc.norm}")
+    for (i in 1..10)
+        print("${r.nextInt(99) + 1} ")
+
+    println()
+
+    for (i in 1..10)
+        print("${rj.nextInt(99) + 1} ")
+
+    println()
 }

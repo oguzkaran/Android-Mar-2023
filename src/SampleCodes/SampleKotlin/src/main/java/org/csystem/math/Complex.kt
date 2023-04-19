@@ -10,13 +10,13 @@
 -----------------------------------------------------------------------*/
 package org.csystem.math
 
-class Complex {
-    //...
+class Complex(val real: Double = 0.0, val imag: Double = 0.0) {
     val norm: Double
-        get() = TODO()
+        get() = kotlin.math.sqrt(real * real + imag * imag)
 
     val length: Double
         get() = norm
 
-    val conjugate: Complex = TODO("a + ib -> a - ib")
+    val conjugate: Complex
+        get() = Complex(real, -imag)
 }
