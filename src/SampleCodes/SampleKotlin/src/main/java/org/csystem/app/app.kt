@@ -1,16 +1,27 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    String sınıfının tüm karakterleri for döngüsü ile elde edilebilir. Yani String sınıfı "iterable"'dır. Iterable kavramı
-    ileride ele alınacaktır
+    Sınıf Çalışnası: Parametresi ile aldığı bir yazının büyük harfleri küçük, küçük harleri büyük harf yapılmış ve geri
+    kalan karakteler aynı olacak şekilde yeni bir yazıya geri dönen changeCase isimli fonksiyonu yazınız ve aşağıdaki
+    kod ile test ediniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main()
+fun main() = runChangeCaseTest()
+
+fun runChangeCaseTest()
 {
-    print("Bir yazı giriniz:")
-    val s = readln()
+    while (true) {
+        print("Input text:")
+        val s = readln()
 
-    for (ch in s)
-        print("$ch ")
+        if (s == "quit")
+            break
 
-    println()
+        val str = changeCase(s)
+
+        println("($str)")
+    }
+}
+fun changeCase(s: String) : String
+{
+    TODO()
 }
