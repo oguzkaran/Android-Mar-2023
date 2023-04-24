@@ -1,27 +1,28 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışnası: Parametresi ile aldığı bir yazının büyük harfleri küçük, küçük harleri büyük harf yapılmış ve geri
-    kalan karakteler aynı olacak şekilde yeni bir yazıya geri dönen changeCase isimli fonksiyonu yazınız ve aşağıdaki
-    kod ile test ediniz
+    Sınıf Çalışması: Parametresi ile aldığı bir yazının baş harfini büyük geri kalan harflerini küçük yapan capitalize
+    isimli fonksiyonu yazınız ve test ediniz
+    Örnek: profesyonel Bir Android Programcısı olmak için çok çalışmak gerekir -> Profesyonel bir android programcısı olmak için çok çalışmak gerekir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-fun main() = runChangeCaseTest()
+fun main() = runCapitalizeTest()
 
-fun runChangeCaseTest()
+fun runCapitalizeTest()
 {
     while (true) {
-        print("Input text:")
-        val s = readln()
+        print("Bir yazı giriniz:")
+        val text = readln()
 
-        if (s == "quit")
+        println(capitalize(text))
+
+        if (text == "elma")
             break
-
-        val str = changeCase(s)
-
-        println("($str)")
     }
+
+    println("Tekrar yapıyor musunuz?")
 }
-fun changeCase(s: String) : String
+
+fun capitalize(s: String) : String
 {
     TODO()
 }
