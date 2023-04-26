@@ -4,6 +4,7 @@ import kotlin.math.abs
 import kotlin.math.log10
 import kotlin.math.pow
 
+
 fun getDigitsPowSum(value: Int) : Int
 {
     var temp = value
@@ -18,13 +19,30 @@ fun getDigitsPowSum(value: Int) : Int
     return total
 }
 
-
-fun countDigits(value: Int) = if (value == 0) 1 else log10(abs(value).toDouble()).toInt() + 1
-
-fun digits(value: Int) : IntArray
+fun numToStr3DigitsTR(value: Int) : String
 {
     TODO()
 }
+
+fun countDigits(value: Int) = countDigits(value.toLong())
+
+fun countDigits(value: Long) = if (value == 0L) 1 else log10(abs(value).toDouble()).toInt() + 1
+
+
+fun digits(value: Long) : IntArray
+{
+    val d = IntArray(countDigits(value))
+    var temp = abs(value)
+
+    for (i in d.size - 1 downTo 0) {
+        d[i] = (temp % 10).toInt()
+        temp /= 10
+    }
+
+    return d
+}
+
+fun digits(value: Int) = digits(value.toLong())
 
 fun isArmstrong(value: Int) = value >= 0 && getDigitsPowSum(value) == value
 
