@@ -4,11 +4,22 @@ import kotlin.random.Random
 
 fun randomIntArray(count: Int, min: Int, bound: Int, random: Random = Random) : IntArray
 {
-    TODO()
+    val a = IntArray(count)
+
+    for (i in a.indices)
+        a[i] = random.nextInt(min, bound)
+
+    return a
 }
 
-
-fun write(a: IntArray)
+fun write(n: Int, a: IntArray)
 {
-    TODO()
+    val fmt = "%%0%dd ".format(n)
+
+    for (value in a)
+        print(fmt.format(value))
+
+    println()
 }
+
+fun write(a: IntArray) = write(1, a)

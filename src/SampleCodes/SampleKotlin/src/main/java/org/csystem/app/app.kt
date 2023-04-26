@@ -1,20 +1,18 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Dizilerin indices property elemanı [0, size) aralığında bir IntRange referansına döner:
-    Eşdeğer bir döngü:
-        for (i in 0 until a.size)
-        a[i] *= a[i]
+    joinToString fonksiyonu
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
+import org.csystem.util.array.kotlin.randomIntArray
+import org.csystem.util.array.kotlin.write
+
 fun main()
 {
-    val a = arrayOf(10, 20, 30)
+    val a = randomIntArray(10, 0, 100)
 
-    for (i in a.indices)
-        a[i] *= a[i];
+    write(2, a)
 
-    for (value in a)
-        print("$value ")
+    val str = a.joinToString(prefix = "{", postfix = "}")
 
-    println()
+    println(str)
 }

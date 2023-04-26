@@ -8,20 +8,14 @@ fun main() = runTest()
 
 fun runTest()
 {
-    val min = readInt("Minimum değeri giriniz:")
-    val bound = readInt("Sınır değeri giriniz:")
-
     while (true) {
         val count = readInt("Dizinin eleman sayısını giriniz:")
 
         if (count <= 0)
             break
-        val a = randomIntArray(count, min, bound)
+        val a = randomIntArray(count, 0, 100)
 
-        for (value in a)
-            print("$value ")
-        println()
-        write(a)
+        write(2, a)
     }
 
     println("Tekrar yapıyor musunuz?")

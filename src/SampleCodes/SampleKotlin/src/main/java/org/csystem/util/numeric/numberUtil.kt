@@ -21,6 +21,11 @@ fun getDigitsPowSum(value: Int) : Int
 
 fun countDigits(value: Int) = if (value == 0) 1 else log10(abs(value).toDouble()).toInt() + 1
 
+fun digits(value: Int) : IntArray
+{
+    TODO()
+}
+
 fun isArmstrong(value: Int) = value >= 0 && getDigitsPowSum(value) == value
 
 fun isPrime(value: Long) : Boolean
