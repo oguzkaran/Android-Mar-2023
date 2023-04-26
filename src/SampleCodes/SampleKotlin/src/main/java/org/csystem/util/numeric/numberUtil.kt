@@ -4,6 +4,8 @@ import kotlin.math.abs
 import kotlin.math.log10
 import kotlin.math.pow
 
+val g_onesTR = arrayOf("", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz")
+val g_tensTR = arrayOf("", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan")
 
 fun getDigitsPowSum(value: Int) : Int
 {
@@ -19,9 +21,28 @@ fun getDigitsPowSum(value: Int) : Int
     return total
 }
 
+fun numToStr3DigitsTR(a: Int, b: Int, c: Int, sb: StringBuilder)
+{
+    if (a != 0) {
+        if (a != 1)
+            sb.append(g_onesTR[a])
+        sb.append("yüz")
+    }
+
+    sb.append(g_tensTR[b])
+    sb.append(g_onesTR[c])
+}
+
 fun numToStr3DigitsTR(value: Int) : String
 {
-    TODO()
+    val sb = StringBuilder()
+
+    sb.append(if (value < 0) "eksi" else "")
+    val temp = abs(value)
+
+    numToStr3DigitsTR(temp / 100, temp % 100 / 10, temp % 10, sb)
+
+    return sb.toString()
 }
 
 fun countDigits(value: Int) = countDigits(value.toLong())
@@ -41,6 +62,14 @@ fun digits(value: Long) : IntArray
 
     return d
 }
+
+fun digitsInThrees(value: Long) : IntArray
+{
+    TODO()
+}
+
+fun digitsInThrees(value: Int) = digitsInThrees(value.toLong())
+
 
 fun digits(value: Int) = digits(value.toLong())
 

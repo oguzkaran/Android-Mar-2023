@@ -4,9 +4,9 @@ import org.csystem.util.array.kotlin.randomIntArray
 import org.csystem.util.array.kotlin.write
 import org.csystem.util.console.kotlin.readInt
 
-fun main() = runTest()
+fun main() = runRandomIntArrayTest()
 
-fun runTest()
+fun runRandomIntArrayTest()
 {
     while (true) {
         val count = readInt("Dizinin eleman sayısını giriniz:")
