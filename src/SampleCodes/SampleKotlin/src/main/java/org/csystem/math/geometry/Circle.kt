@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : Circle.kt
 	AUTHOR      : Android-May-2022 Group
-	LAST UPDATE : 19.04.2023
+	LAST UPDATE : 03.05.2023
 
 	Circle class that represents the circle in geometry
 
@@ -10,15 +10,17 @@
 -----------------------------------------------------------------------*/
 package org.csystem.math.geometry
 
-class Circle(r: Double = 0.0) {
-    var r: Double = kotlin.math.abs(r)
+import kotlin.math.abs
+
+open class Circle(radius: Double = 0.0) {
+    var radius: Double = abs(radius)
         set(value) {
-            field = kotlin.math.abs(value)
+            field = abs(value)
         }
 
     val area : Double
-        get() = Math.PI * r * r
+        get() = Math.PI * radius * radius
 
     val circumference : Double
-        get() = 2 * Math.PI * r
+        get() = 2 * Math.PI * radius
 }
