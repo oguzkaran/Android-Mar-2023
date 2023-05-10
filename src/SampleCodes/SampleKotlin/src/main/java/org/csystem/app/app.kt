@@ -3,9 +3,6 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readInt
-import kotlin.random.Random
-
 fun main()
 {
 
