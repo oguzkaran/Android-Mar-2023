@@ -1,8 +1,5 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Taban sınıf türünden bir referans türemiş sınıf türünden bir referansa as operatörü ile atanabilir (downcasting).
-    Bu işlem derleme zamanından geçmek içindir. Bu durumda çalışma zamanında kaynak referansın dinamik türünün as operatörüne
-    verilen türü kapsayıp kapsamadığına bakılır. Kapsıyorsa haklı dönüşümdür, akış devam eder. Kapsamıyorsa haksız
-    dönüşümdür, exception oluşur
+    is operatörü
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
@@ -16,13 +13,17 @@ fun main()
     for (i in 1..count) {
         val x: A = createRandomA()
 
+        println("---------------------------------------")
         println(x.javaClass.name)
 
-        val y: C = x as C
+        if (x is C) {
+            x.c = 10
+            println("x.c = ${x.c}")
+        }
+        else
+            println("Haksız dönüşüm")
 
-        y.c = 10
-
-        println("y.c = ${y.c}")
+        println("---------------------------------------")
     }
 
     println("Tekrar yapıyor musunuz?")
