@@ -22,4 +22,6 @@ class MutablePoint(var x: Double = 0.0, var y: Double = 0.0) {
         x += dx
         y += dy
     }
+
+    override fun toString() = "(%.2f, %.2f)".format(x, y)
 }

@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : AnalyticalCircle.kt
 	AUTHOR      : Android-May-2022 Group
-	LAST UPDATE : 03.05.2023
+	LAST UPDATE : 15.05.2023
 
 	AnalyticalCircle class that represents a circle in cartesian plane
 
@@ -11,6 +11,8 @@
 package org.csystem.math.geometry
 
 import kotlin.math.abs
+
+private const val DELTA = 0.00001
 
 open class AnalyticalCircle(radius: Double = 0.0, x: Double = 0.0, y: Double = 0.0) : Circle (radius) {
     private val mCenter = MutablePoint(x, y)
@@ -33,5 +35,9 @@ open class AnalyticalCircle(radius: Double = 0.0, x: Double = 0.0, y: Double = 0
 
     fun centerDistance(other: AnalyticalCircle) = mCenter.distance(other.mCenter)
     fun isTangent(other: AnalyticalCircle) = abs(centerDistance(other) - radius - other.radius) < 0.00001
+
+    override fun toString() = "%s, Center = %s".format(super.toString(), mCenter)
+
+    override fun equals(other: Any?) = other is AnalyticalCircle && super.equals(other) && mCenter == other.mCenter
     //...
 }
