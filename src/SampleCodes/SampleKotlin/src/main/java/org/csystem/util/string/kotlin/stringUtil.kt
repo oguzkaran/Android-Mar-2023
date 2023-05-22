@@ -1,5 +1,8 @@
 package org.csystem.util.string.kotlin
 
+import kotlin.random.Random
+
+
 fun changeCase(s: String) : String
 {
     val sb = StringBuilder(s.length)
@@ -32,6 +35,16 @@ fun getFirstShortestPalindrome(s: String) : String
 fun getLastShortestPalindrome(s: String) : String
 {
     TODO()
+}
+
+fun getRandomTextEN(count: Int, random: Random = Random) : String
+{
+    var str = ""
+
+    for (i in 1..count)
+        str += (if (random.nextBoolean()) 'A' else 'a') + random.nextInt(26)
+
+    return str;
 }
 
 fun isIsogram(s: String, alphabet: String) : Boolean
