@@ -3,6 +3,7 @@ package org.csystem.util.array.kotlin.test
 import org.csystem.util.array.kotlin.randomIntArray
 import org.csystem.util.array.kotlin.write
 import org.csystem.util.console.kotlin.readInt
+import kotlin.random.Random
 
 fun main() = runRandomIntArrayTest()
 
@@ -13,9 +14,9 @@ fun runRandomIntArrayTest()
 
         if (count <= 0)
             break
-        val a = randomIntArray(count, 0, 100)
+        val a = Random.randomIntArray(count, 0, 100)
 
-        write(2, a)
+        a.write(2)
     }
 
     println("Tekrar yapıyor musunuz?")

@@ -4,13 +4,13 @@ import kotlin.math.abs
 import kotlin.math.log10
 import kotlin.math.pow
 
-val g_onesTR = arrayOf("", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz")
-val g_tensTR = arrayOf("", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan")
+private val g_onesTR = arrayOf("", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz")
+private val g_tensTR = arrayOf("", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan")
 
-fun getDigitsPowSum(value: Int) : Int
+private fun Int.getDigitsPowSum() : Int
 {
-    var temp = value
-    val digitCount = countDigits(value)
+    var temp = this
+    val digitCount = countDigits()
     var total = 0
 
     while (temp != 0) {
@@ -21,7 +21,7 @@ fun getDigitsPowSum(value: Int) : Int
     return total
 }
 
-fun numToStr3DigitsTR(a: Int, b: Int, c: Int, sb: StringBuilder)
+private fun numToStr3DigitsTR(a: Int, b: Int, c: Int, sb: StringBuilder)
 {
     if (a != 0) {
         if (a != 1)
@@ -33,27 +33,27 @@ fun numToStr3DigitsTR(a: Int, b: Int, c: Int, sb: StringBuilder)
     sb.append(g_onesTR[c])
 }
 
-fun numToStr3DigitsTR(value: Int) : String
+fun Int.numToStr3DigitsTR() : String
 {
     val sb = StringBuilder()
 
-    sb.append(if (value < 0) "eksi" else "")
-    val temp = abs(value)
+    sb.append(if (this < 0) "eksi" else "")
+    val temp = abs(this)
 
     numToStr3DigitsTR(temp / 100, temp % 100 / 10, temp % 10, sb)
 
     return sb.toString()
 }
 
-fun countDigits(value: Int) = countDigits(value.toLong())
+fun Int.countDigits() = this.toLong().countDigits()
 
-fun countDigits(value: Long) = if (value == 0L) 1 else log10(abs(value).toDouble()).toInt() + 1
+fun Long.countDigits() = if (this == 0L) 1 else log10(abs(this).toDouble()).toInt() + 1
 
 
-fun digits(value: Long) : IntArray
+fun Long.digits() : IntArray
 {
-    val d = IntArray(countDigits(value))
-    var temp = abs(value)
+    val d = IntArray(countDigits())
+    var temp = abs(this)
 
     for (i in d.size - 1 downTo 0) {
         d[i] = (temp % 10).toInt()
@@ -63,39 +63,39 @@ fun digits(value: Long) : IntArray
     return d
 }
 
-fun digitsInThrees(value: Long) : IntArray
+fun Long.digitsInThrees() : IntArray
 {
     TODO()
 }
 
-fun digitsInThrees(value: Int) = digitsInThrees(value.toLong())
+fun Int.digitsInThrees() = this.toLong().digitsInThrees()
 
 
-fun digits(value: Int) = digits(value.toLong())
+fun Int.digits() = this.toLong().digits()
 
-fun isArmstrong(value: Int) = value >= 0 && getDigitsPowSum(value) == value
+fun Int.isArmstrong() = this >= 0 && getDigitsPowSum() == this
 
-fun isPrime(value: Long) : Boolean
+fun Long.isPrime() : Boolean
 {
-    if (value <= 1)
+    if (this <= 1)
         return false
 
-    if (value % 2 == 0L)
-        return value == 2L
+    if (this % 2 == 0L)
+        return this == 2L
 
-    if (value % 3 == 0L)
-        return value == 3L
+    if (this % 3 == 0L)
+        return this == 3L
 
-    if (value % 5 == 0L)
-        return value == 5L
+    if (this % 5 == 0L)
+        return this == 5L
 
-    if (value % 7 == 0L)
-        return value == 7L
+    if (this % 7 == 0L)
+        return this == 7L
 
     var i = 11L
 
-    while (i * i <= value) {
-        if (value % i == 0L)
+    while (i * i <= this) {
+        if (this % i == 0L)
             return false
         i += 2
     }

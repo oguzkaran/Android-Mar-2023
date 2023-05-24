@@ -12,7 +12,7 @@ fun runNumToStrTest()
 
     for (i in 1..count) {
         val value = Random.nextInt(-999, 1000)
-        println("$value -> ${numToStr3DigitsTR(value)}")
+        println("$value -> ${value.numToStr3DigitsTR()}")
     }
 
     println("Tekrar yapıyor musunuz?")

@@ -14,7 +14,7 @@ fun runDigitsIntTest()
     for (i in 1..count) {
         val value = Random.nextInt();
         print("$value -> ")
-        write(digits(value))
+        value.digits().write()
     }
 
     println("Tekrar yapıyor musunuz?")

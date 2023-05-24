@@ -20,7 +20,7 @@ fun runIsPangramTRTest()
         if ("elma" == s)
             break
 
-        println(if (isPangramTR(s)) "Pangram" else "Pangram değil")
+        println(if (s.isPangramTR()) "Pangram" else "Pangram değil")
     }
 }
 
@@ -33,6 +33,6 @@ fun runIsPangramENTest()
         if ("quit" == s)
             break
 
-        println(if (isPangramEN(s)) "Pangram" else "Not a Pangram")
+        println(if (s.isPangramEN()) "Pangram" else "Not a Pangram")
     }
 }

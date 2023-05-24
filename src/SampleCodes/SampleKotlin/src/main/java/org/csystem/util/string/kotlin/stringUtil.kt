@@ -2,12 +2,11 @@ package org.csystem.util.string.kotlin
 
 import kotlin.random.Random
 
-
-fun changeCase(s: String) : String
+fun String.changeCase() : String
 {
-    val sb = StringBuilder(s.length)
+    val sb = StringBuilder(this.length)
 
-    for (c in s)
+    for (c in this)
         if (c.isUpperCase())
             sb.append(c.lowercaseChar())
         else
@@ -17,58 +16,58 @@ fun changeCase(s: String) : String
 }
 
 
-fun getFirstLongestPalindrome(s: String) : String
+fun String.getFirstLongestPalindrome() : String
 {
     TODO()
 }
 
-fun getLastLongestPalindrome(s: String) : String
+fun String.getLastLongestPalindrome() : String
 {
     TODO()
 }
 
-fun getFirstShortestPalindrome(s: String) : String
+fun String.getFirstShortestPalindrome() : String
 {
     TODO()
 }
 
-fun getLastShortestPalindrome(s: String) : String
+fun String.getLastShortestPalindrome() : String
 {
     TODO()
 }
 
-fun getRandomTextEN(count: Int, random: Random = Random) : String
+fun Random.getRandomTextEN(count: Int) : String
 {
     var str = ""
 
     for (i in 1..count)
-        str += (if (random.nextBoolean()) 'A' else 'a') + random.nextInt(26)
+        str += (if (this.nextBoolean()) 'A' else 'a') + this.nextInt(26)
 
     return str;
 }
 
-fun isIsogram(s: String, alphabet: String) : Boolean
+fun String.isIsogram(alphabet: String) : Boolean
 {
     TODO()
 }
 
-fun isIsogramTR(s: String) = isIsogram(s, "abcçdefgğhıijklmnoöprsştuüvyz")
+fun isIsogramTR(s: String) = s.isIsogram("abcçdefgğhıijklmnoöprsştuüvyz")
 
-fun isIsogramEN(s: String) = isIsogram(s, "abcdefghijklmnopqrstuvwxyz")
+fun isIsogramEN(s: String) = s.isIsogram("abcdefghijklmnopqrstuvwxyz")
 
-fun isPalindrome(s: String) : Boolean
+fun String.isPalindrome() : Boolean
 {
     TODO()
 }
 
-fun isPangramTR(s: String) = isPangram(s, "abcçdefgğhıijklmnoöprsştuüvyz")
+fun String.isPangramTR() = this.isPangram("abcçdefgğhıijklmnoöprsştuüvyz")
 
-fun isPangramEN(s: String) = isPangram(s, "abcdefghijklmnopqrstuvwxyz")
+fun String.isPangramEN() = this.isPangram("abcdefghijklmnopqrstuvwxyz")
 
-fun isPangram(s: String, alphabet: String) : Boolean
+fun String.isPangram( alphabet: String) : Boolean
 {
     for (c in alphabet)
-        if (!s.contains(c, true))
+        if (!this.contains(c, true))
             return false
 
     return true
