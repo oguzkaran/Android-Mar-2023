@@ -1,18 +1,17 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    MutableComplex sınıfının operatör fonksiyonları
+    Aşağıdaki örneği inceleyiniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.math.random.nextMutableComplex
-import kotlin.random.Random
-
 fun main()
 {
-    val z1 = Random.nextMutableComplex(-10, 10)
-    val value = Random.nextDouble(10.0)
-    val z = z1 + value
+    var vec = Vector3(2.4F, 6.7F, 0F)
+    println(vec)
+    vec *=  3F
+    println(vec)
+}
 
-    println(z1)
-    println("value = $value")
-    println(z)
+data class Vector3(val x: Float, val y: Float, val z: Float) {
+    operator fun times(value: Float) = Vector3(x * value, y * value, z * value)
+    //...
 }

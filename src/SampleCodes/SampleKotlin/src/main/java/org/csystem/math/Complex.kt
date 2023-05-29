@@ -21,12 +21,13 @@ data class Complex(val real: Double = 0.0, val imag: Double = 0.0) {
     val length: Double
         get() = norm
 
-
     val conjugate: Complex
         get() = Complex(real, -imag)
 
     operator fun component3() = norm
     operator fun component4() = conjugate
+
+    //Operator functions
 
     override fun toString() = "(%.2f, %.2f)".format(real, imag)
 }
