@@ -1,17 +1,40 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örneği inceleyiniz
+    use extension fonksiyonu. Bu, aslında Java'daki try-with-resources deyiminin Kotlin'deki karşılığıdır. Aşağıdaki
+    kodun Java karşılığı:
+
+    try (Sample s = new Sample()) {
+        s.foo(-10);
+    }
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
+import java.io.Closeable
+import java.lang.IllegalArgumentException
+import kotlin.random.Random
+
 fun main()
 {
-    var vec = Vector3(2.4F, 6.7F, 0F)
-    println(vec)
-    vec *=  3F
-    println(vec)
+    val s = Sample()
+
+    try {
+        s.use {
+            s.foo(Random.nextInt(-10, 10))
+        }
+    }
+    catch (ex: IllegalArgumentException) {
+        println(ex.message)
+    }
 }
 
-data class Vector3(val x: Float, val y: Float, val z: Float) {
-    operator fun times(value: Float) = Vector3(x * value, y * value, z * value)
-    //...
+class Sample : Closeable {
+    fun foo(a: Int) {
+        if (a < 0)
+            throw IllegalArgumentException("a must be positive")
+
+        println("foo")
+    }
+    override fun close()
+    {
+        println("close")
+    }
 }
