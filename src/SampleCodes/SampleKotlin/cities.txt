@@ -1,0 +1,6 @@
+ankara
+istanbul
+izmir
+zonguldak
+bolu
+balıkesir

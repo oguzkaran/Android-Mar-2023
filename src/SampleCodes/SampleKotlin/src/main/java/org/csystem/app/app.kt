@@ -1,40 +1,19 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    use extension fonksiyonu. Bu, aslında Java'daki try-with-resources deyiminin Kotlin'deki karşılığıdır. Aşağıdaki
-    kodun Java karşılığı:
-
-    try (Sample s = new Sample()) {
-        s.foo(-10);
-    }
+    Aşağıdaki örnekte display fonskiyonu çağrısında K türü tespit edilemez
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import java.io.Closeable
-import java.lang.IllegalArgumentException
-import kotlin.random.Random
-
 fun main()
 {
-    val s = Sample()
+    val a = "ankara"
+    val b = 10
 
-    try {
-        s.use {
-            s.foo(Random.nextInt(-10, 10))
-        }
-    }
-    catch (ex: IllegalArgumentException) {
-        println(ex.message)
-    }
+    display<String, Ibt>(a) //error
 }
 
-class Sample : Closeable {
-    fun foo(a: Int) {
-        if (a < 0)
-            throw IllegalArgumentException("a must be positive")
+fun <T, K> display(t: T) : K?
+{
+    println(t)
 
-        println("foo")
-    }
-    override fun close()
-    {
-        println("close")
-    }
+    return null
 }
