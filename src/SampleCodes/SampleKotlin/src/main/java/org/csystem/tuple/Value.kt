@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------
-	FILE        : Quadruple.kt
+	FILE        : Value.kt
 	AUTHOR      : Android-Mar-2023 Group
 	LAST UPDATE : 31.05.2023
 
@@ -12,6 +12,6 @@ package org.csystem.tuple
 
 import java.io.Serializable
 
-data class Quadruple<out T1, out T2, out T3, out T4>(val first: T1, val second: T2, val third: T3, val forth: T4) : Serializable {
-    override fun toString() = "($first, $second, $third, $forth)"
+data class Value<out T>(val value: T) : Serializable {
+    fun toList() : List<T> = listOf(value)
 }

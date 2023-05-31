@@ -1,19 +1,19 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örnekte display fonskiyonu çağrısında K türü tespit edilemez
+    Aşağıdaki örnekte ** ile belirtilen ifade için yeni bir nesne yaratılmış olur
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
 fun main()
 {
-    val a = "ankara"
-    val b = 10
+    val A = A(10)
+    val x = A(20) //**
 
-    display<String, Ibt>(a) //error
+    println(x)
 }
 
-fun <T, K> display(t: T) : K?
-{
-    println(t)
 
-    return null
+class A(x: Int) {
+    init {
+        println("A.ctor, int")
+    }
 }
