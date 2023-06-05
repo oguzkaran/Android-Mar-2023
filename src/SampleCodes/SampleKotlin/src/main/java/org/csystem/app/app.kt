@@ -1,19 +1,14 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örnekte ** ile belirtilen ifade için yeni bir nesne yaratılmış olur
+    Tek parametreli Lambda fonksiyonlarda it built-in olarak parametre ismi olarak kullanılabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
 fun main()
 {
-    val A = A(10)
-    val x = A(20) //**
-
-    println(x)
+    foo{it - 3}
 }
 
-
-class A(x: Int) {
-    init {
-        println("A.ctor, int")
-    }
+fun foo(f: (Int) -> Int)
+{
+    println(f(0))
 }
