@@ -12,12 +12,20 @@ fun Random.randomIntArray(count: Int, min: Int, bound: Int) : IntArray
     return a
 }
 
-fun IntArray.write(n: Int = 1)
+fun IntArray.write(count: Int = this.size, n: Int = 1)
 {
     val fmt = "%%0%dd ".format(n)
 
-    for (value in this)
-        print(fmt.format(value))
+    for (i in 0 until count)
+        print(fmt.format(this[i]))
 
     println()
+}
+
+fun IntArray.write(n: Int = 1) = this.write(this.size, n)
+
+fun <T> Array<T>.write(count: Int = this.size)
+{
+    for (i in 0 until count)
+        println(this[i])
 }

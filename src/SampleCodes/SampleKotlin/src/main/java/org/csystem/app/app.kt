@@ -1,14 +1,21 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Tek parametreli Lambda fonksiyonlarda it built-in olarak parametre ismi olarak kullanılabilir
+    apply eklenti fonksiyonu: apply eklenti fonksiyonunun callback'ine this geçirilir
+    "apply the following assignments or calls to the object"
+    apply fonksiyonu çağrıldığı referansa geri döner
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
+import org.csystem.util.console.kotlin.readInt
+
 fun main()
 {
-    foo{it - 3}
-}
+    var a = readInt("Bir sayı giriniz:").apply {
+        println("a = $this")
+        println("$this * $this")
+    }
 
-fun foo(f: (Int) -> Int)
-{
-    println(f(0))
+    ++a
+
+    println(a)
+
 }

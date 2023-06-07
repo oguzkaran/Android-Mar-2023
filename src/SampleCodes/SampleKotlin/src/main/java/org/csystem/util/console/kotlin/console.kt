@@ -1,5 +1,7 @@
 package org.csystem.util.console.kotlin
 
+import java.math.BigDecimal
+
 fun readInt(prompt: String = "", errMessage: String = "", end: String = "") : Int
 {
     while (true) {
@@ -83,4 +85,19 @@ fun readString(prompt: String = "") : String
     //...
     print(prompt)
     return readln()
+}
+
+
+fun readBigDecimal(prompt: String, errMessage: String = "", end: String = "") : BigDecimal
+{
+    while (true) {
+        try {
+            print(prompt + end)
+
+            return BigDecimal(readln())
+        }
+        catch (ignore: NumberFormatException) {
+            print(errMessage + end)
+        }
+    }
 }

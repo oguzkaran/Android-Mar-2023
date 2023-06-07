@@ -46,6 +46,17 @@ fun Random.getRandomTextEN(count: Int) : String
     return str;
 }
 
+
+fun Random.randomTextEN(count: Int) : String
+{
+    var str = ""
+
+    for (i in 1..count)
+        str += (if (this.nextBoolean()) 'A' else 'a') + this.nextInt(26)
+
+    return str;
+}
+
 fun String.isIsogram(alphabet: String) : Boolean
 {
     TODO()
