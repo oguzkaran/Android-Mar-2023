@@ -1,21 +1,23 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    apply eklenti fonksiyonu: apply eklenti fonksiyonunun callback'ine this geçirilir
-    "apply the following assignments or calls to the object"
-    apply fonksiyonu çağrıldığı referansa geri döner
+    Aşağıdaki örnekte stokta bulunmayan ürün varsa listelenmiştir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readInt
+import org.csystem.data.source.loadDefaultProductsAsArrays
 
 fun main()
 {
-    var a = readInt("Bir sayı giriniz:").apply {
-        println("a = $this")
-        println("$this * $this")
+    try {
+        val products = loadDefaultProductsAsArrays()
+
+        if (products.any {it.stock <= 0}) {
+            println("Stokta olmayan ürünler:")
+            products.filter {it.stock <= 0}.forEach(::println)
+        }
+        else
+            println("Her ürün stokta var")
     }
-
-    ++a
-
-    println(a)
-
+    catch (ex: Throwable) {
+        println(ex.message)
+    }
 }

@@ -1,6 +1,12 @@
 package org.csystem.test.data
 
+import java.io.BufferedReader
+import java.io.FileReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
 
@@ -17,7 +23,7 @@ private fun getProduct(line: String) : Product
 }
 
 fun loadProductsFromFileAsIterable(path: String) : Iterable<Product> =
-        Files.newBufferedReader(Paths.get(path)).useLines {
+        Files.newBufferedReader(Path.of(InputStream::class.java.getResource(path).toURI())).useLines {
             it.toList().drop(1).map { getProduct(it)}
         }
 
