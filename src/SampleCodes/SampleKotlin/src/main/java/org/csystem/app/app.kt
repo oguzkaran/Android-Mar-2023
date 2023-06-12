@@ -1,18 +1,24 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Yukarıdaki örnek let ile de yapılabilirdi. Ancak okunabililik açısından also daha uygundur
+    Aşağıdaki örnekte stokta bulunmayan ürün varsa listelenmiştir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readInt
-import org.csystem.util.numeric.countDigits
+import org.csystem.data.source.loadDefaultProductsAsArrays
 
 fun main()
 {
-    val a: Int = readInt("Bir sayı giriniz:")
+    try {
+        val products = loadDefaultProductsAsArrays()
 
-    //...
-
-    val str = a.let { println("Number of digits:${it.countDigits()}"); "$it" }
-
-    println(str)
+        if (products.any {it.stock <= 0}) {
+            println("Stokta olmayan ürünler:")
+            products.filter {it.stock <= 0}.forEach(::println)
+        }
+        else
+            println("Her ürün stokta var")
+    }
+    catch (ex: Throwable) {
+        println(ex.message)
+        ex.printStackTrace()
+    }
 }
