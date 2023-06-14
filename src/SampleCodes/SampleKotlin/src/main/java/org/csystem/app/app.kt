@@ -1,26 +1,24 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    next metodu eleman yoksa NoSuchElementException nesnesi fırlatır
+    Yukarıdaki örnek için filter fonksiyonları ayrı ayrı da çağrılabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.array.kotlin.randomIntArray
-import kotlin.random.Random
+import org.csystem.test.data.loadProductsFromFileAsIterable
+import org.csystem.util.console.kotlin.readBigDecimal
 
 fun main()
 {
-    val a = Random.randomIntArray(10, 1, 100)
-    val iter = a.iterator()
-
     try {
-        while (true)
-            print("${iter.next()} ")
-    }
-    catch (ex: NoSuchElementException) {
-        println()
-    }
+        val products = loadProductsFromFileAsIterable("products-withheader.csv")
+        val minPrice = readBigDecimal("Minimum fiyatı giriniz:")
+        val maxPrice = readBigDecimal("Maximum fiyatı giriniz:")
 
-    for (value in a)
-        print("${value} ")
-
-    println()
+        //products.forEach(::println)
+        println("Filtered Products:")
+        products.filter { it.stock > 0}.filter{ minPrice < it.price }.filter {it.price < maxPrice }.forEach(::println)
+    }
+    catch (ex: Throwable) {
+        println(ex.message)
+    }
 }
+

@@ -1,6 +1,6 @@
 /*----------------------------------------------------------------------
 	FILE        : AnalyticalCircle.kt
-	AUTHOR      : Android-May-2022 Group
+	AUTHOR      : Android-Mar-2023 Group
 	LAST UPDATE : 15.05.2023
 
 	AnalyticalCircle class that represents a circle in cartesian plane

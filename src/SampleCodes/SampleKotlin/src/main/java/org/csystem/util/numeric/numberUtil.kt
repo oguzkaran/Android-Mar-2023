@@ -75,6 +75,7 @@ fun Int.digits() = this.toLong().digits()
 
 fun Int.isArmstrong() = this >= 0 && getDigitsPowSum() == this
 
+fun Int.isPrime() = this.toLong().isPrime()
 fun Long.isPrime() : Boolean
 {
     if (this <= 1)

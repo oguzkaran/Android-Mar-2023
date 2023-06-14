@@ -1,6 +1,6 @@
 /*----------------------------------------------------------------------
 	FILE        : Point.kt
-	AUTHOR      : Android-May-2022 Group
+	AUTHOR      : Android-Mar-2023 Group
 	LAST UPDATE : 15.05.2023
 
 	Immutable Point class that represents a point in cartesian plane
