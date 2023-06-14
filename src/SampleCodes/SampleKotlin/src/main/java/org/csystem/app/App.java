@@ -1,11 +1,15 @@
 package org.csystem.app;
 
-import java.io.IOException;
-
 class App {
     public static void main(String[] args)
     {
+        {
+            System.out.println("Merhaba");
 
+            int a = 10;
+
+            System.out.println(a);
+        }
     }
 }
 

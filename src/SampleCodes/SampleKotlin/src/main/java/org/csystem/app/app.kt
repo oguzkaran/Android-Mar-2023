@@ -1,24 +1,26 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örnekte stokta bulunmayan ürün varsa listelenmiştir
+    next metodu eleman yoksa NoSuchElementException nesnesi fırlatır
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.data.source.loadDefaultProductsAsArrays
+import org.csystem.util.array.kotlin.randomIntArray
+import kotlin.random.Random
 
 fun main()
 {
-    try {
-        val products = loadDefaultProductsAsArrays()
+    val a = Random.randomIntArray(10, 1, 100)
+    val iter = a.iterator()
 
-        if (products.any {it.stock <= 0}) {
-            println("Stokta olmayan ürünler:")
-            products.filter {it.stock <= 0}.forEach(::println)
-        }
-        else
-            println("Her ürün stokta var")
+    try {
+        while (true)
+            print("${iter.next()} ")
     }
-    catch (ex: Throwable) {
-        println(ex.message)
-        ex.printStackTrace()
+    catch (ex: NoSuchElementException) {
+        println()
     }
+
+    for (value in a)
+        print("${value} ")
+
+    println()
 }
