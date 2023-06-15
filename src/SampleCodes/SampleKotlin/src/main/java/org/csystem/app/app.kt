@@ -3,13 +3,13 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.test.data.loadProductsFromFileAsIterable
+import org.csystem.test.data.ProductFactory
 import org.csystem.util.console.kotlin.readBigDecimal
 
 fun main()
 {
     try {
-        val products = loadProductsFromFileAsIterable("products-withheader.csv")
+        val products = ProductFactory.loadFromFile("products-withheader.csv")
         val minPrice = readBigDecimal("Minimum fiyatı giriniz:")
         val maxPrice = readBigDecimal("Maximum fiyatı giriniz:")
 
@@ -21,4 +21,3 @@ fun main()
         println(ex.message)
     }
 }
-
