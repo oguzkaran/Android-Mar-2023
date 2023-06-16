@@ -1,27 +1,18 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örnekte drop ve count eklenti fonksiyonları kullanılmıştır
+    Aşağıdaki örnekte printCollatz fonksiyonunun generateSequence ile yazıldığına dikkat ediniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.test.data.loadNamesFromFileAsList
 import org.csystem.util.console.kotlin.readInt
-import org.csystem.util.console.kotlin.readString
 
-fun main()
+fun main() = generateSequence { readInt("Bir sayı giriniz:") }.takeWhile {it > 0}.forEach { printCollatz(it) }
+
+fun printCollatz(value: Int)
 {
-    try {
-        val text = readString("Bir yazı giriniz:")
-        val count = readInt("Sorgudan son kaç tanesi atılsın:")
-        val allNames = loadNamesFromFileAsList("names.csv")
-        val names = allNames.filter { it.contains(text, ignoreCase = true) }
-            .take(count)
-            .map { it.lowercase() }
-            .toList()
+    var a = value
 
-        names.forEach(::println)
-        println("Tüm koşula uygun veriler toplam ${allNames.count { it.contains(text, ignoreCase = true) }} tanedir")
-    }
-    catch (ex: Throwable) {
-        println(ex.message)
-    }
+    generateSequence(a) { a = when { a % 2 == 0 -> a / 2 else ->  3 * a + 1}; a }
+        .takeWhile{a > 1}
+        .forEach{print("$it ")}
+    println(1)
 }
