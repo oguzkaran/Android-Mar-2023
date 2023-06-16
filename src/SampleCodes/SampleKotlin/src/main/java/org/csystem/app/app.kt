@@ -1,21 +1,25 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Yukarıdaki örnek için filter fonksiyonları ayrı ayrı da çağrılabilir
+    Aşağıdaki örnekte drop ve count eklenti fonksiyonları kullanılmıştır
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.test.data.ProductFactory
-import org.csystem.util.console.kotlin.readBigDecimal
+import org.csystem.test.data.loadNamesFromFileAsList
+import org.csystem.util.console.kotlin.readInt
+import org.csystem.util.console.kotlin.readString
 
 fun main()
 {
     try {
-        val products = ProductFactory.loadFromFile("products-withheader.csv")
-        val minPrice = readBigDecimal("Minimum fiyatı giriniz:")
-        val maxPrice = readBigDecimal("Maximum fiyatı giriniz:")
+        val text = readString("Bir yazı giriniz:")
+        val count = readInt("Sorgudan son kaç tanesi atılsın:")
+        val allNames = loadNamesFromFileAsList("names.csv")
+        val names = allNames.filter { it.contains(text, ignoreCase = true) }
+            .take(count)
+            .map { it.lowercase() }
+            .toList()
 
-        //products.forEach(::println)
-        println("Filtered Products:")
-        products.filter { it.stock > 0}.filter{ minPrice < it.price }.filter {it.price < maxPrice }.forEach(::println)
+        names.forEach(::println)
+        println("Tüm koşula uygun veriler toplam ${allNames.count { it.contains(text, ignoreCase = true) }} tanedir")
     }
     catch (ex: Throwable) {
         println(ex.message)

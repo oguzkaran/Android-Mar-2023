@@ -9,6 +9,8 @@ fun loadNamesFromFile(path: String) : Iterable<String> =
             it.toList().drop(1)
         }
 
+fun loadNamesFromFileAsList(path: String) = loadNamesFromFile(path).toMutableList()
+
 fun loadNamesFromFileAsMap(path: String) : Map<Int, MutableList<String>>
 {
     val map = mutableMapOf<Int, MutableList<String>>()
