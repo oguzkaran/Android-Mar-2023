@@ -7,6 +7,7 @@ import org.csystem.util.console.kotlin.readInt
 
 fun main() = generateSequence { readInt("Bir sayı giriniz:") }.takeWhile {it > 0}.forEach { printCollatz(it) }
 
+
 fun printCollatz(value: Int)
 {
     var a = value
