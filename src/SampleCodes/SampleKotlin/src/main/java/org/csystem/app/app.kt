@@ -1,19 +1,22 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örnekte printCollatz fonksiyonunun generateSequence ile yazıldığına dikkat ediniz
+    map tarzı colection'lar: Örnekte TreeMap kullanıldığından anahtar değerlerinin sıralanması gerekmez
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readInt
+import org.csystem.test.data.loadNamesFromFileAsTreeMap
 
-fun main() = generateSequence { readInt("Bir sayı giriniz:") }.takeWhile {it > 0}.forEach { printCollatz(it) }
-
-
-fun printCollatz(value: Int)
+fun main()
 {
-    var a = value
+    try {
+        val namesMap = loadNamesFromFileAsTreeMap("nameswithkeys.csv")
 
-    generateSequence(a) { a = when { a % 2 == 0 -> a / 2 else ->  3 * a + 1}; a }
-        .takeWhile{a > 1}
-        .forEach{print("$it ")}
-    println(1)
+        println("Size: ${namesMap.size}")
+
+        namesMap.keys.forEach {print("$it -> "); namesMap[it]?.forEach { print("$it ") }; println()}
+
+        println("Size: ${namesMap.size}")
+    }
+    catch (ex: Throwable) {
+        ex.printStackTrace()
+    }
 }

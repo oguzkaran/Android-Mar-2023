@@ -2,8 +2,7 @@ package org.csystem.test.data
 
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.util.TreeSet
-import kotlin.Comparator
+import java.util.*
 
 private fun getProduct(line: String) : Product
 {
@@ -24,13 +23,17 @@ fun loadProductsFromFileAsIterable(path: String) : Iterable<Product> =
 
 fun loadProductsFromFileAsArray(path: String) = loadProductsFromFileAsIterable(path).toList().toTypedArray()
 
-fun loadProductsFromFileAsSet(path: String) = loadProductsFromFileAsIterable(path).toSet()
+fun loadProductsFromFileAsSet(path: String) = loadProductsFromFileAsIterable(path).toHashSet()
 
 fun loadProductsFromFileAsTreeSet(path: String) : TreeSet<Product> =
     TreeSet<Product>(Comparator.comparing { it.id }).apply {
         loadProductsFromFileAsIterable(path).forEach{ this.add(it)}
     }
 
+fun loadProductsFromFileAsTreeSet(path: String, comparator: Comparator<Product>) : TreeSet<Product> =
+    TreeSet(comparator).apply {
+        loadProductsFromFileAsIterable(path).forEach{ this.add(it)}
+    }
 
 object ProductFactory {
     fun loadFromFile(path: String) = loadProductsFromFileAsIterable(path)
