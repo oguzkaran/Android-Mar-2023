@@ -1,22 +1,39 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    map tarzı colection'lar: Örnekte TreeMap kullanıldığından anahtar değerlerinin sıralanması gerekmez
+    Aşağıdaki örnekte birden fazla formatter ile işlem yapan örnek bir fonksiyon yazılmıştır. Detaylar gözardı edilmiştir.
+    Bir kütüphane içerisine daha detaylısı eklenecektir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.test.data.loadNamesFromFileAsTreeMap
+import org.csystem.util.console.kotlin.readString
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+
+fun tryParse(str: String) : LocalDate?
+{
+    val formatters = arrayOf(DateTimeFormatter.ofPattern("dd-MM-yyyy"), DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+        DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
+    for (formatter in formatters) {
+        try {
+            return LocalDate.parse(str, formatter)
+        }
+        catch (ignore: DateTimeParseException) {
+
+        }
+    }
+    return null
+}
 
 fun main()
 {
-    try {
-        val namesMap = loadNamesFromFileAsTreeMap("nameswithkeys.csv")
+    while (true) {
+        val str = readString("Tarih bilgisini giriniz:21/06/2023 veya 21-06-2023 veya 2023-06-21:")
 
-        println("Size: ${namesMap.size}")
+        if (str == "elma")
+            break
 
-        namesMap.keys.forEach {print("$it -> "); namesMap[it]?.forEach { print("$it ") }; println()}
-
-        println("Size: ${namesMap.size}")
-    }
-    catch (ex: Throwable) {
-        ex.printStackTrace()
+        val result = tryParse(str)
+        println(if (result != null) DateTimeFormatter.ISO_DATE.format(result) else "Geçersiz tarih!...")
     }
 }
