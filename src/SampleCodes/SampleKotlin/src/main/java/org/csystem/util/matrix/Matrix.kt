@@ -10,40 +10,40 @@
 -----------------------------------------------------------------------*/
 package org.csystem.util.matrix
 
-class Matrix<T> {
+class Matrix {
     //...
 
-    operator fun plus(other: Matrix<T>) : Matrix<T>
+    operator fun plus(other: Matrix) : Matrix
     {
         TODO()
     }
 
-    operator fun plus(value: T) : Matrix<T>
+    operator fun plus(value: Double) : Matrix
     {
         TODO()
     }
 
-    operator fun minus(other: Matrix<T>) : Matrix<T>
+    operator fun minus(other: Matrix) : Matrix
     {
         TODO()
     }
 
-    operator fun minus(value: T) : Matrix<T>
+    operator fun minus(value: Double) : Matrix
     {
         TODO()
     }
 
-    operator fun times(other: Matrix<T>) : Matrix<T>
+    operator fun times(other: Matrix) : Matrix
     {
         TODO()
     }
 
-    operator fun times(value: T) : Matrix<T>
+    operator fun times(value: Double) : Matrix
     {
         TODO()
     }
 
-    operator fun div(value: T) : Matrix<T>
+    operator fun div(value: Double) : Matrix
     {
         TODO()
     }
