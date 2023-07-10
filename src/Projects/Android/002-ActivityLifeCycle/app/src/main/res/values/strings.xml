@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">002-ActivityLifeCycle</string>
+    <string name="app_name">ActivityLifeCycle</string>
+    <string name="textview_greetings">C and System Programmers Association</string>
+    <string name="on_create_message">On Create</string>
+    <string name="on_start_message">On Start</string>
+    <string name="on_resume_message">On Resume</string>
+    <string name="on_pause_message">On Pause</string>
+    <string name="on_stop_message">On Stop</string>
+    <string name="on_restart_message">On Restart</string>
+    <string name="on_destroy_message">On Destroy</string>
 </resources>
