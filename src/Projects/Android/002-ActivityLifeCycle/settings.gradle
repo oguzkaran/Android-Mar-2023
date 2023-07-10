@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "FirstApp"
+rootProject.name = "002-ActivityLifeCycle"
 include ':app'
