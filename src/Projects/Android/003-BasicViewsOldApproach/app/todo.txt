@@ -1,0 +1,3 @@
+- Eklenmiş olan username, passowrd için RegisterInfo sınıfın güncelleyiniz
+- password ve confirm password alanlarındaki şifrelerin aynı olup oılmadığını kontrol ederek, aynı
+değilse uygun bir mesaj veriniz
