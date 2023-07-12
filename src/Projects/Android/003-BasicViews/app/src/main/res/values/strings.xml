@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BasicViews</string>
+    <string name="edittext_name_hint_text">Input your name</string>
+    <string name="edittext_email_hint_text">Input your email</string>
+    <string name="edittext_day_hint_text">Day</string>
+    <string name="edittext_month_hint_text">Month</string>
+    <string name="edittext_year_hint_text">Year</string>
+</resources>
