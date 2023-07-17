@@ -1,0 +1,3 @@
+Yapılacaklar:
+- Show Password button'una basıldığında üzerindeki yazı hide password olarak değişecektir.
+- Button'un durumuna göre şifre gözükecek veya gözükmeyecektir

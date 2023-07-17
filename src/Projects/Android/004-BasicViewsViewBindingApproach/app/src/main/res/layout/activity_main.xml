@@ -65,13 +65,26 @@
         android:inputType="text"
         android:hint="@string/edittext_username_hint_text" />
 
-    <EditText
-        android:id="@+id/mainActivityEditTextPassword"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberPassword"
-        android:hint="@string/edittext_password_hint_text" />
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/mainActivityEditTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_weight="8"
+            android:inputType="numberPassword"
+            android:hint="@string/edittext_password_hint_text" />
+        <Button
+            android:id="@+id/mainActivityButtonShowPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_show_password_text" />
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/mainActivityEditTextConfirmPassword"
@@ -87,11 +100,13 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="@string/button_register_text" />
+
     <CheckBox
         android:id="@+id/mainActivityCheckboxAcceptConditions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/checkbox_accept_text" />
+
     <Button
         android:id="@+id/mainActivityButtonClose"
         android:layout_width="match_parent"

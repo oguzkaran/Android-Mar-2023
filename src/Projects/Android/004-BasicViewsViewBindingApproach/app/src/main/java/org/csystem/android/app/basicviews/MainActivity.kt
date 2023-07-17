@@ -1,11 +1,11 @@
 package org.csystem.android.app.basicviews
 
 import android.os.Bundle
-import android.widget.Button
+import android.text.InputType
 import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.csystem.android.app.basicviews.databinding.ActivityMainBinding
 import org.csystem.android.app.basicviews.global.alert.promptDecision
 import org.csystem.android.app.basicviews.global.alert.promptNotConfirmedDialog
 import org.csystem.android.app.basicviews.viewmodel.RegisterInfo
@@ -13,19 +13,11 @@ import java.time.DateTimeException
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mButtonRegister: Button
-    private lateinit var mEditTextName: EditText
-    private lateinit var mEditTextEmail: EditText
-    private lateinit var mEditTextDay: EditText
-    private lateinit var mEditTextMonth: EditText
-    private lateinit var mEditTextYear: EditText
-    private lateinit var mEditTextUserName: EditText
-    private lateinit var mEditTextPassword: EditText
-    private lateinit var mEditTextConfirmPassword: EditText
+    private lateinit var mBinding: ActivityMainBinding
 
     private fun neutralButtonClickedCallback()
     {
-        mEditTextConfirmPassword.setText("")
+        mBinding.mainActivityEditTextConfirmPassword.setText("")
     }
 
     private fun positiveButtonClickedCallback()
@@ -54,33 +46,33 @@ class MainActivity : AppCompatActivity() {
 
     private fun getRegisterInfo() : RegisterInfo?
     {
-        val password = mEditTextPassword.text.toString()
-        if (!confirm(password, mEditTextConfirmPassword.text.toString()))
+        val password = mBinding.mainActivityEditTextPassword.text.toString()
+        if (!confirm(password, mBinding.mainActivityEditTextConfirmPassword.text.toString()))
             return null
 
-        val name = mEditTextName.text.toString()
-        val email = mEditTextEmail.text.toString()
-        val birthDate = LocalDate.of(mEditTextYear.text.toString().toInt(),
-            mEditTextMonth.text.toString().toInt(), mEditTextDay.text.toString().toInt())
-        val userName = mEditTextUserName.text.toString()
+        val name = mBinding.mainActivityEditTextName.text.toString()
+        val email = mBinding.mainActivityEditTextEmail.text.toString()
+        val birthDate = LocalDate.of(mBinding.mainActivityEditTextYear.text.toString().toInt(),
+            mBinding.mainActivityEditTextMonth.text.toString().toInt(), mBinding.mainActivityEditTextDay.text.toString().toInt())
+        val userName = mBinding.mainActivityEditTextUserName.text.toString()
 
         return RegisterInfo(name, email, birthDate, userName, password)
     }
 
     private fun registerButtonClickedCallback()
     {
-       try {
+        try {
            val registerInfo = getRegisterInfo()
 
            if (registerInfo != null)
                 Toast.makeText(this, registerInfo.toString(), Toast.LENGTH_LONG).show()
-       }
-       catch (ignore: NumberFormatException) {
+        }
+        catch (ignore: NumberFormatException) {
             Toast.makeText(this, R.string.message_number_format_exception, Toast.LENGTH_LONG).show()
-       }
-       catch (ignore: DateTimeException) {
+        }
+        catch (ignore: DateTimeException) {
            Toast.makeText(this, R.string.message_datetime_exception, Toast.LENGTH_LONG).show()
-       }
+        }
     }
 
     private fun closeButtonClickedCallback()
@@ -92,37 +84,30 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRegisterButton()
     {
-        mButtonRegister = findViewById<Button>(R.id.mainActivityButtonRegister)
-            .apply { setOnClickListener { registerButtonClickedCallback() }}
+        mBinding.mainActivityButtonRegister.apply { setOnClickListener { registerButtonClickedCallback() }}
     }
 
     private fun initCloseButton()
     {
-        findViewById<Button>(R.id.mainActivityButtonClose).apply { setOnClickListener { closeButtonClickedCallback() }}
+        mBinding.mainActivityButtonClose.apply { setOnClickListener { closeButtonClickedCallback() }}
+
     }
 
     private fun initAcceptCheckBox()
     {
         findViewById<CheckBox>(R.id.mainActivityCheckboxAcceptConditions)
-            .apply { setOnCheckedChangeListener{_, checked -> mButtonRegister.isEnabled = checked}}
+            .apply { setOnCheckedChangeListener{_, checked -> mBinding.mainActivityButtonRegister.isEnabled = checked}}
     }
 
-    private fun initEditTexts()
+    private fun initBinding()
     {
-        //Getting references via old approach
-        mEditTextName = findViewById(R.id.mainActivityEditTextName)
-        mEditTextEmail = findViewById(R.id.mainActivityEditTextEmail)
-        mEditTextDay = findViewById(R.id.mainActivityEditTextDay)
-        mEditTextMonth = findViewById(R.id.mainActivityEditTextMonth)
-        mEditTextYear = findViewById(R.id.mainActivityEditTextYear)
-        mEditTextUserName = findViewById(R.id.mainActivityEditTextUserName)
-        mEditTextPassword = findViewById(R.id.mainActivityEditTextPassword)
-        mEditTextConfirmPassword = findViewById(R.id.mainActivityEditTextConfirmPassword)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
     }
 
     private fun initViews()
     {
-        initEditTexts()
+        initBinding()
         initRegisterButton()
         initCloseButton()
         initAcceptCheckBox()
@@ -136,7 +121,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         initialize()
     }
 }

@@ -11,6 +11,8 @@
     <string name="checkbox_accept_text">Accept Conditions</string>
     <string name="button_register_text">Register</string>
     <string name="button_close_text">Close</string>
+    <string name="button_show_password_text">Show Password</string>
+    <string name="button_hide_password_text">Hide Password</string>
     <string name="message_number_format_exception">You must input numbers!</string>
     <string name="message_datetime_exception">Invalid date values!</string>
     <string name="message_password_not_confirmed">Passwords are not same</string>
