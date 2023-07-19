@@ -1,3 +1,8 @@
 Yapılacaklar:
-- Show Password button'una basıldığında üzerindeki yazı hide password olarak değişecektir.
+- Show Password button'una basıldığında üzerindeki yazı Hide Password olarak değişecektir.
 - Button'un durumuna göre şifre gözükecek veya gözükmeyecektir
+- Bir clear button'u eklenecek ve basıldığında şunlar yapılacaktır
+        - Doğumm tarihine ilişkin EditText'ler o anki tarihi gösterecektir
+        - Geri kalan EditText'ler temizlenecektir
+        - Password edittext'i ve şifreyi gösteren buttın hide durumuna gelecektir
+        - Accept checkbox'ı pasif duruma getirilecektir
