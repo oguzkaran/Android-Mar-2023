@@ -1,7 +1,6 @@
 package org.csystem.android.app.basicviews
 
 import android.os.Bundle
-import android.text.InputType
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
