@@ -1,9 +1,11 @@
 package org.csystem.android.app.basicviews
 
 import android.os.Bundle
-import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import org.csystem.android.app.basicviews.databinding.ActivityMainBinding
 import org.csystem.android.app.basicviews.global.alert.promptDecision
 import org.csystem.android.app.basicviews.global.alert.promptNotConfirmedDialog
@@ -81,6 +83,46 @@ class MainActivity : AppCompatActivity() {
             {_, _ -> positiveButtonClickedCallback()}) {_, _ -> negativeButtonClickedCallback()}
     }
 
+    private fun clearEditTexts()
+    {
+        mBinding.mainActivityEditTextPassword.setText("")
+        for (view in mBinding.mainActivityLinearLayoutMain.children) {
+            if (view is EditText)
+                view.setText("")
+        }
+    }
+
+    private fun clearButtonClickedCallback()
+    {
+        clearEditTexts()
+        initBirthDateTexts()
+        mBinding.mainActivityCheckboxAcceptConditions.isChecked = false
+        showPasswordButtonClickedCallback()
+    }
+
+
+
+    private fun showPasswordButtonClickedCallback()
+    {
+        with(mBinding.mainActivityButtonShowPassword) {
+            val show = tag as Boolean
+            val resId = if (show) R.string.button_hide_password_text else R.string.button_show_password_text
+
+            setText(resId)
+            mBinding.mainActivityEditTextPassword.inputType =
+                if (show) INPUT_TYPE_TEXT_PASSWORD_SHOW else INPUT_TYPE_TEXT_PASSWORD_HIDE
+            tag = !show
+        }
+    }
+
+    private fun initShowPasswordButton()
+    {
+        mBinding.mainActivityButtonShowPassword.apply {
+            tag = true
+            setOnClickListener { showPasswordButtonClickedCallback() }
+        }
+    }
+
     private fun initRegisterButton()
     {
         mBinding.mainActivityButtonRegister.apply { setOnClickListener { registerButtonClickedCallback() }}
@@ -89,13 +131,26 @@ class MainActivity : AppCompatActivity() {
     private fun initCloseButton()
     {
         mBinding.mainActivityButtonClose.apply { setOnClickListener { closeButtonClickedCallback() }}
+    }
 
+    private fun initClearButton()
+    {
+        mBinding.mainActivityButtonClear.apply { setOnClickListener { clearButtonClickedCallback() }}
     }
 
     private fun initAcceptCheckBox()
     {
-        findViewById<CheckBox>(R.id.mainActivityCheckboxAcceptConditions)
-            .apply { setOnCheckedChangeListener{_, checked -> mBinding.mainActivityButtonRegister.isEnabled = checked}}
+        mBinding.mainActivityCheckboxAcceptConditions
+            .setOnCheckedChangeListener{_, checked -> mBinding.mainActivityButtonRegister.isEnabled = checked}
+    }
+
+    private fun initBirthDateTexts()
+    {
+        val today = LocalDate.now()
+
+        mBinding.mainActivityEditTextDay.setText(today.dayOfMonth.toString())
+        mBinding.mainActivityEditTextMonth.setText(today.monthValue.toString())
+        mBinding.mainActivityEditTextYear.setText(today.year.toString())
     }
 
     private fun initBinding()
@@ -107,7 +162,10 @@ class MainActivity : AppCompatActivity() {
     private fun initViews()
     {
         initBinding()
+        initBirthDateTexts()
+        initShowPasswordButton()
         initRegisterButton()
+        initClearButton()
         initCloseButton()
         initAcceptCheckBox()
     }

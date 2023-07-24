@@ -1,7 +1,7 @@
 Yapılacaklar:
-- Show Password button'una basıldığında üzerindeki yazı Hide Password olarak değişecektir.
++ Show Password button'una basıldığında üzerindeki yazı Hide Password olarak değişecektir.
 
-- Button'un durumuna göre şifre gözükecek veya gözükmeyecektir.
++ Button'un durumuna göre şifre gözükecek veya gözükmeyecektir.
 
 - Bir clear button'u eklenecek ve basıldığında şunlar yapılacaktır:
         - Doğum tarihine ilişkin EditText'ler o anki tarihi gösterecektir

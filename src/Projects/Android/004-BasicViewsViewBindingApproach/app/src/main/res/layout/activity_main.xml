@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/mainActivityLinearLayoutMain"
     tools:context=".MainActivity">
 
     <EditText
@@ -76,7 +78,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:layout_weight="8"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:hint="@string/edittext_password_hint_text" />
         <Button
             android:id="@+id/mainActivityButtonShowPassword"
@@ -92,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:hint="@string/edittext_confirm_password_hint_text" />
 
     <Button
@@ -107,6 +109,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/checkbox_accept_text" />
+
+    <Button
+        android:id="@+id/mainActivityButtonClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_clear_text" />
 
     <Button
         android:id="@+id/mainActivityButtonClose"
