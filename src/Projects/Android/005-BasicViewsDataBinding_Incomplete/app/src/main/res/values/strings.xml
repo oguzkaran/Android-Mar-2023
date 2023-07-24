@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">BasicViews</string>
+    <string name="edittext_name_hint_text">Input name</string>
+    <string name="edittext_email_hint_text">Input email</string>
+    <string name="edittext_day_hint_text">Day</string>
+    <string name="edittext_month_hint_text">Month</string>
+    <string name="edittext_username_hint_text">Input username</string>
+    <string name="edittext_password_hint_text">Input password</string>
+    <string name="edittext_confirm_password_hint_text">Confirm password</string>
+    <string name="edittext_year_hint_text">Year</string>
+    <string name="checkbox_accept_text">Accept Conditions</string>
+    <string name="button_register_text">Register</string>
+    <string name="button_close_text">Close</string>
+    <string name="button_clear_text">Clear</string>
+    <string name="button_show_password_text">Show Password</string>
+    <string name="button_hide_password_text">Hide Password</string>
+    <string name="message_number_format_exception">You must input numbers!</string>
+    <string name="message_datetime_exception">Invalid date values!</string>
+    <string name="message_password_not_confirmed">Passwords are not same</string>
+    <string name="message_confirm_close">Are you sure to close?</string>
+    <string name="message_continue">You can continue</string>
+    <string name="confirm_alert_dialog_title">Alert</string>
+    <string name="confirm_close_alert_dialog_title">Warning</string>
+    <string name="ok_button_text">OK</string>
+    <string name="yes_button_text">Yes</string>
+    <string name="no_button_text">No</string>
+</resources>
