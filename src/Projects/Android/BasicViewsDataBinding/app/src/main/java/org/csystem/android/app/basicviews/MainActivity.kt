@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun neutralButtonClickedCallback()
     {
-        mBinding.mainActivityEditTextConfirmPassword.setText("")
+        mBinding.confirmPassword = "";
     }
 
     private fun positiveButtonClickedCallback()
@@ -45,25 +45,17 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
-    private fun getBirthDate() : LocalDate
-    {
-        val year = mBinding.mainActivityEditTextYear.text.toString().toInt()
-        val month = mBinding.mainActivityEditTextMonth.text.toString().toInt()
-        val day = mBinding.mainActivityEditTextDay.text.toString().toInt()
-
-        return LocalDate.of(year, month, day)
-    }
 
     private fun getRegisterInfo() : RegisterInfo?
     {
-        val password = mBinding.mainActivityEditTextPassword.text.toString()
-        if (!confirm(password, mBinding.mainActivityEditTextConfirmPassword.text.toString()))
+        val password = mBinding.registerInfoViewModel!!.password
+        if (!confirm(password, mBinding.confirmPassword!!))
             return null
 
-        val name = mBinding.mainActivityEditTextName.text.toString()
-        val email = mBinding.mainActivityEditTextEmail.text.toString()
-        val birthDate = getBirthDate()
-        val userName = mBinding.mainActivityEditTextUserName.text.toString()
+        val name = mBinding.registerInfoViewModel!!.name
+        val email = mBinding.registerInfoViewModel!!.email
+        val birthDate = LocalDate.of(mBinding.year!!.toInt(), mBinding.month!!.toInt(), mBinding.day!!.toInt())
+        val userName = mBinding.registerInfoViewModel!!.userName
 
         return RegisterInfo(name, email, birthDate, userName, password)
     }
@@ -75,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
            if (registerInfo != null) {
                Toast.makeText(this, registerInfo.toString(), Toast.LENGTH_LONG).show()
-               mBinding.mainmActivityTextViewInformation.text = registerInfo.toString()
+               mBinding.result = registerInfo.toString()
            }
         }
         catch (ignore: NumberFormatException) {
@@ -95,90 +87,56 @@ class MainActivity : AppCompatActivity() {
 
     private fun clearEditTexts()
     {
-        mBinding.mainActivityEditTextPassword.setText("")
+        mBinding.registerInfoViewModel!!.password = ""
         for (view in mBinding.mainActivityLinearLayoutMain.children) {
             if (view is EditText)
                 view.setText("")
         }
-        mBinding.mainmActivityTextViewInformation.text = ""
+        mBinding.result = ""
     }
 
     private fun clearButtonClickedCallback()
     {
         clearEditTexts()
         initBirthDateTexts()
-        mBinding.mainActivityCheckboxAcceptConditions.isChecked = false
-        with (mBinding.mainActivityEditTextPassword) {
-            inputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
-            mBinding.mainActivityButtonShowPassword.setText(R.string.button_show_password_text)
-            tag = false
-        }
-
+        mBinding.accept = false
+        mBinding.passwordInputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
+        mBinding.showPasswordButtonText = resources.getString(R.string.button_show_password_text)
+        mBinding.show = false
         mBinding.mainActivityEditTextName.requestFocus()
     }
 
-
     private fun showPasswordButtonClickedCallback()
     {
-        with(mBinding.mainActivityButtonShowPassword) {
-            val show = tag as Boolean
-            val resId =
-                if (show) R.string.button_hide_password_text else R.string.button_show_password_text
+        val show = mBinding.show as Boolean
+        val resId = if (show) R.string.button_hide_password_text else R.string.button_show_password_text
 
-            setText(resId)
-            mBinding.mainActivityEditTextPassword.inputType =
-                if (show) INPUT_TYPE_TEXT_PASSWORD_SHOW else INPUT_TYPE_TEXT_PASSWORD_HIDE
-            tag = !show
-        }
-    }
-
-    private fun initShowPasswordButton()
-    {
-        mBinding.mainActivityButtonShowPassword.apply {
-            tag = true
-            setOnClickListener { showPasswordButtonClickedCallback() }
-        }
-    }
-
-    private fun initRegisterButton()
-    {
-        mBinding.mainActivityButtonRegister.apply { setOnClickListener { registerButtonClickedCallback() }}
-    }
-
-    private fun initCloseButton()
-    {
-        mBinding.mainActivityButtonClose.apply { setOnClickListener { closeButtonClickedCallback() }}
-    }
-
-    private fun initClearButton()
-    {
-        mBinding.mainActivityButtonClear.apply { setOnClickListener { clearButtonClickedCallback() }}
+        mBinding.showPasswordButtonText = resources.getString(resId)
+        mBinding.passwordInputType = if (show) INPUT_TYPE_TEXT_PASSWORD_SHOW else INPUT_TYPE_TEXT_PASSWORD_HIDE
+        mBinding.show = !show
     }
 
     private fun initBirthDateTexts()
     {
         val today = LocalDate.now()
 
-        mBinding.mainActivityEditTextDay.setText(today.dayOfMonth.toString())
-        mBinding.mainActivityEditTextMonth.setText(today.monthValue.toString())
-        mBinding.mainActivityEditTextYear.setText(today.year.toString())
+        mBinding.day = today.dayOfMonth.toString()
+        mBinding.month = today.monthValue.toString()
+        mBinding.year = today.year.toString()
     }
 
     private fun initBinding()
     {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mBinding.registerInfoViewModel = RegisterInfo()
+        mBinding.show = true
+        mBinding.passwordInputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
     }
 
     private fun initViews()
     {
         initBinding()
         initBirthDateTexts()
-        initShowPasswordButton()
-        initRegisterButton()
-        initClearButton()
-        initCloseButton()
-        //initAcceptCheckBox()
     }
 
     private fun initialize()

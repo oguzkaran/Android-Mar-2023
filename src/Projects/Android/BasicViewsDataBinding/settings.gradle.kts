@@ -12,5 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "BasicViews"
-include ':app'
+include(":app")
+ 
