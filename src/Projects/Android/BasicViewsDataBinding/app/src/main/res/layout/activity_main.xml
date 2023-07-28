@@ -3,7 +3,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="org.csystem.android.app.basicviews.viewmodel.RegisterInfo"/>
+        <import type="org.csystem.android.app.basicviews.viewmodel.MainActivityViewModel"/>
         <variable type="RegisterInfo" name="registerInfoViewModel" />
+        <variable type="MainActivityViewModel" name="mainActivityViewModel" />
         <variable type="String" name="confirmPassword" />
         <variable type="boolean" name="accept" />
         <variable type="String" name="result" />
@@ -13,6 +15,7 @@
         <variable type="Object" name="show" />
         <variable type="int" name="passwordInputType" />
         <variable type="String" name="showPasswordButtonText" />
+        <variable type="String" name="password" />
     </data>
 
     <LinearLayout
@@ -24,6 +27,7 @@
         tools:context=".MainActivity">
 
         <EditText
+            android:id="@+id/mainActivityEditTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -45,7 +49,6 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/mainActivityEditTextName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,7 +96,7 @@
                 android:ems="10"
                 android:layout_weight="8"
                 android:inputType="@{passwordInputType}"
-                android:text="@={registerInfoViewModel.password}"
+                android:text="@={password}"
                 android:hint="@string/edittext_password_hint_text" />
 
             <Button
@@ -101,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:tag="@{show}"
+                android:onClick="@{() -> mainActivityViewModel.handleShowPasswordButton()}"
                 android:text="@{showPasswordButtonText}" />
         </LinearLayout>
 
@@ -116,6 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="@{accept}"
+            android:onClick="@{() -> mainActivityViewModel.handleRegisterButton()}"
             android:text="@string/button_register_text" />
 
         <CheckBox
@@ -132,11 +137,13 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> mainActivityViewModel.handleClearButton()}"
             android:text="@string/button_clear_text" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> mainActivityViewModel.handleCloseButton()}"
             android:text="@string/button_close_text" />
 
     </LinearLayout>
