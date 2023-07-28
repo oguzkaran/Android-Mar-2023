@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun neutralButtonClickedCallback()
     {
-        mBinding.confirmPassword = "";
+        mBinding.confirmPassword = ""
     }
 
     private fun positiveButtonClickedCallback()

@@ -2,7 +2,7 @@ package org.csystem.android.app.basicviews.viewmodel
 
 import org.csystem.android.app.basicviews.MainActivity
 
-class MainActivityViewModel(val activity: MainActivity) {
+class MainActivityViewModel(private val activity: MainActivity) {
     fun handleShowPasswordButton() = activity.showPasswordButtonClicked()
 
     fun handleRegisterButton() = activity.registerButtonClicked()
@@ -10,5 +10,4 @@ class MainActivityViewModel(val activity: MainActivity) {
     fun handleClearButton() = activity.clearButtonClicked()
 
     fun handleCloseButton() = activity.closeButtonClicked()
-
 }
