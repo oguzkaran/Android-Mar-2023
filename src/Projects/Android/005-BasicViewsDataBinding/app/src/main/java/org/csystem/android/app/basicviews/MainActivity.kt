@@ -2,9 +2,9 @@ package org.csystem.android.app.basicviews
 
 import android.os.Bundle
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
@@ -114,10 +114,23 @@ class MainActivity : AppCompatActivity() {
         initialize()
     }
 
-    fun openToggleButtonCheckedChanged(checked: Boolean)
+    private fun allowClosePositiveButtonClickedCallback(checked: Boolean)
     {
         clearButtonClicked()
-        setRegisterInfoVisibility(if (checked) View.VISIBLE else View.GONE)
+        setRegisterInfoVisibility(View.GONE)
+    }
+
+    fun openToggleButtonCheckedChanged(checked: Boolean)
+    {
+        if (!checked)
+            AlertDialog.Builder(this).setTitle(R.string.confirm_alert_dialog_title)
+                .setMessage(R.string.message_confirm_close)
+                .setPositiveButton(R.string.yes_button_text) {_, _-> allowClosePositiveButtonClickedCallback(checked) }
+                .setNegativeButton(R.string.no_button_text) {_, _ -> mBinding.mainActivityToggleButtonOpen.performClick()}
+                .create()
+                .show()
+        else
+            setRegisterInfoVisibility(View.VISIBLE)
     }
 
     fun showPasswordButtonClicked()

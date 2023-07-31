@@ -1,3 +1,9 @@
-- Toggle button ile kapatılırken bir dialog penceresi çıkartılacak ve aşağıdakine
-benze bir mesaj ile soru sorulacaktır:
++ Toggle button ile kapatılırken bir dialog penceresi çıkartılacak ve aşağıdakine
+benzer bir mesaj ile soru sorulacaktır:
     If you close all input data will be cleared. Are you sure?
+
+- Swicth checked duruma geldiğinde aşağıdaki gibi bir mesaj içeren dialog penceresi
+çıkartılacaktır:
+    If password is visible, it can be dangerous. Are you sure?
+
+- Clear işleminde switch de unchecked duruma getirilecektir

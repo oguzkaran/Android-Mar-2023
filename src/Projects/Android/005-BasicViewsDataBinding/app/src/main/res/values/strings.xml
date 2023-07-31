@@ -14,6 +14,7 @@
     <string name="button_clear_text">Clear</string>
     <string name="button_show_password_text">Show Password</string>
     <string name="button_hide_password_text">Hide Password</string>
+    <string name="switch_show_button_enable">Allow Show Password</string>
     <string name="message_number_format_exception">You must input numbers!</string>
     <string name="message_datetime_exception">Invalid date values!</string>
     <string name="message_password_not_confirmed">Passwords are not same</string>
@@ -26,4 +27,6 @@
     <string name="no_button_text">No</string>
     <string name="toggle_button_on_text">Close</string>
     <string name="toggle_button_off_text">Open</string>
+    <string name="message_register_allow_close">If you close all input data will be cleared. Are you sure?</string>
+    <string name="message_enable_show_password">If password is visible, it can be dangerous. Are you sure?</string>
 </resources>

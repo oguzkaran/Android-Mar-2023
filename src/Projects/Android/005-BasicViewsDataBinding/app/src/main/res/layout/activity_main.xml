@@ -26,6 +26,7 @@
         tools:context=".MainActivity">
 
         <ToggleButton
+            android:id="@+id/mainActivityToggleButtonOpen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textOn="@string/toggle_button_on_text"
@@ -108,18 +109,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:layout_weight="8"
+                    android:layout_weight="5"
                     android:inputType="@{passwordInputType}"
                     android:text="@={password}"
                     android:hint="@string/edittext_password_hint_text" />
 
-                <Button
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:tag="@{show}"
-                    android:onClick="@{() -> mainActivityViewModel.handleShowPasswordButton()}"
-                    android:text="@{showPasswordButtonText}" />
+                    android:orientation="vertical"
+                    android:layout_weight="2">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:tag="@{show}"
+                        android:onClick="@{() -> mainActivityViewModel.handleShowPasswordButton()}"
+                        android:text="@{showPasswordButtonText}" />
+
+                    <Switch
+                        android:id="@+id/switch1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="@string/switch_show_button_enable"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <EditText
