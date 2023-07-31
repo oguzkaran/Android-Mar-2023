@@ -1,0 +1,3 @@
+- Toggle button ile kapatılırken bir dialog penceresi çıkartılacak ve aşağıdakine
+benze bir mesaj ile soru sorulacaktır:
+    If you close all input data will be cleared. Are you sure?

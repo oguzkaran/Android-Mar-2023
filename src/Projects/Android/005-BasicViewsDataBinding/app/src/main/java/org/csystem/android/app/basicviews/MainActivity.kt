@@ -1,6 +1,8 @@
 package org.csystem.android.app.basicviews
 
 import android.os.Bundle
+import android.view.View
+import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -63,12 +65,17 @@ class MainActivity : AppCompatActivity() {
     private fun clearEditTexts()
     {
         mBinding.password = ""
-        for (view in mBinding.mainActivityLinearLayoutMain.children) {
+        for (view in mBinding.mainActivityLayoutRegisterInfo.children)
             if (view is EditText)
                 view.setText("")
-        }
 
         mBinding.confirmPassword = ""
+    }
+
+    private fun setRegisterInfoVisibility(visibility: Int)
+    {
+        for (view in mBinding.mainActivityLayoutRegisterInfo.children)
+            view.visibility = visibility
     }
 
     private fun initBirthDateTexts()
@@ -105,6 +112,12 @@ class MainActivity : AppCompatActivity() {
     {
         super.onCreate(savedInstanceState)
         initialize()
+    }
+
+    fun openToggleButtonCheckedChanged(checked: Boolean)
+    {
+        clearButtonClicked()
+        setRegisterInfoVisibility(if (checked) View.VISIBLE else View.GONE)
     }
 
     fun showPasswordButtonClicked()

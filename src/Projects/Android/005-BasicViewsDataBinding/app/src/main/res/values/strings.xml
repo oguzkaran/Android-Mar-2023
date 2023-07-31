@@ -24,4 +24,6 @@
     <string name="ok_button_text">OK</string>
     <string name="yes_button_text">Yes</string>
     <string name="no_button_text">No</string>
+    <string name="toggle_button_on_text">Close</string>
+    <string name="toggle_button_off_text">Open</string>
 </resources>

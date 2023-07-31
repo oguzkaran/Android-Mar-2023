@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="org.csystem.android.app.basicviews.viewmodel.RegisterInfo"/>
         <import type="org.csystem.android.app.basicviews.viewmodel.MainActivityViewModel"/>
@@ -19,126 +20,141 @@
     </data>
 
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/mainActivityLinearLayoutMain"
         tools:context=".MainActivity">
 
-        <EditText
-            android:id="@+id/mainActivityEditTextName"
+        <ToggleButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@={registerInfoViewModel.name}"
-            android:hint="@string/edittext_name_hint_text" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:text="@={registerInfoViewModel.email}"
-            android:hint="@string/edittext_email_hint_text" />
+            android:textOn="@string/toggle_button_on_text"
+            android:textOff="@string/toggle_button_off_text"
+            android:checked="true"
+            android:onCheckedChanged="@{(_, checked) -> mainActivityViewModel.handleOpenToggleButton(checked)}"
+            />
 
         <LinearLayout
+            android:id="@+id/mainActivityLayoutRegisterInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/mainActivityEditTextName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number"
-                android:hint="@string/edittext_day_hint_text"
-                android:text="@={day}"
-                />
+                android:inputType="textPersonName"
+                android:text="@={registerInfoViewModel.name}"
+                android:hint="@string/edittext_name_hint_text" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number"
-                android:hint="@string/edittext_month_hint_text"
-                android:text="@={month}"/>
+                android:inputType="textEmailAddress"
+                android:text="@={registerInfoViewModel.email}"
+                android:hint="@string/edittext_email_hint_text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/edittext_day_hint_text"
+                    android:text="@={day}"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/edittext_month_hint_text"
+                    android:text="@={month}"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/edittext_year_hint_text"
+                    android:text="@={year}"/>
+            </LinearLayout>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number"
-                android:hint="@string/edittext_year_hint_text"
-                android:text="@={year}"/>
-        </LinearLayout>
+                android:inputType="text"
+                android:text="@={registerInfoViewModel.userName}"
+                android:hint="@string/edittext_username_hint_text" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="@={registerInfoViewModel.userName}"
-            android:hint="@string/edittext_username_hint_text" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="8"
+                    android:inputType="@{passwordInputType}"
+                    android:text="@={password}"
+                    android:hint="@string/edittext_password_hint_text" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@{show}"
+                    android:onClick="@{() -> mainActivityViewModel.handleShowPasswordButton()}"
+                    android:text="@{showPasswordButtonText}" />
+            </LinearLayout>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:layout_weight="8"
-                android:inputType="@{passwordInputType}"
-                android:text="@={password}"
-                android:hint="@string/edittext_password_hint_text" />
+                android:inputType="textPassword"
+                android:text="@={confirmPassword}"
+                android:hint="@string/edittext_confirm_password_hint_text" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:tag="@{show}"
-                android:onClick="@{() -> mainActivityViewModel.handleShowPasswordButton()}"
-                android:text="@{showPasswordButtonText}" />
+                android:enabled="@{accept}"
+                android:onClick="@{() -> mainActivityViewModel.handleRegisterButton()}"
+                android:text="@string/button_register_text" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@={accept}"
+                android:text="@string/checkbox_accept_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{result}"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> mainActivityViewModel.handleClearButton()}"
+                android:text="@string/button_clear_text" />
+
         </LinearLayout>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="@={confirmPassword}"
-            android:hint="@string/edittext_confirm_password_hint_text" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="@{accept}"
-            android:onClick="@{() -> mainActivityViewModel.handleRegisterButton()}"
-            android:text="@string/button_register_text" />
-
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="@={accept}"
-            android:text="@string/checkbox_accept_text" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{result}"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> mainActivityViewModel.handleClearButton()}"
-            android:text="@string/button_clear_text" />
 
         <Button
             android:layout_width="match_parent"
