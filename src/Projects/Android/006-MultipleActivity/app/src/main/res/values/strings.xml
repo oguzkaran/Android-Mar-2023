@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MultipleActivity</string>
+    <string name="button_register_text">Register</string>
+    <string name="button_login_text">Login</string>
+    <string name="button_close_text">Close</string>
+</resources>

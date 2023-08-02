@@ -120,6 +120,11 @@ class MainActivity : AppCompatActivity() {
         setRegisterInfoVisibility(View.GONE)
     }
 
+    private fun allowCShowPasswordNegativeButtonClickedCallback()
+    {
+        mBinding.allowShowPasswordChecked = false
+    }
+
     fun openToggleButtonCheckedChanged(checked: Boolean)
     {
         if (!checked)
@@ -127,10 +132,26 @@ class MainActivity : AppCompatActivity() {
                 .setMessage(R.string.message_confirm_close)
                 .setPositiveButton(R.string.yes_button_text) {_, _-> allowClosePositiveButtonClickedCallback(checked) }
                 .setNegativeButton(R.string.no_button_text) {_, _ -> mBinding.mainActivityToggleButtonOpen.performClick()}
+                .setOnCancelListener{mBinding.mainActivityToggleButtonOpen.performClick()}
                 .create()
                 .show()
         else
             setRegisterInfoVisibility(View.VISIBLE)
+    }
+
+    fun allowShowPasswordSwitchCheckedChanged(checked: Boolean)
+    {
+        if (!checked)
+            return
+
+        AlertDialog.Builder(this).setTitle(R.string.confirm_alert_dialog_title)
+            .setMessage(R.string.message_enable_show_password)
+            .setPositiveButton(R.string.yes_button_text) {_, _->  }
+            .setNegativeButton(R.string.no_button_text) {_, _ -> allowCShowPasswordNegativeButtonClickedCallback() }
+            //.setNeutralButton("") {_, _ -> mBinding.allowShowPasswordChecked = false}
+            .setOnCancelListener{mBinding.allowShowPasswordChecked = false}
+            .create()
+            .show()
     }
 
     fun showPasswordButtonClicked()
@@ -170,6 +191,7 @@ class MainActivity : AppCompatActivity() {
         mBinding.showPasswordButtonText = resources.getString(R.string.button_show_password_text)
         mBinding.show = true
         mBinding.result = ""
+        mBinding.allowShowPasswordChecked = false
         mBinding.mainActivityEditTextName.requestFocus()
     }
 

@@ -17,6 +17,7 @@
         <variable type="int" name="passwordInputType" />
         <variable type="String" name="showPasswordButtonText" />
         <variable type="String" name="password" />
+        <variable type="boolean" name="allowShowPasswordChecked" />
     </data>
 
     <LinearLayout
@@ -123,18 +124,18 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:tag="@{show}"
                         android:onClick="@{() -> mainActivityViewModel.handleShowPasswordButton()}"
+                        android:enabled="@{allowShowPasswordChecked}"
                         android:text="@{showPasswordButtonText}" />
 
                     <Switch
-                        android:id="@+id/switch1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:text="@string/switch_show_button_enable"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                        android:checked="@={allowShowPasswordChecked}"
+                        tools:ignore="UseSwitchCompatOrMaterialXml"
+                        android:onCheckedChanged="@{(_, checked) -> mainActivityViewModel.handleAllowShowPasswordSwitch(checked)}"/>
                 </LinearLayout>
 
             </LinearLayout>
