@@ -2,7 +2,6 @@ package org.csystem.android.app.multipleactivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.csystem.android.app.multipleactivity.databinding.ActivityMainBinding
