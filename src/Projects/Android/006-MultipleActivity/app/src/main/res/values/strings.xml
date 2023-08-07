@@ -3,6 +3,11 @@
     <string name="button_register_text">Register</string>
     <string name="button_login_text">Login</string>
     <string name="button_close_text">Close</string>
+    <string name="button_pay_text">Pay</string>
+    <string name="button_clear_text">Clear</string>
     <string name="edittext_username_hint">Input username</string>
     <string name="edittext_password_hint">Input password</string>
+    <string name="edittext_product_name_hint">Input product name</string>
+    <string name="edittext_product_unit_price_hint">Input unit price</string>
+    <string name="edittext_product_quantity_hint">Input quantity</string>
 </resources>

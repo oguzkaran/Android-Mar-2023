@@ -10,6 +10,7 @@ import org.csystem.android.app.multipleactivity.databinding.ActivityPaymentBindi
 import org.csystem.android.app.multipleactivity.keys.LOGIN_INFO
 import org.csystem.android.app.multipleactivity.viewmodel.LoginInfo
 import org.csystem.android.app.multipleactivity.viewmodel.PaymentActivityViewModel
+import org.csystem.android.app.multipleactivity.viewmodel.PaymentInfo
 
 class PaymentActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityPaymentBinding
@@ -21,6 +22,7 @@ class PaymentActivity : AppCompatActivity() {
             VERSION.SDK_INT < VERSION_CODES.TIRAMISU -> intent.getSerializableExtra(LOGIN_INFO) as LoginInfo
             else -> intent.getSerializableExtra(LOGIN_INFO, LoginInfo::class.java)
         }
+        mBinding.result = "";
     }
 
     private fun initBinding()
@@ -41,5 +43,28 @@ class PaymentActivity : AppCompatActivity() {
         Toast.makeText(this, mBinding.loginInfo!!.password, Toast.LENGTH_LONG).show()
     }
 
-    //...
+    fun payButtonClicked()
+    {
+        try {
+            //Şimdilik bu şekilde yapılmıştırü
+            mBinding.result = "";
+            val pi = PaymentInfo(mBinding.viewModel!!.name,
+                mBinding.viewModel!!.unitPriceStr.toDouble(), mBinding.viewModel!!.quantityStr.toInt())
+
+            mBinding.result = pi.toString()
+        }
+        catch (ignore: Throwable) {
+            Toast.makeText(this, "Problem occurs!...", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun clearButtonClicked()
+    {
+
+    }
+
+    fun closeButtonClicked()
+    {
+
+    }
 }
