@@ -1,0 +1,20 @@
+Sınıf Çalışması: 07 Ağustos 2023
+- PaymentActivity içerisine 3 adet edittext, üç adet button ve bir tane textview yerleştiriniz. Bu vlewlar şunları
+temjsil edecektir:
+1. EditText -> Ürün Adı
+2. EditText -> Ürün birim fiyatı (noktalı sayı)
+3. EditText -> Ürüm miktarı (tamsayı)
+
+1.Button -> Hesapla
+2.Button -> Temizle
+3.Çıkış
+
+1. Button'a basıldığında ürünün birim fiyatı ile ürün miktarı çarpılıp elde edilen sonuç Ürün ismi
+ile birlikte TextView'da gösterilecektir. Ayrıca her basıldığında TexView temizlenecektir
+2. Button'a basıldığında tüm alanlar temizlenecektir
+3. button'a basıldığında 1 AlertDialog ile çıkmak isteyip istemediği sorulacaktır
+
+- Eklentiler dataBinding kullanılarak yapılacaktır
+- Mesajlar string kaynağına eklenecek ve İngilizce olacaktır. Mesajların ne olduğuna ne olduğuna
+siz karar verebilirsiniz
+- UI tasarımı çok daha iyi yapılabilir. Şu an önemsizdir

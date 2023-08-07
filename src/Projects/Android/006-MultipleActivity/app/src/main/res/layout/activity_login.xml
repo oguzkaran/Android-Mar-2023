@@ -4,8 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="org.csystem.android.app.multipleactivity.viewmodel.LoginActivityViewModel"/>
-        <variable name="viewModel" type="LoginActivityViewModel" />
+        <import type="org.csystem.android.app.multipleactivity.viewmodel.LoginActivityListenersViewModel"/>
+        <import type="org.csystem.android.app.multipleactivity.viewmodel.LoginInfo"/>
+        <variable name="viewModel" type="LoginActivityListenersViewModel" />
+        <variable name="loginInfo" type="LoginInfo" />
     </data>
 
     <LinearLayout
@@ -19,7 +21,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="@={viewModel.username}"
+            android:text="@={loginInfo.username}"
             android:hint="@string/edittext_username_hint"/>
 
         <EditText
@@ -27,7 +29,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@={viewModel.password}"
+            android:text="@={loginInfo.password}"
             android:hint="@string/edittext_password_hint"/>
 
         <Button
