@@ -11,7 +11,7 @@ import org.csystem.android.app.multipleactivity.binding.PaymentUnitPriceStringCo
 import org.csystem.android.app.multipleactivity.databinding.ActivityPaymentBinding
 import org.csystem.android.app.multipleactivity.keys.LOGIN_INFO
 import org.csystem.android.app.multipleactivity.viewmodel.LoginInfo
-import org.csystem.android.app.multipleactivity.viewmodel.PaymentActivityViewModel
+import org.csystem.android.app.multipleactivity.viewmodel.PaymentActivityListenersViewModel
 import org.csystem.android.app.multipleactivity.viewmodel.PaymentInfo
 
 class PaymentActivity : AppCompatActivity() {
@@ -19,7 +19,7 @@ class PaymentActivity : AppCompatActivity() {
 
     private fun initViewModels()
     {
-        mBinding.viewModel = PaymentActivityViewModel(this)
+        mBinding.viewModel = PaymentActivityListenersViewModel(this)
         mBinding.loginInfo =  when {
             VERSION.SDK_INT < VERSION_CODES.TIRAMISU -> intent.getSerializableExtra(LOGIN_INFO) as LoginInfo
             else -> intent.getSerializableExtra(LOGIN_INFO, LoginInfo::class.java)

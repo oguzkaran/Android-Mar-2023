@@ -20,7 +20,6 @@ siz karar verebilirsiniz
     - Second Name (EditText) -> Yanında bir switch ile aktif ya da pasif hale getirilecektir
     - Last Name (EditText)
     - Email (EditText)
-    - Username (EditText)
     - Password (EditText)
+    - ConfirmPassword
     - BirthDate (EditText) -> Bu alanda bilgi dd/MM/yyyy formatında girilecektir
-    BirthDate bir LocalDate ile bind edilecektir. Bu anlamda bir DateTimeStringConverter yazılabilir
