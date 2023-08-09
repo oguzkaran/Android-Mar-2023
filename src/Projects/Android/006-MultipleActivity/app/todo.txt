@@ -15,3 +15,12 @@ temsil edecektir:
 - Mesajlar string kaynağına eklenecek ve İngilizce olacaktır. Mesajların ne olduğuna ne olduğuna
 siz karar verebilirsiniz
 
+- RegisterActivity içerisinde şu alanlar bulunsun:
+    - First Name (EditText)
+    - Second Name (EditText) -> Yanında bir switch ile aktif ya da pasif hale getirilecektir
+    - Last Name (EditText)
+    - Email (EditText)
+    - Username (EditText)
+    - Password (EditText)
+    - BirthDate (EditText) -> Bu alanda bilgi dd/MM/yyyy formatında girilecektir
+    BirthDate bir LocalDate ile bind edilecektir. Bu anlamda bir DateTimeStringConverter yazılabilir

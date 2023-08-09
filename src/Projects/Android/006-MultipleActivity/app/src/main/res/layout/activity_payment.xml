@@ -5,9 +5,13 @@
 
     <data>
         <import type="org.csystem.android.app.multipleactivity.viewmodel.PaymentActivityViewModel"/>
+        <import type="org.csystem.android.app.multipleactivity.binding.PaymentQuantityStringConverter"/>
+        <import type="org.csystem.android.app.multipleactivity.binding.PaymentUnitPriceStringConverter"/>
+        <import type="org.csystem.android.app.multipleactivity.viewmodel.PaymentInfo"/>
         <import type="org.csystem.android.app.multipleactivity.viewmodel.LoginInfo"/>
         <import type="java.time.format.DateTimeFormatter"/>
         <variable name="viewModel" type="PaymentActivityViewModel"/>
+        <variable name="paymentInfo" type="PaymentInfo"/>
         <variable name="loginInfo" type="LoginInfo"/>
         <variable name="result" type="String"/>
     </data>
@@ -35,7 +39,7 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/edittext_product_name_hint"
-            android:text="@={viewModel.name}"/>
+            android:text="@={paymentInfo.name}"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -43,7 +47,7 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:hint="@string/edittext_product_unit_price_hint"
-            android:text="@={viewModel.unitPriceStr}"/>
+            android:text="@={PaymentUnitPriceToStringConverter.toStr(paymentInfo.unitPrice)}"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -51,7 +55,7 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/edittext_product_quantity_hint"
-            android:text="@={viewModel.quantityStr}"/>
+            android:text="@={PaymentQuantityToStringConverter.toStr(paymentInfo.quantity)}"/>
 
         <Button
             android:layout_width="match_parent"
@@ -75,6 +79,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{result}"/>
-
     </LinearLayout>
 </layout>
