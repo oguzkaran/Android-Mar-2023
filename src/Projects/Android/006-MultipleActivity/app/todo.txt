@@ -24,4 +24,3 @@ siz karar verebilirsiniz
     - ConfirmPassword
     - BirthDate (EditText) -> Bu alanda bilgi dd/MM/yyyy formatında girilecektir
 
-    
