@@ -1,9 +1,11 @@
 package org.csystem.android.app.multipleactivity.viewmodel
 
 import org.csystem.android.app.multipleactivity.PaymentActivity
+import java.lang.ref.WeakReference
 
-data class PaymentActivityListenersViewModel(val activity: PaymentActivity) {
-    fun handlePayButton() = activity.payButtonClicked()
-    fun handleClearButton() = activity.clearButtonClicked()
-    fun handleCloseButton() = activity.closeButtonClicked()
+class PaymentActivityListenersViewModel(activity: PaymentActivity) {
+    private val mWeakReference = WeakReference(activity)
+    fun handlePayButton() = mWeakReference.get()?.payButtonClicked()
+    fun handleClearButton() = mWeakReference.get()?.clearButtonClicked()
+    fun handleCloseButton() = mWeakReference.get()?.closeButtonClicked()
 }

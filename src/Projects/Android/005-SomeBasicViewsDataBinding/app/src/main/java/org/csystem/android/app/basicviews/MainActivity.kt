@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil
 import org.csystem.android.app.basicviews.databinding.ActivityMainBinding
 import org.csystem.android.app.basicviews.global.alert.promptDecision
 import org.csystem.android.app.basicviews.global.alert.promptNotConfirmedDialog
-import org.csystem.android.app.basicviews.viewmodel.MainActivityViewModel
+import org.csystem.android.app.basicviews.viewmodel.MainActivityListenersViewModel
 import org.csystem.android.app.basicviews.viewmodel.RegisterInfo
 import java.time.DateTimeException
 import java.time.LocalDate
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mBinding.registerInfoViewModel = RegisterInfo()
-        mBinding.mainActivityViewModel = MainActivityViewModel(this)
+        mBinding.mainActivityViewModel = MainActivityListenersViewModel(this)
         mBinding.show = true
         mBinding.passwordInputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
         mBinding.showPasswordButtonText = resources.getString(R.string.button_show_password_text)

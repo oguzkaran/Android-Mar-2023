@@ -11,4 +11,14 @@ data class RegisterInfo(var firstName: String = "",
                         var birthDate: LocalDate = LocalDate.of(1995, Month.OCTOBER, 12)) {
     val age: Double
         get() = ChronoUnit.DAYS.between(birthDate, LocalDate.now()) / 365.0
+
+    val fullName: String
+        get()
+        {
+            var middleStr = middleName ?: "" //Elvis operatör kullanmak için yapıldı
+
+            middleStr += if (middleStr.isNotEmpty()) " " else ""
+
+            return "${"$firstName "}$middleStr$lastName"
+        }
 }

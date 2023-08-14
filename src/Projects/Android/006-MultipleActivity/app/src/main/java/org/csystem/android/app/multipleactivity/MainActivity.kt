@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.csystem.android.app.multipleactivity.databinding.ActivityMainBinding
-import org.csystem.android.app.multipleactivity.viewmodel.MainActivityViewModel
+import org.csystem.android.app.multipleactivity.viewmodel.MainActivityListenersViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     private fun initialize()
     {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        mBinding.viewModel = MainActivityViewModel(this)
+        mBinding.viewModel = MainActivityListenersViewModel(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?)

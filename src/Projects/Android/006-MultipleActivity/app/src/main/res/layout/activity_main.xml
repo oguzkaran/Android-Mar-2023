@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="org.csystem.android.app.multipleactivity.viewmodel.MainActivityViewModel"/>
-        <variable name="viewModel" type="MainActivityViewModel"/>
+        <import type="org.csystem.android.app.multipleactivity.viewmodel.MainActivityListenersViewModel"/>
+        <variable name="viewModel" type="MainActivityListenersViewModel"/>
     </data>
 
     <LinearLayout

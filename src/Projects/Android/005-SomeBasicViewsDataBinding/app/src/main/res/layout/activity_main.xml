@@ -4,9 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="org.csystem.android.app.basicviews.viewmodel.RegisterInfo"/>
-        <import type="org.csystem.android.app.basicviews.viewmodel.MainActivityViewModel"/>
+        <import type="org.csystem.android.app.basicviews.viewmodel.MainActivityListenersViewModel"/>
         <variable type="RegisterInfo" name="registerInfoViewModel" />
-        <variable type="MainActivityViewModel" name="mainActivityViewModel" />
+        <variable type="MainActivityListenersViewModel" name="mainActivityViewModel" />
         <variable type="String" name="confirmPassword" />
         <variable type="boolean" name="accept" />
         <variable type="String" name="result" />

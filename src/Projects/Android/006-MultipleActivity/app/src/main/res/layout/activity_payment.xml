@@ -47,7 +47,7 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:hint="@string/edittext_product_unit_price_hint"
-            android:text="@={PaymentUnitPriceToStringConverter.toStr(paymentInfo.unitPrice)}"/>
+            android:text="@={PaymentUnitPriceStringConverter.toStr(paymentInfo.unitPrice)}"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/edittext_product_quantity_hint"
-            android:text="@={PaymentQuantityToStringConverter.toStr(paymentInfo.quantity)}"/>
+            android:text="@={PaymentQuantityStringConverter.toStr(paymentInfo.quantity)}"/>
 
         <Button
             android:layout_width="match_parent"

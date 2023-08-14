@@ -23,4 +23,8 @@ siz karar verebilirsiniz
     - Password (EditText)
     - ConfirmPassword
     - BirthDate (EditText) -> Bu alanda bilgi dd/MM/yyyy formatında girilecektir
+    - Register button'u
+    - Exit button'u
+
+- Register button'una basıldığında Bir text alanı içerisinde fullName ile birlikte diğer bilgiler gösterilsin
 
