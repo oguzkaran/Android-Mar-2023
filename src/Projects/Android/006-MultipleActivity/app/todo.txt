@@ -17,7 +17,7 @@ siz karar verebilirsiniz
 
 - RegisterActivity içerisinde şu alanlar bulunsun:
     - First Name (EditText)
-    - Second Name (EditText) -> Yanında bir switch ile aktif ya da pasif hale getirilecektir
+    - Middle Name (EditText) -> Yanında bir switch ile aktif ya da pasif hale getirilecektir
     - Last Name (EditText)
     - Email (EditText)
     - Password (EditText)
