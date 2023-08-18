@@ -1,5 +1,6 @@
 package org.csystem.android.app.multipleactivity
 
+import android.app.AlertDialog
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -17,6 +18,7 @@ import org.csystem.android.app.multipleactivity.viewmodel.PaymentInfo
 class PaymentActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityPaymentBinding
 
+
     private fun initViewModels()
     {
         mBinding.viewModel = PaymentActivityListenersViewModel(this)
@@ -25,7 +27,7 @@ class PaymentActivity : AppCompatActivity() {
             else -> intent.getSerializableExtra(LOGIN_INFO, LoginInfo::class.java)
         }
         mBinding.paymentInfo = PaymentInfo()
-        mBinding.result = "";
+        mBinding.result = ""
         PaymentQuantityStringConverter.failStr = "Invalid quantity"
         PaymentUnitPriceStringConverter.failStr = "Invalid unit price"
     }
@@ -66,7 +68,7 @@ class PaymentActivity : AppCompatActivity() {
 
     fun payButtonClicked()
     {
-        mBinding.result = "";
+        mBinding.result = ""
         if (checkFail().isNotEmpty())
             return
 
@@ -75,11 +77,23 @@ class PaymentActivity : AppCompatActivity() {
 
     fun clearButtonClicked()
     {
-
+        mBinding.paymentInfo = PaymentInfo()
+        mBinding.result = ""
     }
 
     fun closeButtonClicked()
     {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.alert_dialog_close_title)
+            .setMessage(R.string.alert_dialog_close_message)
+            .setPositiveButton(R.string.alert_dialog_close_positive_button_text) {_, _ -> finish()}
+            .setNegativeButton(R.string.alert_dialog_close_negative_button_text) {_, _ -> }
+            .create()
+            .show()
+    }
 
+    fun exitButtonClicked()
+    {
+        TODO("Not implemented yet!...")
     }
 }

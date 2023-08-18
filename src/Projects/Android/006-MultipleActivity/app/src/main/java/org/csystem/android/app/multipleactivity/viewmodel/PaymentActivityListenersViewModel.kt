@@ -8,4 +8,5 @@ class PaymentActivityListenersViewModel(activity: PaymentActivity) {
     fun handlePayButton() = mWeakReference.get()?.payButtonClicked()
     fun handleClearButton() = mWeakReference.get()?.clearButtonClicked()
     fun handleCloseButton() = mWeakReference.get()?.closeButtonClicked()
+    fun handleExitButton() = mWeakReference.get()?.exitButtonClicked()
 }

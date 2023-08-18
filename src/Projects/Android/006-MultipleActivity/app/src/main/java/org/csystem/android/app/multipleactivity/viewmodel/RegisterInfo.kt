@@ -15,7 +15,7 @@ data class RegisterInfo(var firstName: String = "",
     val fullName: String
         get()
         {
-            var middleStr = middleName ?: "" //Elvis operatör kullanmak için yapıldı
+            var middleStr = middleName ?: "" //Elvis operatör kullanmak için bu şekilde yapıldı
 
             middleStr += if (middleStr.isNotEmpty()) " " else ""
 

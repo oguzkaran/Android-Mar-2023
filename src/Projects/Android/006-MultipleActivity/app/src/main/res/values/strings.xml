@@ -3,6 +3,7 @@
     <string name="button_register_text">Register</string>
     <string name="button_login_text">Login</string>
     <string name="button_close_text">Close</string>
+    <string name="button_exit_text">Exit</string>
     <string name="button_pay_text">Pay</string>
     <string name="button_clear_text">Clear</string>
     <string name="edittext_username_hint">Input username</string>
@@ -10,4 +11,15 @@
     <string name="edittext_product_name_hint">Input product name</string>
     <string name="edittext_product_unit_price_hint">Input unit price</string>
     <string name="edittext_product_quantity_hint">Input quantity</string>
+    <string name="alert_dialog_close_title">Warning</string>
+    <string name="alert_dialog_close_message">Are you sure?</string>
+    <string name="alert_dialog_close_positive_button_text">Yes</string>
+    <string name="alert_dialog_close_negative_button_text">No</string>
+    <string name="edittext_first_name_hint">Input first name</string>
+    <string name="edittext_middle_name_hint">Input middle name</string>
+    <string name="edittext_last_name_hint">Input last name</string>
+    <string name="switch_middle_name_text">Middle Name</string>
+    <string name="edittext_email_hint">Input email</string>
+    <string name="edittext_confirm_password_hint">Confirm password</string>
+    <string name="edittext_birth_date_hint">Input birth date</string>
 </resources>

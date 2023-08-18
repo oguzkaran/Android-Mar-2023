@@ -4,13 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.csystem.android.app.multipleactivity.databinding.ActivityRegisterBinding
+import org.csystem.android.app.multipleactivity.viewmodel.RegisterInfo
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityRegisterBinding
 
     private fun initViewModels()
     {
-
+        mBinding.registerInfo = RegisterInfo()
     }
 
     private fun initBinding()
@@ -31,6 +32,16 @@ class RegisterActivity : AppCompatActivity() {
 
     fun registerButtonClicked()
     {
+        TODO("Not implemented yet!...")
+    }
 
+    fun clearButtonClicked()
+    {
+        TODO("Not implemented yet!...")
+    }
+
+    fun closeButtonClicked()
+    {
+        TODO("Not implemented yet!...")
     }
 }
