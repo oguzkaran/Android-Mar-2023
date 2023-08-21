@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MultipleActivity"
 include(":app")
- 
+include(":DataBindingConverterModule")

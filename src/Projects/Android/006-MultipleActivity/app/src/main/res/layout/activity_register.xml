@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
   <data>
     <import type="org.csystem.android.app.multipleactivity.viewmodel.RegisterActivityListenersViewModel"/>
-    <import type="org.csystem.android.app.multipleactivity.binding.RegisterBirthDateStringConverter"/>
+    <import type="org.csystem.app.multipleactivity.library.databinding.converter.RegisterBirthDateStringConverter"/>
     <import type="org.csystem.android.app.multipleactivity.viewmodel.RegisterInfo"/>
     <variable name="registerInfo" type="RegisterInfo" />
     <variable name="viewModel" type="RegisterActivityListenersViewModel" />

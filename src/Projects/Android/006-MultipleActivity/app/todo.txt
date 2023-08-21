@@ -1,4 +1,4 @@
-Sınıf Çalışması: 18 Ağustos 2023
+Sınıf Çalışması: 21 Ağustos 2023
 
 - RegisterActivity içerisinde şu alanlar bulunsun:
     - First Name (EditText)
@@ -18,4 +18,8 @@ korunacaktır, Yes seçilirse switch kapanacak ve yazı temizlenecektir. Eğer y
 oluşuyorsa AlertDialog ile sorulmayacak, switch kapatılacak ve yazı yine temizlenecektir
 
 - Register button'una basıldığında Bir text alanı içerisinde fullName ile birlikte diğer bilgiler gösterilsin
+
+- MainActivity haricindeki tüm activity'lere bir exit buttonu ekleyiniz. Bu exit button'larında yine
+onay için AlertDialog çıkatınız. Kullanıcı onay verirse bir önceki activity'ye (yani onu açan activity'ye
+finish mesajını veriniz. Bu durumda zincirleme olarak tüm activitiy'lerin kapatılmasını sağlayınız
 

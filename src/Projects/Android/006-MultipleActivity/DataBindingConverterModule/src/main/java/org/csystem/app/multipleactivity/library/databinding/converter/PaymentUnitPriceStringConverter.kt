@@ -1,8 +1,8 @@
-package org.csystem.android.app.multipleactivity.binding
+package org.csystem.app.multipleactivity.library.databinding.converter
 
 import androidx.databinding.InverseMethod
 
-object PaymentQuantityStringConverter {
+object PaymentUnitPriceStringConverter {
     private var mFail = false
 
     val fail: Boolean
@@ -12,19 +12,21 @@ object PaymentQuantityStringConverter {
 
     @InverseMethod("toStr")
     @JvmStatic
-    fun toInt(str: String) : Int
+    fun toDouble(str: String) : Double
     {
-        var result = 0
+        var result = 0.0
+
         try {
             mFail = false
-            result = str.toInt();
+            result = str.toDouble();
         }
         catch (ignore: NumberFormatException) {
-            mFail = true
+            mFail = true;
         }
 
         return result
     }
+
     @JvmStatic
-    fun toStr(quantity: Int) = quantity.toString()
+    fun toStr(unitPrice: Double) = unitPrice.toString()
 }

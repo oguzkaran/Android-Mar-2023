@@ -1,4 +1,4 @@
-package org.csystem.android.app.multipleactivity.binding
+package org.csystem.app.multipleactivity.library.databinding.converter
 
 import androidx.databinding.InverseMethod
 import java.time.LocalDate

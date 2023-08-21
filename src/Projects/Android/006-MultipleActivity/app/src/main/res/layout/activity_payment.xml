@@ -5,8 +5,8 @@
 
     <data>
         <import type="org.csystem.android.app.multipleactivity.viewmodel.PaymentActivityListenersViewModel"/>
-        <import type="org.csystem.android.app.multipleactivity.binding.PaymentQuantityStringConverter"/>
-        <import type="org.csystem.android.app.multipleactivity.binding.PaymentUnitPriceStringConverter"/>
+        <import type="org.csystem.app.multipleactivity.library.databinding.converter.PaymentUnitPriceStringConverter"/>
+        <import type="org.csystem.app.multipleactivity.library.databinding.converter.PaymentQuantityStringConverter"/>
         <import type="org.csystem.android.app.multipleactivity.viewmodel.PaymentInfo"/>
         <import type="org.csystem.android.app.multipleactivity.viewmodel.LoginInfo"/>
         <import type="java.time.format.DateTimeFormatter"/>
@@ -78,8 +78,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_close_text"
-            android:onClick="@{() -> viewModel.handleCloseButton()}"/>
+            android:text="@string/button_exit_text"
+            android:onClick="@{() -> viewModel.handleExitButton()}"/>
 
         <TextView
             android:layout_width="match_parent"

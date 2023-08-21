@@ -1,23 +1,37 @@
 package org.csystem.android.app.multipleactivity
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import org.csystem.android.app.multipleactivity.binding.PaymentQuantityStringConverter
-import org.csystem.android.app.multipleactivity.binding.PaymentUnitPriceStringConverter
 import org.csystem.android.app.multipleactivity.databinding.ActivityPaymentBinding
 import org.csystem.android.app.multipleactivity.keys.LOGIN_INFO
+import org.csystem.android.app.multipleactivity.keys.PRODUCT_NAME
+import org.csystem.android.app.multipleactivity.keys.TOTAL_PRICE
 import org.csystem.android.app.multipleactivity.viewmodel.LoginInfo
 import org.csystem.android.app.multipleactivity.viewmodel.PaymentActivityListenersViewModel
 import org.csystem.android.app.multipleactivity.viewmodel.PaymentInfo
+import org.csystem.app.multipleactivity.library.databinding.converter.PaymentQuantityStringConverter
+import org.csystem.app.multipleactivity.library.databinding.converter.PaymentUnitPriceStringConverter
 
 class PaymentActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityPaymentBinding
 
+    private fun closeAlertDialogPositiveButtonCallback()
+    {
+        if (mBinding.result!!.isNotEmpty())
+            Intent().apply {
+                //Buradaki bilgiler örnek amaçlı geçilmiştir. Pratikte PaymentInfo Serializable yapılıp doğrudan bundle'a eklenebilir
+                putExtra(PRODUCT_NAME, mBinding.paymentInfo!!.name)
+                putExtra(TOTAL_PRICE, mBinding.paymentInfo!!.total)
+                setResult(RESULT_OK, this)
+            }
+        finish()
+    }
 
     private fun initViewModels()
     {
@@ -86,7 +100,7 @@ class PaymentActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(R.string.alert_dialog_close_title)
             .setMessage(R.string.alert_dialog_close_message)
-            .setPositiveButton(R.string.alert_dialog_close_positive_button_text) {_, _ -> finish()}
+            .setPositiveButton(R.string.alert_dialog_close_positive_button_text) {_, _ -> closeAlertDialogPositiveButtonCallback()}
             .setNegativeButton(R.string.alert_dialog_close_negative_button_text) {_, _ -> }
             .create()
             .show()
