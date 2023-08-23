@@ -10,6 +10,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://raw.github.com/oguzkaran/android-mar-2023-maven-repo/main")
+        }
+
+        maven {
+            url = uri("https://raw.github.com/oguzkaran/android-mar-2023-karandev-maven-repo/main")
+        }
     }
 }
 

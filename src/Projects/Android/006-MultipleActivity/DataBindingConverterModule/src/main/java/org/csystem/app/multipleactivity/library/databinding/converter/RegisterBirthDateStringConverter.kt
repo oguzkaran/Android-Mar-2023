@@ -4,10 +4,11 @@ import androidx.databinding.InverseMethod
 import org.csystem.android.util.datetime.DateTimeFormatterUtil
 import java.time.LocalDate
 import java.time.Month
+import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
 object RegisterBirthDateStringConverter {
-    private val mFormatter=  DateTimeFormatterUtil.DATE_TIME_FORMATTER_TR
+    private val mFormatter = DateTimeFormatterUtil.DATE_TIME_FORMATTER_TR;
     private var mFail = false
 
     val fail: Boolean

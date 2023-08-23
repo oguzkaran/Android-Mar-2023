@@ -8,11 +8,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import org.csystem.android.activity.viewmodel.LoginInfo
 import org.csystem.android.app.multipleactivity.databinding.ActivityPaymentBinding
 import org.csystem.android.app.multipleactivity.keys.LOGIN_INFO
 import org.csystem.android.app.multipleactivity.keys.PRODUCT_NAME
 import org.csystem.android.app.multipleactivity.keys.TOTAL_PRICE
-import org.csystem.android.app.multipleactivity.viewmodel.LoginInfo
 import org.csystem.android.app.multipleactivity.viewmodel.PaymentActivityListenersViewModel
 import org.csystem.android.app.multipleactivity.viewmodel.PaymentInfo
 import org.csystem.app.multipleactivity.library.databinding.converter.PaymentQuantityStringConverter
