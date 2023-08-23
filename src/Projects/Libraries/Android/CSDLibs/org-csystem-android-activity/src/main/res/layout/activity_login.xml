@@ -4,25 +4,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="org.csystem.android.app.multipleactivity.viewmodel.LoginActivityListenersViewModel"/>
-        <import type="org.csystem.android.app.multipleactivity.viewmodel.LoginInfo"/>
+        <import type="org.csystem.android.activity.viewmodel.LoginActivityListenersViewModel"/>
+        <import type="org.csystem.android.activity.viewmodel.LoginInfo"/>
         <variable name="viewModel" type="LoginActivityListenersViewModel" />
         <variable name="loginInfo" type="LoginInfo" />
     </data>
 
     <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".PaymentActivity">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="@={loginInfo.username}"
-            android:hint="@string/edittext_username_hint"/>
+        tools:context=".LoginActivity">
 
         <EditText
             android:layout_width="match_parent"
@@ -45,5 +38,8 @@
             android:layout_height="wrap_content"
             android:text="@string/button_login_text"
             android:onClick="@{() -> viewModel.handleLoginButton()}"/>
+
     </LinearLayout>
+
 </layout>
+

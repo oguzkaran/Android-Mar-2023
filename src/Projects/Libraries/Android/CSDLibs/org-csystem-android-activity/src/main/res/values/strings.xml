@@ -1,0 +1,6 @@
+<resources>
+    <string name="edittext_username_hint">Input username</string>
+    <string name="edittext_password_hint">Input password</string>
+    <string name="button_login_text">Login</string>
+    <string name="button_close_text">Close</string>
+</resources>

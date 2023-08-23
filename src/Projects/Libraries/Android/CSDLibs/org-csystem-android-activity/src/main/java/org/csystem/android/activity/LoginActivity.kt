@@ -1,4 +1,4 @@
-package org.csystem.android.app.multipleactivity
+package org.csystem.android.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,28 +8,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import org.csystem.android.app.multipleactivity.databinding.ActivityLoginBinding
-import org.csystem.android.app.multipleactivity.keys.LOGIN_INFO
-import org.csystem.android.app.multipleactivity.keys.PRODUCT_NAME
-import org.csystem.android.app.multipleactivity.keys.TOTAL_PRICE
-import org.csystem.android.app.multipleactivity.viewmodel.LoginActivityListenersViewModel
-import org.csystem.android.app.multipleactivity.viewmodel.LoginInfo
-import java.time.LocalDateTime
+import org.csystem.android.activity.databinding.ActivityLoginBinding
+import org.csystem.android.activity.viewmodel.LoginActivityListenersViewModel
+import org.csystem.android.activity.viewmodel.LoginInfo
 
 class LoginActivity : AppCompatActivity() {
+
     private lateinit var mBinding: ActivityLoginBinding
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
 
     private fun paymentActivityCallback(result: ActivityResult)
     {
-        if (result.resultCode != RESULT_OK)
-            return
-
-        val data = result.data
-        val productName = data?.getStringExtra(PRODUCT_NAME)
-        val totalPrice = data?.getDoubleExtra(TOTAL_PRICE, 0.0)
-        "%.2f paid for '%s'".format(totalPrice, productName)
-            .apply { Toast.makeText(this@LoginActivity, this, Toast.LENGTH_LONG).show() }
+        TODO("Not implemented yet")
     }
 
     private fun initPaymentActivityResultLauncher()
@@ -53,16 +43,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        initialize()
+        setContentView(R.layout.activity_login)
     }
 
     fun loginButtonClicked()
     {
-        //...
-        Intent(this, PaymentActivity::class.java).apply {
-            mBinding.loginInfo!!.loginDateTime = LocalDateTime.now()
-            putExtra(LOGIN_INFO, mBinding.loginInfo)
-            mLauncher.launch(this)
-        }
+        Toast.makeText(this, "Login button clicked", Toast.LENGTH_LONG).show()
     }
 }

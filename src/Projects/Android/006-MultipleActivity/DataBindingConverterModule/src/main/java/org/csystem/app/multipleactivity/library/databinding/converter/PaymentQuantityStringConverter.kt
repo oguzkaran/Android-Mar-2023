@@ -15,6 +15,7 @@ object PaymentQuantityStringConverter {
     fun toInt(str: String) : Int
     {
         var result = 0
+
         try {
             mFail = false
             result = str.toInt();
