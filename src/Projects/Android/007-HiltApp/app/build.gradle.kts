@@ -1,19 +1,22 @@
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
+    kotlin("kapt") //For Kotlin
     id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "org.csystem.android.activity"
+    namespace = "org.csystem.android.app.hillt"
     compileSdk = 33
 
     defaultConfig {
-        minSdk = 22
+        applicationId = "org.csystem.android.app.hillt"
+        minSdk = 26
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -30,12 +33,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    dataBinding.enable = true
 }
 
 dependencies {
@@ -49,8 +49,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
-    implementation("com.google.dagger:hilt-android:2.47")
-    kapt("com.google.dagger:hilt-compiler:2.47") //For Kotlin
+
+    implementation ("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-compiler:2.47")
+
 }
 
 kapt {
