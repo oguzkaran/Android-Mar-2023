@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kapt") //For Kotlin
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -43,4 +45,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-compiler:2.47") //For Kotlin
+}
+
+kapt {
+    correctErrorTypes = true
 }
