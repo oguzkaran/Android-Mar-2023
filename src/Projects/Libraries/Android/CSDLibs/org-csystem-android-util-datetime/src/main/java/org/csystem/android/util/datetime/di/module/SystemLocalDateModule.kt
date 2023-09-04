@@ -4,11 +4,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import java.time.LocalDateTime
+import org.csystem.android.util.datetime.di.module.annotation.SystemLocalDateInterceptor
+import java.time.LocalDate
 
 @Module
 @InstallIn(ActivityComponent::class)
-object LocalDateTimeModule {
+object SystemLocalDateModule {
     @Provides
-    fun provideNow() : LocalDateTime = LocalDateTime.now()
+    @SystemLocalDateInterceptor
+    fun provideLocalDate() : LocalDate = LocalDate.now()
 }

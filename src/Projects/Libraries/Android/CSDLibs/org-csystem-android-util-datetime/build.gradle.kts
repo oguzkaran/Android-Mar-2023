@@ -9,8 +9,14 @@ android {
     namespace = "org.csystem.android.util.datetime"
     compileSdk = 33
 
+
+
     defaultConfig {
         minSdk = 22
+
+        
+        var versionCode = 21
+        var versionName = "21.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

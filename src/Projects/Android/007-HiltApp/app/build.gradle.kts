@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-
+    implementation(files("libs/org-csystem-android-util-datetime-21.0.0.aar"))
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
@@ -52,7 +52,6 @@ dependencies {
 
     implementation ("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-compiler:2.47")
-
 }
 
 kapt {
