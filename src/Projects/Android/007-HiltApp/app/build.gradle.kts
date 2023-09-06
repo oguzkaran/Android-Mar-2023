@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "org.csystem.android.app.hillt"
+    namespace = "org.csystem.android.app.hilt"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "org.csystem.android.app.hillt"
+        applicationId = "org.csystem.android.app.hilt"
         minSdk = 26
         targetSdk = 33
         versionCode = 1
@@ -36,6 +36,8 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    dataBinding.enable = true
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package org.csystem.android.app.hillt.datetime
+package org.csystem.android.app.hilt.datetime
 
 import org.csystem.android.util.datetime.di.module.annotation.SystemLocalTimeInterceptor
 import org.csystem.android.util.datetime.di.module.formatter.annotation.LocalTimeFormatterInterceptor

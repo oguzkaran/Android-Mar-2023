@@ -1,4 +1,4 @@
-package org.csystem.android.app.hillt
+package org.csystem.android.app.hilt
 
 import org.junit.Test
 

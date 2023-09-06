@@ -1,4 +1,4 @@
-package org.csystem.android.app.hillt.application
+package org.csystem.android.app.hilt.application
 
 import android.app.Application
 import android.widget.Toast

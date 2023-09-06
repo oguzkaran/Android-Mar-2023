@@ -1,4 +1,4 @@
-package org.csystem.android.app.hillt
+package org.csystem.android.app.hilt
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
