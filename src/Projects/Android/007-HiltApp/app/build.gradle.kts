@@ -41,7 +41,6 @@ android {
 }
 
 dependencies {
-    implementation(files("libs/org-csystem-android-util-datetime-21.0.0.aar"))
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
@@ -53,6 +52,7 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
     implementation ("com.google.dagger:hilt-android:2.47")
+    implementation("org.csystem.android:org-csystem-android-datetime:21.0.0")
     kapt("com.google.dagger:hilt-compiler:2.47")
 }
 
