@@ -52,8 +52,9 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
     implementation ("com.google.dagger:hilt-android:2.47")
-    implementation("org.csystem.android:org-csystem-android-datetime:21.0.0")
     kapt("com.google.dagger:hilt-compiler:2.47")
+
+    implementation("org.csystem.android:org-csystem-android-datetime:21.0.0")
 }
 
 kapt {

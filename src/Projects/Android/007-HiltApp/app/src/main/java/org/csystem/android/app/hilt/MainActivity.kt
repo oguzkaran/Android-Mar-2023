@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
-import org.csystem.android.app.hilt.calculator.IIBinaryOperator
+import org.csystem.android.app.hilt.calculator.IBinaryOperator
 import org.csystem.android.app.hilt.calculator.di.module.annotation.IntAddOperationInterceptor
 import org.csystem.android.app.hilt.databinding.ActivityMainBinding
 import org.csystem.android.app.hilt.datetime.DateInfo
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     @IntAddOperationInterceptor
-    lateinit var intBinaryOperator: IIBinaryOperator<Int>
+    lateinit var intBinaryOperator: IBinaryOperator<Int>
 
     private fun showDateTime()
     {

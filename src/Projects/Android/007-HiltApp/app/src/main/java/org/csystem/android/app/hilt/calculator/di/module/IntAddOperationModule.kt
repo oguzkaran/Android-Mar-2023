@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import org.csystem.android.app.hilt.calculator.IIBinaryOperator
+import org.csystem.android.app.hilt.calculator.IBinaryOperator
 import org.csystem.android.app.hilt.calculator.IntAddOperation
 import org.csystem.android.app.hilt.calculator.di.module.annotation.IntAddOperationInterceptor
 
@@ -13,5 +13,5 @@ import org.csystem.android.app.hilt.calculator.di.module.annotation.IntAddOperat
 abstract class IntAddOperationModule {
     @Binds
     @IntAddOperationInterceptor
-    abstract fun bindIntAddOperation(intAddOperation: IntAddOperation) : IIBinaryOperator<Int>
+    abstract fun bindIntAddOperation(intAddOperation: IntAddOperation) : IBinaryOperator<Int>
 }

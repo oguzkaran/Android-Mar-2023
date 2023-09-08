@@ -1,0 +1,6 @@
+Sınıf Çalışması: 10.09.2023
+- Uygulamanın paketi içerisindeki datetime paketinde bulunan sınıfları ayrı bir modüle ekleyip. Projede
+o modülü kullanacak hale getiriniz.
+
+- Uygulamanın paketi içerisindeki calculator paketinde bulunan sınıfları ayrı bir modüle ekleyip. Projede
+o modülü kullanacak hale getiriniz.
