@@ -23,4 +23,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "HiltApp"
 include(":app")
- 
+include(":DateTimeInfoLib")
+include(":CalculatorLib")
