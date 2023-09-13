@@ -5,19 +5,25 @@
     <data>
         <import type="org.csystem.android.app.basicviews.viewmodel.RegisterInfo"/>
         <import type="org.csystem.android.app.basicviews.viewmodel.MainActivityListenersViewModel"/>
+        <import type="android.widget.ArrayAdapter"/>
         <variable type="RegisterInfo" name="registerInfoViewModel" />
         <variable type="MainActivityListenersViewModel" name="mainActivityViewModel" />
         <variable type="String" name="confirmPassword" />
         <variable type="boolean" name="accept" />
         <variable type="String" name="result" />
-        <variable type="String" name="day" />
-        <variable type="String" name="month" />
-        <variable type="String" name="year" />
+        <variable type="int" name="day" />
+        <variable type="int" name="month" />
+        <variable type="int" name="year" />
         <variable type="Object" name="show" />
         <variable type="int" name="passwordInputType" />
         <variable type="String" name="showPasswordButtonText" />
         <variable type="String" name="password" />
         <variable type="boolean" name="allowShowPasswordChecked" />
+        <variable type="ArrayAdapter&lt;String&gt;" name="educationAdapter" />
+        <variable type="int" name="educationSelectedPos" />
+        <variable type="ArrayAdapter&lt;Integer&gt;" name="dayAdapter" />
+        <variable type="ArrayAdapter&lt;String&gt;" name="monthAdapter" />
+        <variable type="ArrayAdapter&lt;Integer&gt;" name="yearAdapter" />
     </data>
 
     <LinearLayout
@@ -33,8 +39,7 @@
             android:textOn="@string/toggle_button_on_text"
             android:textOff="@string/toggle_button_off_text"
             android:checked="true"
-            android:onCheckedChanged="@{(_, checked) -> mainActivityViewModel.handleOpenToggleButton(checked)}"
-            />
+            android:onCheckedChanged="@{(_, checked) -> mainActivityViewModel.handleOpenToggleButton(checked)}" />
 
         <LinearLayout
             android:id="@+id/mainActivityLayoutRegisterInfo"
@@ -64,34 +69,34 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <EditText
+                <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:hint="@string/edittext_day_hint_text"
-                    android:text="@={day}"
-                    />
+                    android:adapter="@{dayAdapter}"
+                    android:selectedItemPosition="@={day}"/>
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adapter="@{monthAdapter}"
+                    android:selectedItemPosition="@={month}"/>
 
-                <EditText
+                <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:hint="@string/edittext_month_hint_text"
-                    android:text="@={month}"/>
+                    android:adapter="@{yearAdapter}"
+                    android:selectedItemPosition="@={year}"/>
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:hint="@string/edittext_year_hint_text"
-                    android:text="@={year}"/>
             </LinearLayout>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adapter="@{educationAdapter}"
+                android:selectedItemPosition="@={educationSelectedPos}"
+                android:onItemSelected="@{(av, v, pos, i) -> mainActivityViewModel.handleEducationSpinner(pos)}" />
 
             <EditText
                 android:layout_width="match_parent"

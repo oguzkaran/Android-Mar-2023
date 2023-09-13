@@ -2,6 +2,7 @@ package org.csystem.android.app.basicviews
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         val name = mBinding.registerInfoViewModel!!.name
         val email = mBinding.registerInfoViewModel!!.email
-        val birthDate = LocalDate.of(mBinding.year!!.toInt(), mBinding.month!!.toInt(), mBinding.day!!.toInt())
+        val birthDate = LocalDate.of(mBinding.year, mBinding.month + 1, mBinding.day)
         val userName = mBinding.registerInfoViewModel!!.userName
 
         return RegisterInfo(name, email, birthDate, userName, mBinding.password!!)
@@ -81,20 +82,46 @@ class MainActivity : AppCompatActivity() {
     private fun initBirthDateTexts()
     {
         val today = LocalDate.now()
+    }
 
-        mBinding.day = today.dayOfMonth.toString()
-        mBinding.month = today.monthValue.toString()
-        mBinding.year = today.year.toString()
+    private fun initBirthDateAdapters()
+    {
+        val days = (1..31).toList()
+        val months = resources.getStringArray(R.array.spinner_months)
+        val years = (1900..LocalDate.now().minusYears(19).year).toList()
+
+        mBinding.dayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, days)
+        mBinding.monthAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, months)
+        mBinding.yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
+    }
+
+    private fun initEducationAdapter()
+    {
+        val educationInfo = resources.getStringArray(R.array.spinner_education_info)
+
+        mBinding.educationAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, educationInfo)
+        mBinding.educationSelectedPos = 2
+    }
+
+    private fun initViewModels()
+    {
+        mBinding.registerInfoViewModel = RegisterInfo()
+        mBinding.mainActivityViewModel = MainActivityListenersViewModel(this)
+    }
+
+    private fun initData()
+    {
+        initViewModels()
+        mBinding.show = true
+        mBinding.passwordInputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
+        initEducationAdapter()
+        initBirthDateAdapters()
     }
 
     private fun initBinding()
     {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        mBinding.registerInfoViewModel = RegisterInfo()
-        mBinding.mainActivityViewModel = MainActivityListenersViewModel(this)
-        mBinding.show = true
-        mBinding.passwordInputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
-        mBinding.showPasswordButtonText = resources.getString(R.string.button_show_password_text)
+        initData()
     }
 
     private fun initViews()
@@ -200,5 +227,10 @@ class MainActivity : AppCompatActivity() {
         promptDecision(this, R.string.confirm_close_alert_dialog_title, R.string.message_confirm_close,
             R.string.yes_button_text, R.string.no_button_text,
             {_, _ -> positiveButtonClickedCallback()}) {_, _ -> negativeButtonClickedCallback()}
+    }
+
+    fun educationSpinnerItemSelected(pos: Int)
+    {
+        Toast.makeText(this, mBinding.educationAdapter!!.getItem(pos), Toast.LENGTH_LONG).show()
     }
 }

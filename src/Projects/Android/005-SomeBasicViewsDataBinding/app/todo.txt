@@ -1,0 +1,6 @@
+- Activity ilk kez açıldığında doğum tarihi alanı sistemin o anki tarihini gösterecektir
+
+- Doğum tarihine ilişkin spinner'lar için ay ve/veya yıl değiştiğinde gün bilgisi o ay
+ve yıla göre uygun değerler arasında seçilebilecektir
+
+- Yıl spinner'ı için toplam 100 yıl olmalıdır. Yani örneğin. 2023 için [1923, 2023] aralığı olmalıdır

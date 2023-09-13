@@ -16,4 +16,6 @@ class MainActivityListenersViewModel(activity: MainActivity) {
     fun handleClearButton() = mWeakReference.get()?.clearButtonClicked()
 
     fun handleCloseButton() = mWeakReference.get()?.closeButtonClicked()
+
+    fun handleEducationSpinner(pos: Int) = mWeakReference.get()?.educationSpinnerItemSelected(pos)
 }

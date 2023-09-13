@@ -29,4 +29,26 @@
     <string name="toggle_button_off_text">Open</string>
     <string name="message_register_allow_close">If you close all input data will be cleared. Are you sure?</string>
     <string name="message_enable_show_password">If password is visible, it can be dangerous. Are you sure?</string>
+
+    <string-array name="spinner_months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string-array name="spinner_education_info">
+        <item>Under Graduate</item>
+        <item>Graduate</item>
+        <item>MsC</item>
+        <item>PhD</item>
+    </string-array>
 </resources>
