@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import org.csystem.android.app.basicviews.databinding.ActivityMainBinding
+import org.csystem.android.app.basicviews.global.INPUT_TYPE_TEXT_PASSWORD_HIDE
+import org.csystem.android.app.basicviews.global.INPUT_TYPE_TEXT_PASSWORD_SHOW
 import org.csystem.android.app.basicviews.global.alert.promptDecision
 import org.csystem.android.app.basicviews.global.alert.promptNotConfirmedDialog
 import org.csystem.android.app.basicviews.viewmodel.MainActivityListenersViewModel
@@ -19,6 +21,7 @@ import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
+    private lateinit var mMonths: Array<String>
 
     private fun neutralButtonClickedCallback()
     {
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         val name = mBinding.registerInfoViewModel!!.name
         val email = mBinding.registerInfoViewModel!!.email
-        val birthDate = LocalDate.of(mBinding.year, mBinding.month + 1, mBinding.day)
+        val birthDate = LocalDate.of(mBinding.yearPos, mBinding.monthPos + 1, mBinding.dayPos)
         val userName = mBinding.registerInfoViewModel!!.userName
 
         return RegisterInfo(name, email, birthDate, userName, mBinding.password!!)
@@ -82,17 +85,26 @@ class MainActivity : AppCompatActivity() {
     private fun initBirthDateTexts()
     {
         val today = LocalDate.now()
+
+
+    }
+
+    private fun getDaysByMonthAndYear(monthPos: Int, yearPos: Int) : List<Int>
+    {
+        val max = LocalDate.of(yearPos, monthPos + 1, 1).minusDays(1).dayOfMonth
+
+        return (1..max).toList()
     }
 
     private fun initBirthDateAdapters()
     {
-        val days = (1..31).toList()
-        val months = resources.getStringArray(R.array.spinner_months)
-        val years = (1900..LocalDate.now().minusYears(19).year).toList()
+        val now = LocalDate.now()
+        val years = (now.year - 100..now.minusYears(19).year).toList()
 
-        mBinding.dayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, days)
-        mBinding.monthAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, months)
+        mBinding.dayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, getDaysByMonthAndYear(now.monthValue, now.year))
+        mBinding.monthAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mMonths)
         mBinding.yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
+        mBinding.yearPos = mBinding.yearAdapter!!.count - 1
     }
 
     private fun initEducationAdapter()
@@ -101,6 +113,12 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.educationAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, educationInfo)
         mBinding.educationSelectedPos = 2
+    }
+
+    private fun initBirthDateSpinners()
+    {
+        initBirthDateTexts()
+        initBirthDateAdapters()
     }
 
     private fun initViewModels()
@@ -115,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         mBinding.show = true
         mBinding.passwordInputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
         initEducationAdapter()
-        initBirthDateAdapters()
+        initBirthDateSpinners()
     }
 
     private fun initBinding()
@@ -126,6 +144,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews()
     {
+        mMonths = resources.getStringArray(R.array.spinner_months)
         initBinding()
         initBirthDateTexts()
     }
@@ -232,5 +251,26 @@ class MainActivity : AppCompatActivity() {
     fun educationSpinnerItemSelected(pos: Int)
     {
         Toast.makeText(this, mBinding.educationAdapter!!.getItem(pos), Toast.LENGTH_LONG).show()
+    }
+
+    fun birthDateDaySpinnerItemSelected(pos: Int)
+    {
+        //Nothing
+    }
+
+    fun birthDateMonthSpinnerItemSelected(pos: Int)
+    {
+        mBinding.dayAdapter?.clear()
+        val year = mBinding.yearAdapter!!.getItem(mBinding.yearPos)!!.toInt()
+
+        mBinding.dayAdapter?.addAll(getDaysByMonthAndYear(pos + 1, year))
+    }
+
+    fun birthDateYearSpinnerItemSelected(pos: Int)
+    {
+        mBinding.dayAdapter?.clear()
+        val year = mBinding.yearAdapter!!.getItem(pos)!!.toInt()
+
+        mBinding.dayAdapter?.addAll(getDaysByMonthAndYear(mBinding.monthPos + 1, year))
     }
 }

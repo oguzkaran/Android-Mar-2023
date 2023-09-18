@@ -11,9 +11,9 @@
         <variable type="String" name="confirmPassword" />
         <variable type="boolean" name="accept" />
         <variable type="String" name="result" />
-        <variable type="int" name="day" />
-        <variable type="int" name="month" />
-        <variable type="int" name="year" />
+        <variable type="int" name="dayPos" />
+        <variable type="int" name="monthPos" />
+        <variable type="int" name="yearPos" />
         <variable type="Object" name="show" />
         <variable type="int" name="passwordInputType" />
         <variable type="String" name="showPasswordButtonText" />
@@ -24,6 +24,7 @@
         <variable type="ArrayAdapter&lt;Integer&gt;" name="dayAdapter" />
         <variable type="ArrayAdapter&lt;String&gt;" name="monthAdapter" />
         <variable type="ArrayAdapter&lt;Integer&gt;" name="yearAdapter" />
+
     </data>
 
     <LinearLayout
@@ -74,20 +75,25 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:adapter="@{dayAdapter}"
-                    android:selectedItemPosition="@={day}"/>
+                    android:selectedItemPosition="@={dayPos}"
+                    android:onItemSelected="@{(av, v, pos, i) -> mainActivityViewModel.handleBirthDateDaySpinner(pos)}"/>
+
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:adapter="@{monthAdapter}"
-                    android:selectedItemPosition="@={month}"/>
+                    android:selectedItemPosition="@={monthPos}"
+                    android:onItemSelected="@{(av, v, pos, i) -> mainActivityViewModel.handleBirthDateMonthSpinner(pos)}"/>
 
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:adapter="@{yearAdapter}"
-                    android:selectedItemPosition="@={year}"/>
+                    android:selectedItemPosition="@={yearPos}"
+                    android:onItemSelected="@{(av, v, pos, i) -> mainActivityViewModel.handleBirthDateYearSpinner(pos)}"
+                    />
 
             </LinearLayout>
 

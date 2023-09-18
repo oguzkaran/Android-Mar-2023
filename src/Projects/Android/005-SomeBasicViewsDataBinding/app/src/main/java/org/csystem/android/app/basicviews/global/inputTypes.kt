@@ -1,4 +1,4 @@
-package org.csystem.android.app.basicviews
+package org.csystem.android.app.basicviews.global
 
 import android.text.InputType
 

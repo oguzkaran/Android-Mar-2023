@@ -18,4 +18,8 @@ class MainActivityListenersViewModel(activity: MainActivity) {
     fun handleCloseButton() = mWeakReference.get()?.closeButtonClicked()
 
     fun handleEducationSpinner(pos: Int) = mWeakReference.get()?.educationSpinnerItemSelected(pos)
+
+    fun handleBirthDateDaySpinner(pos: Int) = mWeakReference.get()?.birthDateDaySpinnerItemSelected(pos)
+    fun handleBirthDateMonthSpinner(pos: Int) = mWeakReference.get()?.birthDateMonthSpinnerItemSelected(pos)
+    fun handleBirthDateYearSpinner(pos: Int) = mWeakReference.get()?.birthDateYearSpinnerItemSelected(pos)
 }
