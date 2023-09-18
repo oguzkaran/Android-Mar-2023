@@ -75,8 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:adapter="@{dayAdapter}"
-                    android:selectedItemPosition="@={dayPos}"
-                    android:onItemSelected="@{(av, v, pos, i) -> mainActivityViewModel.handleBirthDateDaySpinner(pos)}"/>
+                    android:selectedItemPosition="@={dayPos}" />
 
                 <Spinner
                     android:layout_width="wrap_content"

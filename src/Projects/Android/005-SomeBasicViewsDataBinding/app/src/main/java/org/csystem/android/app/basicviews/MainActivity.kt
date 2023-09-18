@@ -82,11 +82,10 @@ class MainActivity : AppCompatActivity() {
             view.visibility = visibility
     }
 
-    private fun initBirthDateTexts()
+    private fun initBirthDateTexts(today: LocalDate)
     {
-        val today = LocalDate.now()
-
-
+        mBinding.dayPos = today.dayOfMonth - 1
+        mBinding.monthPos = today.monthValue - 1
     }
 
     private fun getDaysByMonthAndYear(monthPos: Int, yearPos: Int) : List<Int>
@@ -98,13 +97,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBirthDateAdapters()
     {
-        val now = LocalDate.now()
-        val years = (now.year - 100..now.minusYears(19).year).toList()
+        val today = LocalDate.now()
+        val years = (today.year - 100..today.minusYears(19).year).toList()
 
-        mBinding.dayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, getDaysByMonthAndYear(now.monthValue, now.year))
+        mBinding.dayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, getDaysByMonthAndYear(today.monthValue, today.year))
         mBinding.monthAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mMonths)
         mBinding.yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
         mBinding.yearPos = mBinding.yearAdapter!!.count - 1
+        initBirthDateTexts(today)
     }
 
     private fun initEducationAdapter()
@@ -117,7 +117,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBirthDateSpinners()
     {
-        initBirthDateTexts()
         initBirthDateAdapters()
     }
 
@@ -146,7 +145,6 @@ class MainActivity : AppCompatActivity() {
     {
         mMonths = resources.getStringArray(R.array.spinner_months)
         initBinding()
-        initBirthDateTexts()
     }
 
     private fun initialize()
@@ -194,7 +192,6 @@ class MainActivity : AppCompatActivity() {
             .setMessage(R.string.message_enable_show_password)
             .setPositiveButton(R.string.yes_button_text) {_, _->  }
             .setNegativeButton(R.string.no_button_text) {_, _ -> allowCShowPasswordNegativeButtonClickedCallback() }
-            //.setNeutralButton("") {_, _ -> mBinding.allowShowPasswordChecked = false}
             .setOnCancelListener{mBinding.allowShowPasswordChecked = false}
             .create()
             .show()
@@ -231,7 +228,7 @@ class MainActivity : AppCompatActivity() {
     fun clearButtonClicked()
     {
         clearEditTexts()
-        initBirthDateTexts()
+        initBirthDateTexts(LocalDate.now())
         mBinding.accept = false
         mBinding.passwordInputType = INPUT_TYPE_TEXT_PASSWORD_HIDE
         mBinding.showPasswordButtonText = resources.getString(R.string.button_show_password_text)
@@ -251,11 +248,6 @@ class MainActivity : AppCompatActivity() {
     fun educationSpinnerItemSelected(pos: Int)
     {
         Toast.makeText(this, mBinding.educationAdapter!!.getItem(pos), Toast.LENGTH_LONG).show()
-    }
-
-    fun birthDateDaySpinnerItemSelected(pos: Int)
-    {
-        //Nothing
     }
 
     fun birthDateMonthSpinnerItemSelected(pos: Int)

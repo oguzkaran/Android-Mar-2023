@@ -1,39 +1,21 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örnekte birden fazla formatter ile işlem yapan örnek bir fonksiyon yazılmıştır. Detaylar gözardı edilmiştir.
-    Bir kütüphane içerisine daha detaylısı eklenecektir
+    Sınıf Çalışması: LocalDate sınıfını kullanarak iki tarih arasındaki toplam yılı Double türden çıkartma operatörü
+    ile hesaplayan kodları yazınız
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readString
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
+import java.time.Month
+import java.time.temporal.ChronoUnit
 
-fun tryParse(str: String) : LocalDate?
-{
-    val formatters = arrayOf(DateTimeFormatter.ofPattern("dd-MM-yyyy"), DateTimeFormatter.ofPattern("dd/MM/yyyy"),
-        DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-
-    for (formatter in formatters) {
-        try {
-            return LocalDate.parse(str, formatter)
-        }
-        catch (ignore: DateTimeParseException) {
-
-        }
-    }
-    return null
-}
+operator fun LocalDate.minus(localDate: LocalDate) = ChronoUnit.DAYS.between(localDate, this) / 365.0
 
 fun main()
 {
-    while (true) {
-        val str = readString("Tarih bilgisini giriniz:21/06/2023 veya 21-06-2023 veya 2023-06-21:")
+    val birthDate = LocalDate.of(1976, Month.SEPTEMBER, 10)
+    val today = LocalDate.now()
 
-        if (str == "elma")
-            break
+    val age = today - birthDate
 
-        val result = tryParse(str)
-        println(if (result != null) DateTimeFormatter.ISO_DATE.format(result) else "Geçersiz tarih!...")
-    }
+    println("Age:$age")
 }
