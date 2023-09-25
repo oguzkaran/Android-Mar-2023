@@ -30,12 +30,12 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
             while (true) {
                 user = ObjectInputStream(fis).readObject() as? User
 
-                if (user?.username == userName && user.passowrd == password)
+                if (user?.username == userName && user.password == password)
                     break
             }
         }
         catch (ignore: EOFException) {
-
+            user = null
         }
 
         return user
@@ -52,7 +52,6 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
-
 
     override fun existsByUserNameAndPassword(userName: String, password: String): Boolean
     {
