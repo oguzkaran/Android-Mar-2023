@@ -26,7 +26,7 @@ class UserRepositoryInstrumentedTest {
     {
         val file = File(appContext.filesDir, USER_FILE)
 
-        file.delete();
+        file.delete()
         val user1 = User("alican", "alican1234", "Alican", "Keçici", LocalDate.of(1989, Month.JANUARY, 5), LocalDate.now())
         val user2 = User("umut", "umut123", "Umut", "Utku", "Kırmızıgül", LocalDate.of(1995, Month.OCTOBER, 12), LocalDate.now())
 
@@ -56,5 +56,29 @@ class UserRepositoryInstrumentedTest {
     fun save_and_findByUserNameAndPasswordBothFailTest()
     {
         assertNull(userRepository.findByUserNameAndPassword("baturhan", "baturhan"))
+    }
+
+    @Test
+    fun existsByUserNameAndPasswordSuccessTest()
+    {
+        assertTrue(userRepository.existsByUserNameAndPassword("umut", "umut123"))
+    }
+
+    @Test
+    fun existsByUserNameAndPasswordPasswordFailTest()
+    {
+        assertFalse(userRepository.existsByUserNameAndPassword("umut", "umut12"))
+    }
+
+    @Test
+    fun existsByUserNameAndPasswordUsernameFailTest()
+    {
+        assertTrue(userRepository.existsByUserNameAndPassword("umu", "umut123"))
+    }
+
+    @Test
+    fun existsByUserNameAndPasswordBothFailTest()
+    {
+        assertTrue(userRepository.existsByUserNameAndPassword("erkan", "erkan123"))
     }
 }

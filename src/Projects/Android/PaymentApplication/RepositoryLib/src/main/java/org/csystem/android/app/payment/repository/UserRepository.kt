@@ -41,6 +41,25 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
         return user
     }
 
+    private fun existsByIdCallback(fis: FileInputStream, userName: String)  : Boolean
+    {
+        var user : User? = null
+
+        try {
+            while (true) {
+                user = ObjectInputStream(fis).readObject() as? User
+
+                if (user?.username == userName)
+                    break
+            }
+        }
+        catch (ignore: EOFException) {
+            user = null
+        }
+
+        return user != null
+    }
+
     override fun <S : User?> save(user: S): S
     {
         return mContext.openFileOutput(USER_FILE, Context.MODE_APPEND).use {saveCallback(it, user)}
@@ -49,6 +68,11 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
     override fun findByUserNameAndPassword(userName: String, password: String): User?
     {
         return mContext.openFileInput(USER_FILE).use { findByUserNameAndPasswordCallback(it, userName, password) }
+    }
+
+    override fun existsById(userName: String?): Boolean
+    {
+        return mContext.openFileInput(USER_FILE).use {existsByIdCallback(it, userName!!)}
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
@@ -100,10 +124,7 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
         TODO("Not yet implemented")
     }
 
-    override fun existsById(id: String?): Boolean
-    {
-        TODO("Not yet implemented")
-    }
+
 
     override fun findAllById(id: MutableIterable<String>?): MutableIterable<User>
     {
