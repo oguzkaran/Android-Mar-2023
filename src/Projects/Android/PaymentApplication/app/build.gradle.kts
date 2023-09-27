@@ -42,7 +42,8 @@ android {
 }
 
 dependencies {
-
+    implementation(project(path = ":RepositoryLib"))
+    implementation(project(path = ":DataServiceLib"))
     implementation("androidx.core:core-ktx:1.10.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")

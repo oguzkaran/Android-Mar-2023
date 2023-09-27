@@ -38,7 +38,7 @@ class PaymentApplicationHelper @Inject constructor(){
         }
     }
 
-    fun saveUser(user: User) : User
+    fun saveUser(user: User) : User?
     {
         try {
             return userRepository.save(user)
@@ -75,6 +75,16 @@ class PaymentApplicationHelper @Inject constructor(){
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findFailLoginInfoByUserName", ex)
+        }
+    }
+
+    fun saveLoginInfo(loginInfo: LoginInfo) : LoginInfo
+    {
+        try {
+            return loginInfoRepository.save(loginInfo)
+        }
+        catch (ex: Throwable) {
+            throw RepositoryException("PaymentApplicationHelper.saveLoginInfo", ex)
         }
     }
 

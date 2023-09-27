@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "PaymentApplication"
 include(":app")
 include(":RepositoryLib")
+include(":DataServiceLib")

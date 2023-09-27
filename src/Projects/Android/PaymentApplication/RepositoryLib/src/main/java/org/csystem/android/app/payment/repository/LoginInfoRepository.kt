@@ -22,6 +22,11 @@ class LoginInfoRepository@Inject constructor(@ApplicationContext var context: Co
         TODO("Not yet implemented")
     }
 
+    override fun <S : LoginInfo?> save(entity: S): S
+    {
+        TODO("Not yet implemented")
+    }
+
     ////////////////////////////////////////////////////////
 
     override fun findLastSuccessByUserName(userName: String): List<LoginInfo>
@@ -59,10 +64,7 @@ class LoginInfoRepository@Inject constructor(@ApplicationContext var context: Co
         TODO("Not yet implemented")
     }
 
-    override fun <S : LoginInfo?> save(entity: S): S
-    {
-        TODO("Not yet implemented")
-    }
+
 
     override fun <S : LoginInfo?> saveAll(entities: MutableIterable<S>?): MutableIterable<S>
     {
