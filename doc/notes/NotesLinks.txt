@@ -3,4 +3,4 @@ Basic Database          : https://www.dropbox.com/scl/fi/u59wgra518t1tk04j956r/T
 MongoDB                 : https://www.dropbox.com/sh/cypsgjdal47vwmc/AACCSg3K1Zh7YwClGrdGqMCoa?dl=0
 Basic IP Protocol       : https://www.dropbox.com/scl/fi/9bt8w4m35uh6e27cx4ixf/IP.docx?dl=0&rlkey=9zfzrrodqomy1vqysu7grtx8v
 Basic Algoritm Analysis : https://www.dropbox.com/scl/fi/7y5a7qunhz6i96xnv0nqb/AlgoritmaAnalizi.docx?dl=0&rlkey=c0wemoobtsy5p2zs1sj2mwxq1
-Android Dependencies    : https://www.dropbox.com/s/p76958h6rrjt0jj/Android-dependencies.txt?dl=0
+Android Dependencies    : https://www.dropbox.com/scl/fi/7crsnbge500iowdd943j3/Android-dependencies.txt?rlkey=headnxeouzr90a49mbvfxx31p&dl=0
