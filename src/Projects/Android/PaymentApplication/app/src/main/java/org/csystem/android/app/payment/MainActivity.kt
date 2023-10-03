@@ -1,40 +1,31 @@
 package org.csystem.android.app.payment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
-import org.csystem.android.app.data.service.PaymentApplicationDataService
-import org.csystem.android.app.data.service.dto.UserSaveDTO
 import org.csystem.android.app.payment.databinding.ActivityMainBinding
-import java.time.LocalDate
-import java.time.Month
-import javax.inject.Inject
+import org.csystem.android.app.payment.viewmodel.MainActivityListenerViewModel
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var mainBinding: ActivityMainBinding
-
-    @Inject
-    lateinit var dataService: PaymentApplicationDataService
+    private lateinit var mBinding: ActivityMainBinding
 
     private fun initialize()
     {
-        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        mBinding.viewModel = MainActivityListenerViewModel(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         initialize()
-
-        saveUser()
     }
 
-    fun saveUser()
+    fun registerButtonClicked()
     {
-        val userSaveDTO = UserSaveDTO("Cem", "cem1234", "Cem", "?", LocalDate.of(2000, Month.JANUARY, 1), "?")
-
-        dataService.saveUser(userSaveDTO)
+        Intent(this, RegisterActivity::class.java).apply { startActivity(this) }
     }
 }

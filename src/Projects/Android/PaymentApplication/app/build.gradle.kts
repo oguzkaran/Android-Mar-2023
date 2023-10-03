@@ -58,6 +58,7 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.48")
 
     implementation("org.csystem.android:org-csystem-android-datetime:21.0.0")
+    implementation("com.karandev:com-karandev-util-data:20.0.0")
 }
 
 kapt {
