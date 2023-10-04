@@ -10,6 +10,7 @@ import org.csystem.android.app.data.service.PaymentApplicationDataService
 import org.csystem.android.app.data.service.dto.UserSaveDTO
 import org.csystem.android.app.payment.databinding.ActivityRegisterBinding
 import org.csystem.android.app.payment.viewmodel.RegisterActivityListenerViewModel
+import java.time.LocalDate
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,6 +42,11 @@ class RegisterActivity : AppCompatActivity() {
     {
         try {
             val user = mBinding.user!!
+
+            if (user.birthDate.equals(LocalDate.now())) {
+                Toast.makeText(this, "Invalid data format", Toast.LENGTH_LONG).show()
+                return
+            }
 
             if (dataService.saveUser(user))
                 Toast.makeText(this, "${user.username} successfully registered", Toast.LENGTH_LONG).show()

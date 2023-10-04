@@ -8,7 +8,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.payment.databinding.ActivityMainBinding
 import org.csystem.android.app.payment.viewmodel.MainActivityListenerViewModel
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
 

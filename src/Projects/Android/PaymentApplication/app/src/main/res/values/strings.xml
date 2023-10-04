@@ -3,4 +3,11 @@
     <string name="button_register_text">Register</string>
     <string name="button_login_text">Login</string>
     <string name="button_close_text">Close</string>
+
+    <string name="edittext_user_name_hint_text">Input username</string>
+    <string name="edittext_password_hint_text">Input password</string>
+    <string name="edittext_first_name_hint_text">Input first name</string>
+    <string name="edittext_middle_name_hint_text">Input middle name</string>
+    <string name="edittext_last_name_hint_text">Input last name</string>
+    <string name="edittext_birth_date_hint_text">Input birth date (DD/MM/YYYY -> 13/10/1977)</string>
 </resources>

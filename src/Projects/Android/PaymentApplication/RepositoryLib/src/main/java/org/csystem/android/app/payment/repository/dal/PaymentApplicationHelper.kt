@@ -8,7 +8,7 @@ import org.csystem.android.app.payment.repository.entity.LoginInfo
 import org.csystem.android.app.payment.repository.entity.User
 import javax.inject.Inject
 
-class PaymentApplicationHelper @Inject constructor(){
+class PaymentApplicationHelper @Inject constructor() {
     @Inject
     lateinit var userRepository: IUserRepository
 
