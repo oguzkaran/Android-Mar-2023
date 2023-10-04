@@ -18,6 +18,27 @@ class PaymentApplicationHelper @Inject constructor() {
     @Inject
     lateinit var paymentRepository: IPaymentRepository
 
+    fun existsUserByUserName(userName: String?): Boolean
+    {
+        try {
+            return userRepository.existsById(userName)
+        }
+        catch (ex: Throwable) {
+            throw RepositoryException("PaymentApplicationHelper.existsUserByUserName", ex)
+        }
+    }
+
+
+    fun existsUserByUserNameAndPassword(userName: String, password: String): Boolean
+    {
+        try {
+            return userRepository.existsByUserNameAndPassword(userName, password)
+        }
+        catch (ex: Throwable) {
+            throw RepositoryException("PaymentApplicationHelper.existsUserByUserNameAndPassword", ex)
+        }
+    }
+
     fun findUserByUserNameAndPassword(userName: String, password: String): User?
     {
         try {
@@ -28,15 +49,6 @@ class PaymentApplicationHelper @Inject constructor() {
         }
     }
 
-    fun existsUserByUserName(userName: String?): Boolean
-    {
-        try {
-            return userRepository.existsById(userName)
-        }
-        catch (ex: Throwable) {
-            throw RepositoryException("PaymentApplicationHelper.existsUserByUserName", ex)
-        }
-    }
 
     fun saveUser(user: User) : User?
     {

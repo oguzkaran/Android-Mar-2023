@@ -21,11 +21,13 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_login_text" />
+            android:text="@string/button_login_text"
+            android:onClick="@{() -> viewModel.handleLoginButton()}"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_close_text" />
+            android:text="@string/button_close_text"
+            android:onClick="@{() -> viewModel.handleCloseButton()}"/>
     </LinearLayout>
 </layout>

@@ -3,10 +3,25 @@ package org.csystem.android.app.payment.repository
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.csystem.android.app.payment.repository.entity.LoginInfo
+import org.csystem.android.app.payment.repository.global.LOGIN_INFO_FILE
+import java.io.FileOutputStream
+import java.io.ObjectOutputStream
 import java.util.Optional
 import javax.inject.Inject
 
 class LoginInfoRepository@Inject constructor(@ApplicationContext var context: Context) : ILoginInfoRepository {
+    private fun <S : LoginInfo?> saveCallback(fos: FileOutputStream, user: S): S
+    {
+        ObjectOutputStream(fos).writeObject(user)
+
+        return user
+    }
+
+    override fun <S : LoginInfo?> save(loginInfo: S): S
+    {
+        return context.openFileOutput(LOGIN_INFO_FILE, Context.MODE_APPEND).use{saveCallback(it, loginInfo)}
+    }
+
     override fun findByUserName(userName: String): List<LoginInfo>
     {
         TODO("Not yet implemented")
@@ -22,10 +37,7 @@ class LoginInfoRepository@Inject constructor(@ApplicationContext var context: Co
         TODO("Not yet implemented")
     }
 
-    override fun <S : LoginInfo?> save(entity: S): S
-    {
-        TODO("Not yet implemented")
-    }
+
 
     ////////////////////////////////////////////////////////
 

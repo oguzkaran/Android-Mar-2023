@@ -27,4 +27,9 @@ class MainActivity : AppCompatActivity() {
     {
         Intent(this, RegisterActivity::class.java).apply { startActivity(this) }
     }
+
+    fun loginButtonClicked()
+    {
+        Intent(this, LoginActivity::class.java).apply { startActivity(this) }
+    }
 }

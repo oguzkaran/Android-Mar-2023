@@ -56,8 +56,8 @@ class RegisterActivity : AppCompatActivity() {
         catch (ex: DataServiceException) {
             Toast.makeText(this, "Data problem:${ex.message}", Toast.LENGTH_LONG).show()
         }
-        catch (ex: Throwable) {
-            Toast.makeText(this, "Problem occured. Try again later", Toast.LENGTH_LONG).show()
+        catch (ignore: Throwable) {
+            Toast.makeText(this, "Problem occurred. Try again later", Toast.LENGTH_LONG).show()
         }
     }
 }

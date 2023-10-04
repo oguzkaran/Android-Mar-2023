@@ -65,6 +65,7 @@
             android:hint="@string/edittext_birth_date_hint_text"
             android:text = "@={DateStringConverter.INSTANCE.toStr(user.birthDate)}"
             android:inputType="date" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

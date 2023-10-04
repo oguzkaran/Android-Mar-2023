@@ -1,0 +1,24 @@
+Yapılacaktır: Son tarih: 11.10.2023
+- OperationsActivity içerisinde şu button'lar bulunacaktır
+    - Payment
+    - Login Information
+    - Close
+
+- Login Information button'una basıldığında LoginInfomationActivity açılacak ve içerisinde şu
+button'lar button''lar bulunacaktır:
+    - Success Logins
+    - Fail Logins
+    - Close
+Ayrıca Close button'unun altına bir ListView eklenecektir
+
+- Success Logins button'una basıldığında tüm başarılı login'ler listview'a getirilecektir. Benzer şekilde
+Fail Logins button'una basıldığında tüm başarısız login'ler listview'a getirilecektir. Hiç ilgili
+login işlemi yoksa uygun mesaj Toast ile verilecektir
+
+- ListView'dan bir elemana click yapıldığında yine AlertDialog ile şifre haricindeki bilgiler
+gösterilecektir
+
+- Bilgiler Toast'da ve AlertDialog'da gösterim biçimini dilediğiniz gibi belirleyebilirsiniz.
+
+- Görsel renke ve biçim gibi widget'lar özgü elemanlar dışında aynen kalacaktır. Yani button'lar button,
+listview'da listview olarak kalacaktır

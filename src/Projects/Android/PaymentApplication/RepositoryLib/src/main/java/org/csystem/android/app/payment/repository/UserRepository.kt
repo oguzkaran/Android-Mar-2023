@@ -6,6 +6,7 @@ import org.csystem.android.app.payment.repository.entity.User
 import org.csystem.android.app.payment.repository.global.USER_FILE
 import java.io.EOFException
 import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
@@ -62,25 +63,39 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
 
     override fun <S : User?> save(user: S): S
     {
-        return mContext.openFileOutput(USER_FILE, Context.MODE_APPEND).use {saveCallback(it, user)}
+        return mContext.openFileOutput(USER_FILE, Context.MODE_APPEND).use { saveCallback(it, user) }
     }
 
     override fun findByUserNameAndPassword(userName: String, password: String): User?
     {
-        return mContext.openFileInput(USER_FILE).use { findByUserNameAndPasswordCallback(it, userName, password) }
+        var result: User? = null
+
+        try {
+            result =  mContext.openFileInput(USER_FILE)
+                .use { findByUserNameAndPasswordCallback(it, userName, password) }
+        }
+        catch (ignore: FileNotFoundException) {
+
+        }
+
+        return result
     }
 
     override fun existsById(userName: String?): Boolean
     {
-        return mContext.openFileInput(USER_FILE).use {existsByIdCallback(it, userName!!)}
+        var result = false
+
+        try {
+            result = mContext.openFileInput(USER_FILE).use { existsByIdCallback(it, userName!!) }
+        }
+        catch (ignore: FileNotFoundException) {
+
+        }
+
+        return result
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
-
-    override fun existsByUserNameAndPassword(userName: String, password: String): Boolean
-    {
-        TODO("Not yet implemented")
-    }
 
     override fun count(): Long
     {
