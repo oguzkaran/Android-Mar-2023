@@ -12,6 +12,7 @@ import com.karandev.util.data.service.DataServiceException;
 import org.csystem.android.app.data.service.PaymentApplicationDataService;
 import org.csystem.android.app.data.service.dto.LoginInfoDTO;
 import org.csystem.android.app.payment.databinding.ActivityLoginBinding;
+import static org.csystem.android.app.payment.global.key.BundleKeyKt.LOGIN_INFO;
 import org.csystem.android.app.payment.viewmodel.LoginActivityListenerViewModel;
 
 import javax.inject.Inject;
@@ -47,9 +48,10 @@ public class LoginActivity extends AppCompatActivity {
     public void loginButtonClicked()
     {
         try {
-            if (datService.checkAndSaveLoginInfo(m_binding.getLoginInfo())) {
+            var loginInfo = m_binding.getLoginInfo();
+            if (datService.checkAndSaveLoginInfo(loginInfo)) {
                 Toast.makeText(this, "Access granted", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, OperationsActivity.class));
+                startActivity(new Intent(this, OperationsActivity.class).putExtra(LOGIN_INFO, loginInfo));
             }
             else
                 Toast.makeText(this, "Access denied!...", Toast.LENGTH_SHORT).show();

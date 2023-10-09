@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:hint="@string/edittext_middle_name_hint_text"
+            android:hint="@string/edittext_last_name_hint_text"
             android:text="@={user.lastName}"/>
 
         <EditText

@@ -18,37 +18,35 @@ class PaymentApplicationHelper @Inject constructor() {
     @Inject
     lateinit var paymentRepository: IPaymentRepository
 
-    fun existsUserByUserName(userName: String?): Boolean
+    fun existsUserByUserName(username: String?): Boolean
     {
         try {
-            return userRepository.existsById(userName)
+            return userRepository.existsById(username)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.existsUserByUserName", ex)
         }
     }
 
-
-    fun existsUserByUserNameAndPassword(userName: String, password: String): Boolean
+    fun existsUserByUserNameAndPassword(username: String, password: String): Boolean
     {
         try {
-            return userRepository.existsByUserNameAndPassword(userName, password)
+            return userRepository.existsByUserNameAndPassword(username, password)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.existsUserByUserNameAndPassword", ex)
         }
     }
 
-    fun findUserByUserNameAndPassword(userName: String, password: String): User?
+    fun findUserByUserNameAndPassword(username: String, password: String): User?
     {
         try {
-            return userRepository.findByUserNameAndPassword(userName, password)
+            return userRepository.findByUserNameAndPassword(username, password)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findUserByUserNameAndPassword", ex)
         }
     }
-
 
     fun saveUser(user: User) : User?
     {
@@ -60,20 +58,20 @@ class PaymentApplicationHelper @Inject constructor() {
         }
     }
 
-    fun findLoginInfoByUserName(userName: String): List<LoginInfo>
+    fun findLoginInfoByUserName(username: String): List<LoginInfo>
     {
         try {
-            return loginInfoRepository.findByUserName(userName)
+            return loginInfoRepository.findByUserName(username)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findLoginInfoByUserName", ex)
         }
     }
 
-    fun findSuccessLoginInfoByUserName(userName: String): List<LoginInfo>
+    fun findSuccessLoginInfoByUserName(username: String): List<LoginInfo>
     {
         try {
-            return loginInfoRepository.findSuccessByUserName(userName)
+            return loginInfoRepository.findSuccessByUserName(username)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findSuccessLoginInfoByUserName", ex)

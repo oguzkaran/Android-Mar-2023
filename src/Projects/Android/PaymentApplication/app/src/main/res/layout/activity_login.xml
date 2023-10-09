@@ -32,7 +32,6 @@
             android:hint="@string/edittext_password_hint_text"
             android:text="@={loginInfo.password}"/>
 
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

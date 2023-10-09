@@ -2,6 +2,10 @@
     <string name="app_name">PaymentApplication</string>
     <string name="button_register_text">Register</string>
     <string name="button_login_text">Login</string>
+    <string name="button_payment_text">Payment</string>
+    <string name="button_login_information_text">Login Information</string>
+    <string name="button_success_logins_information_text">Success Logins</string>
+    <string name="button_fail_logins_information_text">Fail Logins</string>
     <string name="button_close_text">Close</string>
 
     <string name="edittext_user_name_hint_text">Input username</string>
