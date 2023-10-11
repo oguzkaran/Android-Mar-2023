@@ -9,3 +9,4 @@ gösterilecektir
 - RegisterActivity içerisinde bulunan Clear button'u tüm alanları temizleyecektir.
 
 - Register işlemi başarıyla yapılmışsa kapatılıp, LoginActivity'ye geçilecektir
+
