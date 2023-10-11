@@ -7,4 +7,5 @@ class RegisterActivityListenerViewModel(activity: RegisterActivity) {
     private val mWeakReference = WeakReference(activity)
 
     fun handleRegisterButton() = mWeakReference.get()?.registerButtonClicked()
+    fun handleCloseButton() = mWeakReference.get()?.closeButtonClicked()
 }

@@ -1,5 +1,6 @@
 package org.csystem.android.app.payment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -10,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.data.service.PaymentApplicationDataService
 import org.csystem.android.app.data.service.dto.LoginInfoDTO
 import org.csystem.android.app.data.service.dto.LoginInfoStatusDTO
-import org.csystem.android.app.payment.global.alias.LoginInfoArrayAdapter
 import org.csystem.android.app.payment.databinding.ActivityLoginInformationBinding
 import org.csystem.android.app.payment.global.key.LOGIN_INFO
 import org.csystem.android.app.payment.viewmodel.LoginInformationActivityListenerViewModel
@@ -87,6 +87,17 @@ class LoginInformationActivity : AppCompatActivity() {
         catch (ignore: Throwable) {
             Toast.makeText(this, "Problem occurred. Try again later", Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun loginInformationItemClicked(pos: Int)
+    {
+        val loginInfoStatusDTO = mBinding.adapter!!.getItem(pos)
+
+        AlertDialog.Builder(this)
+            .setTitle(R.string.alertdialog_login_info_title_text)
+            .setMessage(loginInfoStatusDTO.toString())
+            .setPositiveButton(R.string.alertdialog_login_info_ok_button_text) {_, _->}
+            .create().show()
     }
 
     fun closeButtonClicked()

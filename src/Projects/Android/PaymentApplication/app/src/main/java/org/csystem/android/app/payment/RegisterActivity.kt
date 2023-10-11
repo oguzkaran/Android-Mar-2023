@@ -2,6 +2,7 @@ package org.csystem.android.app.payment
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.karandev.util.data.service.DataServiceException
@@ -59,5 +60,14 @@ class RegisterActivity : AppCompatActivity() {
         catch (ignore: Throwable) {
             Toast.makeText(this, "Problem occurred. Try again later", Toast.LENGTH_LONG).show()
         }
+    }
+    fun closeButtonClicked()
+    {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.alertdialog_register_title_text)
+            .setMessage(R.string.alertdialog_register_message_text)
+            .setPositiveButton(R.string.alertdialog_register_yes_button_text) {_, _ -> finish()}
+            .setNegativeButton(R.string.alertdialog_register_no_button_text) {_, _ ->}
+            .create().show()
     }
 }

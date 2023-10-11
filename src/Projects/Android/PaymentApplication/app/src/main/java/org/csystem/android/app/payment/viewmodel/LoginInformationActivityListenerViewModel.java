@@ -26,4 +26,11 @@ public class LoginInformationActivityListenerViewModel {
     {
         m_weakReference.get().closeButtonClicked();
     }
+
+    public void handleListViewItemSelected(int pos)
+    {
+        m_weakReference.get().loginInformationItemClicked(pos);
+    }
+
+
 }
