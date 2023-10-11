@@ -1,0 +1,16 @@
+git clone https://github.com/oguzkaran/Android-Mar-2023
+
+git config --global user.email "your email"
+
+mvn install:install-file -DgroupId=org.csystem.android -DartifactId=org-csystem-android-datetime -Dversion=21.0.0 -Dfile=../jars/org-csystem-android-util-datetime-21.0.0.aar -Dpackaging=aar -DgeneratePom=true -DlocalRepositoryPath=. -DcreateChecksum=true
+
+mvn install:install-file -DgroupId=com.karandev -DartifactId=com-karandev-util-data -Dversion=20.0.0 -Dfile=../jars/com-karandev-util-data-20.0.0.jar -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=. -DcreateChecksum=true
+
+
+git add -A . && git commit -m "released version 20.0.0" --> dilerseniz bu kısımdan sonra github desktop ile daha kolay yapılabilir
+
+url -> 'https://raw.github.com/<github usernama>/<github repository name>/<branch name>that is configured for maven repo>/<branch name defaul main>'
+
+url -> 'https://raw.github.com/oguzkaran/android-mar-2023-maven-repo/main'
+url -> 'https://raw.github.com/oguzkaran/android-mar-2023-karandev-maven-repo/main'
+
