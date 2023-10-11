@@ -59,5 +59,4 @@ class LoginInfoRepositoryInstrumentedTest {
     {
         assertEquals(0, loginInfoRepository.findByUserName("baturhan").size)
     }
-
 }
