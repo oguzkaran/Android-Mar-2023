@@ -1,5 +1,6 @@
 package org.csystem.android.app.payment
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -21,6 +22,15 @@ class RegisterActivity : AppCompatActivity() {
     @Inject
     lateinit var dataService: PaymentApplicationDataService
 
+    private fun registerSuccessCallback()
+    {
+        val user = mBinding.user
+
+        Toast.makeText(this, "${user?.username} successfully registered", Toast.LENGTH_LONG).show()
+        Intent(this, LoginActivity::class.java).apply {startActivity(this)}
+        finish()
+    }
+
     private fun initBinding()
     {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
@@ -35,7 +45,6 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-
         initialize()
     }
 
@@ -50,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             if (dataService.saveUser(user))
-                Toast.makeText(this, "${user.username} successfully registered", Toast.LENGTH_LONG).show()
+                registerSuccessCallback()
             else
                 Toast.makeText(this, "${user.username} can not be registered", Toast.LENGTH_LONG).show()
         }
@@ -61,6 +70,7 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, "Problem occurred. Try again later", Toast.LENGTH_LONG).show()
         }
     }
+
     fun closeButtonClicked()
     {
         AlertDialog.Builder(this)

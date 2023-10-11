@@ -1,12 +1,2 @@
-Yapılacaklar: 11.10.2023
-+ ListView'dan bir elemana click yapıldığında yine AlertDialog ile şifre haricindeki bilgiler
-gösterilecektir
-
-+ Bilgilerin Toast'da ve AlertDialog'da gösterim biçimini dilediğiniz gibi belirleyebilirsiniz.
-
-- RegisterActivity içerisinde Close buttonu olacaktır.
-
+Yapılacaklar: 16.10.2023
 - RegisterActivity içerisinde bulunan Clear button'u tüm alanları temizleyecektir.
-
-- Register işlemi başarıyla yapılmışsa kapatılıp, LoginActivity'ye geçilecektir
-
