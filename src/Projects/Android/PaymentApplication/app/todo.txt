@@ -2,7 +2,7 @@ Yapılacaklar: 16.10.2023
 
 TODO: PaymentActivity içerisinde şu elemanlar bulunacaktır
     Button -> Make Payement -> MakePaymentActivity açılacaktır
-    Button -> Payments -> PaymentsActivity açılacaktır
+    Button -> Payments -> PaymentsActivity açılacaktır. Bu activity şimdilik boş kalacaktır
     Button -> Çıkış -> Activity kapatılacaktır
 
 TODO: MakePaymentActivity içerisinde şu elemanlar bulunacaktır
