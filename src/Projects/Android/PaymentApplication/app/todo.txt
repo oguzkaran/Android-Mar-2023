@@ -1,4 +1,4 @@
-Yapılacaklar: 16.10.2023
+Yapılacaklar: 18.10.2023
 
 TODO: PaymentActivity içerisinde şu elemanlar bulunacaktır
     Button -> Make Payement -> MakePaymentActivity açılacaktır
