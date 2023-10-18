@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.karandev.util.data.service.DataServiceException
 import dagger.hilt.android.AndroidEntryPoint
-import org.csystem.android.app.data.service.PaymentApplicationDataService
-import org.csystem.android.app.data.service.dto.UserSaveDTO
+import org.csystem.android.app.payment.data.service.PaymentApplicationDataService
+import org.csystem.android.app.payment.data.service.dto.UserSaveDTO
 import org.csystem.android.app.payment.databinding.ActivityRegisterBinding
 import org.csystem.android.app.payment.viewmodel.RegisterActivityListenerViewModel
 import java.time.LocalDate

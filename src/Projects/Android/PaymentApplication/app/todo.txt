@@ -1,28 +1,13 @@
-Yapılacaklar: 18.10.2023
-
-TODO: PaymentActivity içerisinde şu elemanlar bulunacaktır
-    Button -> Make Payement -> MakePaymentActivity açılacaktır
-    Button -> Payments -> PaymentsActivity açılacaktır. Bu activity şimdilik boş kalacaktır
-    Button -> Çıkış -> Activity kapatılacaktır
-
 TODO: MakePaymentActivity içerisinde şu elemanlar bulunacaktır
-    - EditText -> Ödemesi yapılan ürüne ilişkin açıklama (description)
-    - EditText -> Ürünün birim fiyatı (Ondalık olabilir) Default değer alabilirler
-    - EditText -> Ürünün miktarı olduğu bilgisi (Ondalık olabilir) Default değer alabilirler
     - Button -> Ödeme Yapma buttonu -> İlgili alanların boş olup olmadıkları kontrol edilecek ve uygunsa
       ödeme yapılacaktır. Uygun değilse bir AlertDialog ile mesaj verilecektir. Ayrı birim fiyat ve
       miktar bilgileri de kontrol edilecektir. Birim fiyat sıfır olarak girilebilecektir
     - Button -> Temizle -> Tüm alanlar bir AlertDialog ile onay alınarak temizlenecektir
-    - Button -> Çıkış -> Activity sonlandırılacaktır
     - TextView -> Ödemenin yapılıp yapılmadığına ilişkin bilgi mesajı olacaktr. Mesajları dilediğiniz
-    gibi belirleyebilirsiniz. Paid, Not Paid: amount needed vb.
+    gibi belirleyebilirsiniz. Paid, Not Paid, amount needed vb.
 
-TODO: Uygulama katmanında yapılacak işlemler Data servis katmanından çağrılan metotlarla yapılacaktır.
-    Data Service katmanı da DAL katmanından çağrılan metotlarla yazılacaktır...
-
-
-
-- RegisterActivity içerisinde bulunan Clear button'u tüm alanları temizleyecektir. Temizleme için
-AlertDialog'dan onay alınması gerekir
+TODO:
+    - RegisterActivity içerisinde bulunan Clear button'u tüm alanları temizleyecektir. Temizleme için
+    AlertDialog'dan onay alınması gerekir
 
 

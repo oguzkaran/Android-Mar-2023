@@ -7,9 +7,9 @@
     <data>
         <import type="org.csystem.android.app.payment.viewmodel.RegisterActivityListenerViewModel"/>
         <import type="org.csystem.android.app.payment.converter.DateStringConverter"/>
-        <import type="org.csystem.android.app.data.service.dto.UserSaveDTO"/>
+        <import type="org.csystem.android.app.payment.data.service.dto.UserSaveDTO"/>
         <variable name="viewModel" type="RegisterActivityListenerViewModel" />
-        <variable name="user" type="UserSaveDTO" />
+        <variable name="user" type="org.csystem.android.app.payment.data.service.dto.UserSaveDTO" />
     </data>
 
     <LinearLayout

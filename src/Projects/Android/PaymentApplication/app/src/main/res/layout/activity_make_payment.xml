@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="org.csystem.android.app.payment.viewmodel.MakePaymentActivityListenerViewModel"/>
+        <import type="org.csystem.android.app.payment.data.service.dto.PaymentSaveDTO"/>
+        <import type="org.csystem.android.app.payment.converter.DoubleStringConverter"/>
+        <variable name="viewModel" type="MakePaymentActivityListenerViewModel" />
+        <variable name="paymentInfo" type="PaymentSaveDTO" />
+    </data>
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MakePaymentActivity">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/edittext_description_hint_text"
+            android:text="@={paymentInfo.desc}"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="@string/edittext_unit_price_text"
+            android:text="@={DoubleStringConverter.INSTANCE.toStr(paymentInfo.price)}"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="@string/edittext_quantity_text"
+            android:text="@={DoubleStringConverter.INSTANCE.toStr(paymentInfo.quantity)}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_pay_text"
+            android:onClick="@{() -> viewModel.handlePayButton()}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_clear_text"
+            android:onClick="@{() -> viewModel.handleClearButton()}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_close_text"
+            android:onClick="@{() -> viewModel.handleCloseButton()}"
+            />
+    </LinearLayout>
+</layout>

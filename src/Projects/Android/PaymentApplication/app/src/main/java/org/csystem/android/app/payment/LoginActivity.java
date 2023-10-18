@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.karandev.util.data.service.DataServiceException;
 
-import org.csystem.android.app.data.service.PaymentApplicationDataService;
-import org.csystem.android.app.data.service.dto.LoginInfoDTO;
+import org.csystem.android.app.payment.data.service.PaymentApplicationDataService;
+import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO;
 import org.csystem.android.app.payment.databinding.ActivityLoginBinding;
 import static org.csystem.android.app.payment.global.key.BundleKeyKt.LOGIN_INFO;
 import org.csystem.android.app.payment.viewmodel.LoginActivityListenerViewModel;

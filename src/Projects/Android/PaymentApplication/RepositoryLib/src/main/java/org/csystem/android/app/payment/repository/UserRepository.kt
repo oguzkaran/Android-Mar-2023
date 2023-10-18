@@ -18,6 +18,7 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
 
     private fun <S: User?> saveCallback(fos: FileOutputStream, user: S): S
     {
+        //Aynı user'dan bir tane ndaha eklenmeyecek. User varsa null değerine geri dönülecek
         ObjectOutputStream(fos).writeObject(user)
 
         return user
@@ -36,7 +37,6 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
             }
         }
         catch (ignore: EOFException) {
-            user = null
         }
 
         return user
@@ -55,7 +55,7 @@ class UserRepository @Inject constructor(@ApplicationContext context: Context) :
             }
         }
         catch (ignore: EOFException) {
-            user = null
+
         }
 
         return user != null

@@ -4,8 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import org.csystem.android.app.data.service.dto.LoginInfoDTO
+import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO
 import org.csystem.android.app.payment.databinding.ActivityOperationsBinding
+import org.csystem.android.app.payment.global.getLoginInfo
 import org.csystem.android.app.payment.global.key.LOGIN_INFO
 import org.csystem.android.app.payment.viewmodel.OperationsActivityListenerViewModel
 
@@ -16,10 +17,7 @@ class OperationsActivity : AppCompatActivity() {
 
     private fun initLoginInfo()
     {
-        mLoginInfo =  if (android.os.Build.VERSION.SDK_INT < 33)
-            intent.getSerializableExtra(LOGIN_INFO) as LoginInfoDTO
-        else
-            intent.getSerializableExtra(LOGIN_INFO, LoginInfoDTO::class.java)!!
+        mLoginInfo =  getLoginInfo(intent)
     }
 
     private fun initBinding()

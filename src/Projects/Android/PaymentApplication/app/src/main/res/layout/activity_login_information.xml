@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="org.csystem.android.app.payment.viewmodel.LoginInformationActivityListenerViewModel"/>
-        <import type="org.csystem.android.app.data.service.dto.LoginInfoStatusDTO"/>
+        <import type="org.csystem.android.app.payment.data.service.dto.LoginInfoStatusDTO"/>
         <import type="android.widget.ArrayAdapter"/>
         <variable name="viewModel" type="LoginInformationActivityListenerViewModel" />
         <variable name="adapter" type="ArrayAdapter&lt;LoginInfoStatusDTO&gt;" />

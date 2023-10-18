@@ -8,10 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.karandev.util.data.service.DataServiceException
 import dagger.hilt.android.AndroidEntryPoint
-import org.csystem.android.app.data.service.PaymentApplicationDataService
-import org.csystem.android.app.data.service.dto.LoginInfoDTO
-import org.csystem.android.app.data.service.dto.LoginInfoStatusDTO
+import org.csystem.android.app.payment.data.service.PaymentApplicationDataService
+import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO
+import org.csystem.android.app.payment.data.service.dto.LoginInfoStatusDTO
 import org.csystem.android.app.payment.databinding.ActivityLoginInformationBinding
+import org.csystem.android.app.payment.global.getLoginInfo
 import org.csystem.android.app.payment.global.key.LOGIN_INFO
 import org.csystem.android.app.payment.viewmodel.LoginInformationActivityListenerViewModel
 import javax.inject.Inject
@@ -27,10 +28,7 @@ class LoginInformationActivity : AppCompatActivity() {
 
     private fun initLoginInfo()
     {
-        mLoginInfo =  if (android.os.Build.VERSION.SDK_INT < 33)
-            intent.getSerializableExtra(LOGIN_INFO) as LoginInfoDTO
-        else
-            intent.getSerializableExtra(LOGIN_INFO, LoginInfoDTO::class.java)!!
+        mLoginInfo =  getLoginInfo(intent)
     }
 
     private fun initBinding()

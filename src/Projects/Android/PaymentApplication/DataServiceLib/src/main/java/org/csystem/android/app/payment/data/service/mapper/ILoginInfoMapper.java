@@ -1,7 +1,8 @@
-package org.csystem.android.app.data.service.mapper;
+package org.csystem.android.app.payment.data.service.mapper;
 
-import org.csystem.android.app.data.service.dto.LoginInfoDTO;
-import org.csystem.android.app.data.service.dto.LoginInfoStatusDTO;
+import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO;
+import org.csystem.android.app.payment.data.service.dto.LoginInfoStatusDTO;
+import org.csystem.android.app.payment.data.service.dto.LoginInfoStatusDTO;
 import org.csystem.android.app.payment.repository.entity.LoginInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

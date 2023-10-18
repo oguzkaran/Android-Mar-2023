@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".PaymentActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="org.csystem.android.app.payment.viewmodel.PaymentActivityListenerViewModel"/>
+        <variable name="viewModel" type="PaymentActivityListenerViewModel" />
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PaymentActivity">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_make_payment_text"
+            android:onClick="@{() -> viewModel.handleMakePaymentButton()}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_payments_text"
+            android:onClick="@{() -> viewModel.handlePaymentsButton()}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_close_text"
+            android:onClick="@{() -> viewModel.handleCloseButton()}"
+            />
+
+    </LinearLayout>
+</layout>

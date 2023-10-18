@@ -1,10 +1,10 @@
-package org.csystem.android.app.data.service.mapper.di.module.annotation
+package org.csystem.android.app.payment.data.service.mapper.di.module
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import org.csystem.android.app.data.service.mapper.ILoginInfoMapper
+import org.csystem.android.app.payment.data.service.mapper.ILoginInfoMapper
 import org.mapstruct.factory.Mappers
 import javax.inject.Singleton
 

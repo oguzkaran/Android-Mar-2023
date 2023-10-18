@@ -99,7 +99,6 @@ class PaymentApplicationHelper @Inject constructor() {
         }
     }
 
-
     fun findPaymentsByUserName(userName: String): List<Payment>
     {
         try {
@@ -109,6 +108,7 @@ class PaymentApplicationHelper @Inject constructor() {
             throw RepositoryException("PaymentApplicationHelper.findPaymentsByUserName", ex)
         }
     }
+
     fun savePayment(payment: Payment) : Payment?
     {
         try {

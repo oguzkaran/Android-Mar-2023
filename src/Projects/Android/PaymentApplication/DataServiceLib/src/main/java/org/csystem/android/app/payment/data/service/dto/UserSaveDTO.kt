@@ -1,4 +1,4 @@
-package org.csystem.android.app.data.service.dto
+package org.csystem.android.app.payment.data.service.dto
 
 import java.io.Serializable
 import java.time.LocalDate

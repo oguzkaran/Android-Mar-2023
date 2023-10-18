@@ -1,23 +1,27 @@
-package org.csystem.android.app.data.service
+package org.csystem.android.app.payment.data.service
 
 import com.karandev.util.data.repository.exception.RepositoryException
 import com.karandev.util.data.service.DataServiceException
-import org.csystem.android.app.data.service.dto.LoginInfoDTO
-import org.csystem.android.app.data.service.dto.LoginInfoStatusDTO
-import org.csystem.android.app.data.service.dto.UserSaveDTO
-import org.csystem.android.app.data.service.mapper.ILoginInfoMapper
-import org.csystem.android.app.data.service.mapper.IUserMapper
-import org.csystem.android.app.data.service.mapper.di.module.annotation.UserMapperInterceptor
+import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO
+import org.csystem.android.app.payment.data.service.dto.LoginInfoStatusDTO
+import org.csystem.android.app.payment.data.service.dto.PaymentSaveDTO
+import org.csystem.android.app.payment.data.service.dto.UserSaveDTO
+import org.csystem.android.app.payment.data.service.mapper.ILoginInfoMapper
+import org.csystem.android.app.payment.data.service.mapper.IPaymentMapper
+import org.csystem.android.app.payment.data.service.mapper.IUserMapper
 import org.csystem.android.app.payment.repository.dal.PaymentApplicationHelper
 import javax.inject.Inject
 
 class PaymentApplicationDataService @Inject constructor(
     paymentApplicationHelper: PaymentApplicationHelper,
-    @UserMapperInterceptor userMapper: IUserMapper,
-    loginInfoMapper: ILoginInfoMapper) {
+    userMapper: IUserMapper,
+    loginInfoMapper: ILoginInfoMapper,
+    paymentMapper: IPaymentMapper
+) {
     private val mPaymentApplicationHelper = paymentApplicationHelper
     private val mUserMapper = userMapper
     private val mLoginInfoMapper = loginInfoMapper
+    private val mPaymentMapper = paymentMapper
 
     fun checkAndSaveLoginInfo(loginInfoDTO: LoginInfoDTO) : Boolean
     {
@@ -95,6 +99,19 @@ class PaymentApplicationDataService @Inject constructor(
         }
         catch (ex: Throwable) {
             throw DataServiceException("PaymentApplicationDataService.saveUser", ex)
+        }
+    }
+
+    fun savePayment(paymentSaveDTO: PaymentSaveDTO)
+    {
+        try {
+            mPaymentApplicationHelper.savePayment(mPaymentMapper.toPayment(paymentSaveDTO))
+        }
+        catch (ex: RepositoryException) {
+            throw DataServiceException("PaymentApplicationDataService.savePayment", ex.cause)
+        }
+        catch (ex: Throwable) {
+            throw DataServiceException("PaymentApplicationDataService.savePayment", ex)
         }
     }
 
