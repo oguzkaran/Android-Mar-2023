@@ -3,6 +3,7 @@
 <layout>
     <data>
         <variable name="dateTime" type="String" />
+        <variable name="time" type="String" />
     </data>
 
     <LinearLayout
@@ -19,5 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{dateTime}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{time}" />
     </LinearLayout>
 </layout>

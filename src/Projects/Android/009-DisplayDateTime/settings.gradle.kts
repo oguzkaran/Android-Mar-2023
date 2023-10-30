@@ -21,6 +21,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "008-DisplayDateTimeDoNotDo"
+rootProject.name = "DisplayDateTime"
 include(":app")
  
