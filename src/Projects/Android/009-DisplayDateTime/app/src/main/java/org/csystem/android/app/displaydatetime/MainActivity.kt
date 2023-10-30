@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.displaydatetime.databinding.ActivityMainBinding
 import org.csystem.android.util.datetime.di.module.formatter.annotation.LocalDateTimeFormatterInterceptor
 import org.csystem.android.util.datetime.di.module.formatter.annotation.LocalTimeFormatterInterceptor
@@ -16,6 +17,7 @@ import java.util.TimerTask
 import javax.inject.Inject
 import kotlin.concurrent.thread
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mTimerDateTime: Timer
@@ -32,13 +34,11 @@ class MainActivity : AppCompatActivity() {
     private fun scheduleDateTimeTimer()
     {
         mTimerDateTime = Timer()
-        dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm:ss")
         mTimerDateTime.scheduleAtFixedRate(createDateTimeTimerTask(), 0, 1000)
     }
 
     private fun clockThreadCallback()
     {
-        timeFormatter = DateTimeFormatter.ofPattern("kk:mm:ss")
         //Şüphesiz timer kullanımı daha uygundur. Durumu göstermek için bu şekilde yazılmıştır
         while (true) {
             mBinding.time = timeFormatter.format(LocalTime.now())
