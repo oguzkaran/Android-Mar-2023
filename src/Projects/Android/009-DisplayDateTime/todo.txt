@@ -1,0 +1,3 @@
+Yapılacaklar:
+Bir toggle button'a basıldığında saat:dakika:saniye:milisaniye biçiminde bir sayaç başlatan ve tekrar
+basıldığında sayacı durduran programı yazınız
