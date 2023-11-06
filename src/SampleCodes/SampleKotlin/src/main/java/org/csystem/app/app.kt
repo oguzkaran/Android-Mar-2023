@@ -1,35 +1,72 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: Klavyeden 'b' girildiğinde saat:dakika:saniye:milisaniye biçiminde bir sayaç başlatan ve 'd' girildiğinde
-    sayacı sonlandıran uygulamayı yazınız. Program 'ç' girildiğinde sonlanacaktır. Bu karakterler dışında değer girilmesi
-    durumunda hiç bir şey yapılamayacaktır
-
-    Not: Aynı uygulamayı DiplayDateTime uygulamasını bir tane button' basıldığında başltana ve tekrar basıldığında
-    sayacı durdurucak şekilde yazınız. Button üzerinde yazı duruma göre değişecektir. İpucu: Toggle button kullanabilirsiniz
+    Thread'lerin sonlandırılması:
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readString
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Timer
-import java.util.TimerTask
+import org.csystem.util.console.kotlin.readChar
+import java.util.*
+import kotlin.system.exitProcess
 
-private fun createTimerTask(formatter: DateTimeFormatter) : TimerTask
+private fun createTimerTask() : TimerTask
 {
+    var seconds = 0L
+
     return object: TimerTask() {
         override fun run()
         {
-            print("%s\r".format(formatter.format(LocalDateTime.now())))
+            printDuration(seconds++)
         }
     }
 }
 
-fun main()
+private fun printDuration(seconds: Long)
 {
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm:ss")
-    val timer = Timer()
+    val hour = seconds / 60 / 60
+    val minute = seconds / 60 % 60
+    val second = seconds % 60
 
-    timer.scheduleAtFixedRate(createTimerTask(formatter), 0, 1000)
-    readString("Çıkmak için enter tuşuna basınız\n");
-    timer.cancel()
+    print("%02d:%02d:%02d\r".format(hour, minute, second))
 }
+
+private fun readCharProc()
+{
+    while (true) {
+        val ch = readChar()
+
+        clearScreen()
+
+        if (ch == 'b')
+            break
+
+        if (ch == 'd')
+            exitProcess(0);
+    }
+}
+
+fun clearScreen()
+{
+    for (i in 1..26)
+        println()
+}
+
+private fun runApp()
+{
+    var flag = false
+
+    while (true) {
+        readCharProc()
+
+        if (flag)
+            continue
+
+        val timer = Timer()
+
+        println("Press d to stop chronometer!...")
+        timer.scheduleAtFixedRate(createTimerTask(), 0, 1000)
+        flag = true
+    }
+}
+
+fun main() = runApp()
+
+

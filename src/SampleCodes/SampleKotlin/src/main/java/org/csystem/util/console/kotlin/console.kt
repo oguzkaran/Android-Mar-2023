@@ -87,6 +87,18 @@ fun readString(prompt: String = "") : String
     return readln()
 }
 
+fun readChar(prompt: String = "", errorMessage: String = "", end: String = "") : Char
+{
+    while (true) {
+        val str = readString(prompt)
+
+        if (str.length == 1)
+            return str[0];
+
+        print("$errorMessage $end")
+    }
+}
+
 
 fun readBigDecimal(prompt: String, errMessage: String = "", end: String = "") : BigDecimal
 {

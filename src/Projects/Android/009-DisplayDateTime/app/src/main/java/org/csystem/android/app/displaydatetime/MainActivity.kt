@@ -21,35 +21,8 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mTimerDateTime: Timer
+    private lateinit var mChronoTimer: Timer
     private lateinit var mClockThread: Thread
-
-    private fun createDateTimeTimerTask() = object: TimerTask() {
-        override fun run()
-        {
-            mBinding.dateTime = dateTimeFormatter.format(LocalDateTime.now())
-        }
-    }
-
-
-    private fun scheduleDateTimeTimer()
-    {
-        mTimerDateTime = Timer()
-        mTimerDateTime.scheduleAtFixedRate(createDateTimeTimerTask(), 0, 1000)
-    }
-
-    private fun clockThreadCallback()
-    {
-        //Şüphesiz timer kullanımı daha uygundur. Durumu göstermek için bu şekilde yazılmıştır
-        while (true) {
-            mBinding.time = timeFormatter.format(LocalTime.now())
-            Thread.sleep(1000)
-        }
-    }
-
-    private fun startClock()
-    {
-        mClockThread = thread { clockThreadCallback() }
-    }
 
     @Inject
     @LocalDateTimeFormatterInterceptor
@@ -58,6 +31,71 @@ class MainActivity : AppCompatActivity() {
     @Inject
     @LocalTimeFormatterInterceptor
     lateinit var timeFormatter : DateTimeFormatter
+
+    private fun createDateTimeTimerTask() = object: TimerTask() {
+        override fun run()
+        {
+            mBinding.dateTime = dateTimeFormatter.format(LocalDateTime.now())
+        }
+    }
+
+    private fun createChronoTimerTask() : TimerTask
+    {
+        var seconds = 0L
+
+        return object: TimerTask() {
+            override fun run()
+            {
+                displayChronoDuration(seconds++)
+            }
+        }
+    }
+
+    private fun displayChronoDuration(seconds: Long)
+    {
+        val hour = seconds / 60 / 60
+        val minute = seconds / 60 % 60
+        val second = seconds % 60
+
+        mBinding.chronometer = "%02d:%02d:%02d".format(hour, minute, second)
+    }
+
+    private fun scheduleDateTimeTimer()
+    {
+        mTimerDateTime = Timer()
+        mTimerDateTime.scheduleAtFixedRate(createDateTimeTimerTask(), 0, 1000)
+    }
+
+    private fun scheduleChronoTimer()
+    {
+        mChronoTimer = Timer()
+        mChronoTimer.scheduleAtFixedRate(createChronoTimerTask(), 0, 1000)
+    }
+
+
+    private fun startAutoDisplayChronometer()
+    {
+        mBinding.mainActivityChronometerAutoDisplay.start()
+    }
+
+    private fun clockThreadCallback()
+    {
+        //Şüphesiz timer kullanımı daha uygundur. Durumu göstermek için bu şekilde yazılmıştır
+        try {
+            while (true) {
+                mBinding.time = timeFormatter.format(LocalTime.now())
+                Thread.sleep(1000)
+            }
+        }
+        catch (_ : InterruptedException) {
+            runOnUiThread{Toast.makeText(this, "Artık sonlanmak lazım", Toast.LENGTH_LONG).show()}
+        }
+    }
+
+    private fun startClock()
+    {
+        mClockThread = thread { clockThreadCallback() }
+    }
 
     private fun initBinding()
     {
@@ -79,12 +117,14 @@ class MainActivity : AppCompatActivity() {
     {
         try {
             scheduleDateTimeTimer()
+            scheduleChronoTimer()
+            startAutoDisplayChronometer()
             startClock()
             super.onStart()
         }
         catch (ex: Throwable) {
             Log.d("on-start", ex.message!!)
-            Toast.makeText(this, "Problem occured on start!...", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Problem occurred on start!...", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -92,7 +132,9 @@ class MainActivity : AppCompatActivity() {
     {
         try {
             mTimerDateTime.cancel()
+            mChronoTimer.cancel()
             mClockThread.interrupt()
+            mBinding.mainActivityChronometerAutoDisplay.stop()
             super.onStop()
         }
         catch (ex: Throwable) {
