@@ -3,7 +3,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="org.csystem.android.app.payment.viewmodel.PaymentActivityListenerViewModel"/>
+        <import type="android.widget.ArrayAdapter"/>
         <variable name="viewModel" type="PaymentActivityListenerViewModel" />
+        <variable name="adapter" type="ArrayAdapter&lt;String&gt;" />
+
     </data>
 
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
