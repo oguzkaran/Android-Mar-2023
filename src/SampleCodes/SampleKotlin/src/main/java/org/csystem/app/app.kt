@@ -1,72 +1,36 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Thread'lerin sonlandırılması:
+    Thread havuzları ve Excutors:
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readChar
-import java.util.*
-import kotlin.system.exitProcess
+import kotlin.concurrent.thread
+import kotlin.random.Random
 
-private fun createTimerTask() : TimerTask
+fun threadCallback()
 {
-    var seconds = 0L
+    val self = Thread.currentThread()
+    var sum = 0L
 
-    return object: TimerTask() {
-        override fun run()
-        {
-            printDuration(seconds++)
-        }
+    while (!Thread.interrupted()) {
+        val value = Random.nextInt()
+        println(value)
+        sum += value
     }
-}
 
-private fun printDuration(seconds: Long)
-{
-    val hour = seconds / 60 / 60
-    val minute = seconds / 60 % 60
-    val second = seconds % 60
+    println("Sum first = $sum")
 
-    print("%02d:%02d:%02d\r".format(hour, minute, second))
-}
-
-private fun readCharProc()
-{
-    while (true) {
-        val ch = readChar()
-
-        clearScreen()
-
-        if (ch == 'b')
-            break
-
-        if (ch == 'd')
-            exitProcess(0);
+    while (!self.isInterrupted) {
+        val value = Random.nextInt()
+        println(value)
+        sum += value
     }
+
+    println("Sum last = $sum")
 }
 
-fun clearScreen()
+fun main()
 {
-    for (i in 1..26)
-        println()
+    thread(block = ::threadCallback).apply { join(3000); interrupt(); join(1000); interrupt()}
 }
-
-private fun runApp()
-{
-    var flag = false
-
-    while (true) {
-        readCharProc()
-
-        if (flag)
-            continue
-
-        val timer = Timer()
-
-        println("Press d to stop chronometer!...")
-        timer.scheduleAtFixedRate(createTimerTask(), 0, 1000)
-        flag = true
-    }
-}
-
-fun main() = runApp()
 
 
