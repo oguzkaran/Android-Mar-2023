@@ -12,7 +12,6 @@
         android:orientation="vertical"
         tools:context=".SplashActivity">
 
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
