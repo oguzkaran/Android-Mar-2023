@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         mChronoTimer = Timer()
         mChronoTimer.scheduleAtFixedRate(createChronoTimerTask(), 0, 1000)
     }
-    
+
     private fun startAutoDisplayChronometer()
     {
         mBinding.mainActivityChronometerAutoDisplay.start()
