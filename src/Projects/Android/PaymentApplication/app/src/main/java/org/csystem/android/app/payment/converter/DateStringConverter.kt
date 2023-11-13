@@ -14,7 +14,7 @@ object DateStringConverter {
         try {
             result = LocalDate.parse(str, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
-        catch (ignore: DateTimeParseException) {
+        catch (_: DateTimeParseException) {
 
         }
 

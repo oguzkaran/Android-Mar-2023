@@ -13,7 +13,7 @@ object DoubleStringConverter {
             if (result < 0)
                 throw NumberFormatException()
         }
-        catch (ignore: NumberFormatException) {
+        catch (_: NumberFormatException) {
 
         }
 
