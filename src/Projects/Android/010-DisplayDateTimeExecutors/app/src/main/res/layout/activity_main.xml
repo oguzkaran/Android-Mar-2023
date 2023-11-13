@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="dateTime" type="String" />
+        <variable name="time" type="String" />
+        <variable name="chronometer" type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <Chronometer
+            android:id="@+id/mainActivityChronometerAutoDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{chronometer}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{dateTime}" />
+
+        <TextView
+            android:id="@+id/mainActivityTextViewTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{time}" />
+
+
+
+
+
+    </LinearLayout>
+</layout>
