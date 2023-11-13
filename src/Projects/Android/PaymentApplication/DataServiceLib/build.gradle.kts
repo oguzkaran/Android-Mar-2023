@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "org.csystem.android.app.payment.data.service"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 26
