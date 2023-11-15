@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "org.csystem.android.app.payment"
+    namespace = "org.csystem.android.app.generator.random"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "org.csystem.android.app.payment"
+        applicationId = "org.csystem.android.app.generator.random"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -28,6 +28,10 @@ android {
             )
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
@@ -42,8 +46,6 @@ android {
 }
 
 dependencies {
-    implementation(project(path = ":RepositoryLib"))
-    implementation(project(path = ":DataServiceLib"))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -57,8 +59,7 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
 
-    implementation("org.csystem.android:org-csystem-android-datetime:21.0.0")
-    implementation("com.karandev:com-karandev-util-data:20.0.0")
+    implementation("org.csystem.android:org-csystem-android-datetime:21.0.1")
 }
 
 kapt {
