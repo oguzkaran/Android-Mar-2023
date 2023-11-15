@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DisplayDateTime</string>
+    <string name="button_close_text">Close</string>
 </resources>

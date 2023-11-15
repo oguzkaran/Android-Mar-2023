@@ -4,6 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="org.csystem.android.app.displaydatetime.viewmodel.MainActivityViewModel"/>
+        <variable name="viewModel" type="MainActivityViewModel" />
         <variable name="dateTime" type="String" />
         <variable name="time" type="String" />
         <variable name="chronometer" type="String" />
@@ -36,9 +38,11 @@
             android:layout_height="wrap_content"
             android:text="@{time}" />
 
-
-
-
-
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.handleCloseButton()}"
+            android:text="@string/button_close_text" />
     </LinearLayout>
 </layout>

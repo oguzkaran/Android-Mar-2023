@@ -1,47 +1,28 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki örneği inceleyiniz
+
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import org.csystem.util.console.kotlin.readInt
-import org.csystem.util.console.kotlin.readLong
-import org.csystem.util.console.kotlin.readString
-import org.csystem.util.string.kotlin.getRandomTextEN
-import java.io.*
-import java.nio.charset.StandardCharsets
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.concurrent.Executors
-import java.util.concurrent.Future
-import kotlin.random.Random
-
-private fun generateCallback(fos: FileOutputStream, count: Long, random: Random, min: Int, bound: Int)
-{
-    BufferedWriter(OutputStreamWriter(fos, StandardCharsets.UTF_8)).use { bw ->
-        (0..<count).forEach { _ -> bw.write("${random.getRandomTextEN(random.nextInt(min, bound))}\r\n") }
-    }
-}
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 fun main()
 {
-    val basePath = readString("Input base path:")
-    val count = readInt("Input files count:")
-    val dataCount = readLong("Input count per each:")
-    val threadPool = Executors.newFixedThreadPool(count)
+    val pool = Executors.newScheduledThreadPool(1)
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm:ss")
 
-    File(basePath).parentFile.mkdirs()
+    val future = pool.scheduleAtFixedRate({print("%s\r".format(formatter.format(LocalDateTime.now())))}, 0L, 1, TimeUnit.SECONDS)
 
-    Array<Future<*>>(count) {threadPool.submit{ generateTextsCallback(dataCount, File("$basePath-${it}.txt").absolutePath, 5, 11) }}
-        .onEach { it.get() }
-
-    println("All files created successfully")
-    threadPool.shutdown()
-}
-
-fun generateTextsCallback(count: Long, path: String, min: Int, bound: Int, random: Random = Random)
-{
     try {
-        FileOutputStream(path).use {generateCallback(it, count, random, min, bound)}
+        future.get(3, TimeUnit.SECONDS)
     }
-    catch (ex: IOException) {
-        println("IO Problem:${ex.message}")
+    catch (_: TimeoutException) {
+        future.cancel(false)
     }
+
+    pool.shutdown()
 }
+

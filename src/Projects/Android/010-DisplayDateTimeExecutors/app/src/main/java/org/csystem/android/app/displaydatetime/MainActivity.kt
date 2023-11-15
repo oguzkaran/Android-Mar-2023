@@ -7,26 +7,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.displaydatetime.databinding.ActivityMainBinding
+import org.csystem.android.app.displaydatetime.viewmodel.MainActivityViewModel
 import org.csystem.android.util.datetime.di.module.formatter.annotation.LocalDateTimeFormatterInterceptor
 import org.csystem.android.util.datetime.di.module.formatter.annotation.LocalTimeFormatterInterceptor
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.Timer
-import java.util.TimerTask
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.Future
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
-    private lateinit var mTimerDateTime: Timer
-    private lateinit var mChronoTimer: Timer
+    private lateinit var mDateTimeScheduledFuture: ScheduledFuture<*>
+    private lateinit var mChronoScheduledFuture: ScheduledFuture<*>
     private lateinit var mClockFuture: Future<*>
+    private var mSeconds = 0L
 
     @Inject
-    lateinit var singleThreadExecutor: ExecutorService
+    lateinit var threadPool: ScheduledExecutorService
 
     @Inject
     @LocalDateTimeFormatterInterceptor
@@ -36,24 +38,16 @@ class MainActivity : AppCompatActivity() {
     @LocalTimeFormatterInterceptor
     lateinit var timeFormatter : DateTimeFormatter
 
-    private fun createDateTimeTimerTask() = object: TimerTask() {
-        override fun run()
-        {
-            mBinding.dateTime = dateTimeFormatter.format(LocalDateTime.now())
-        }
-    }
-
-    private fun createChronoTimerTask() : TimerTask
+    private fun dateTimeSchedulerCallback()
     {
-        var seconds = 0L
-
-        return object: TimerTask() {
-            override fun run()
-            {
-                displayChronoDuration(seconds++)
-            }
-        }
+        mBinding.dateTime = dateTimeFormatter.format(LocalDateTime.now())
     }
+
+    private fun chronoSchedulerCallback(seconds: Long)
+    {
+        displayChronoDuration(seconds + 1)
+    }
+
 
     private fun displayChronoDuration(seconds: Long)
     {
@@ -64,16 +58,14 @@ class MainActivity : AppCompatActivity() {
         mBinding.chronometer = "%02d:%02d:%02d".format(hour, minute, second)
     }
 
-    private fun scheduleDateTimeTimer()
+    private fun scheduleDateTimeScheduler()
     {
-        mTimerDateTime = Timer()
-        mTimerDateTime.scheduleAtFixedRate(createDateTimeTimerTask(), 0, 1000)
+        mDateTimeScheduledFuture = threadPool.scheduleAtFixedRate({dateTimeSchedulerCallback()}, 0, 1, TimeUnit.SECONDS)
     }
 
-    private fun scheduleChronoTimer()
+    private fun scheduleChronoScheduler()
     {
-        mChronoTimer = Timer()
-        mChronoTimer.scheduleAtFixedRate(createChronoTimerTask(), 0, 1000)
+        mChronoScheduledFuture = threadPool.scheduleAtFixedRate({chronoSchedulerCallback(mSeconds++)}, 0, 1, TimeUnit.SECONDS)
     }
 
     private fun startAutoDisplayChronometer()
@@ -97,12 +89,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun startClock()
     {
-        mClockFuture = singleThreadExecutor.submit { clockThreadCallback() }
+        mClockFuture = threadPool.submit { clockThreadCallback() }
     }
 
     private fun initBinding()
     {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        mBinding.viewModel = MainActivityViewModel(this)
     }
 
     private fun initialize()
@@ -119,8 +112,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStart()
     {
         try {
-            scheduleDateTimeTimer()
-            scheduleChronoTimer()
+            scheduleDateTimeScheduler()
+            scheduleChronoScheduler()
             startAutoDisplayChronometer()
             startClock()
             super.onStart()
@@ -134,8 +127,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStop()
     {
         try {
-            mTimerDateTime.cancel()
-            mChronoTimer.cancel()
+            mDateTimeScheduledFuture.cancel(false)
+            mChronoScheduledFuture.cancel(false)
             mClockFuture.cancel(true)
             mBinding.mainActivityChronometerAutoDisplay.stop()
             super.onStop()
@@ -144,6 +137,11 @@ class MainActivity : AppCompatActivity() {
             Log.d("on-stop", ex.message!!)
             Toast.makeText(this, "Problem occured on stop!...", Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun closeButtonClicked()
+    {
+        finish()
     }
 
     //...
