@@ -112,34 +112,36 @@ class MainActivity : AppCompatActivity() {
         initialize()
     }
 
-    override fun onStart()
+    override fun onResume()
     {
         try {
             scheduleDateTimeTimer()
             scheduleChronoTimer()
             startAutoDisplayChronometer()
             startClock()
-            super.onStart()
+
         }
         catch (ex: Throwable) {
             Log.d("on-start", ex.message!!)
             Toast.makeText(this, "Problem occurred on start!...", Toast.LENGTH_LONG).show()
         }
+        super.onResume()
     }
 
-    override fun onStop()
+    override fun onPause()
     {
         try {
             mTimerDateTime.cancel()
             mChronoTimer.cancel()
             mClockThread.interrupt()
             mBinding.mainActivityChronometerAutoDisplay.stop()
-            super.onStop()
         }
         catch (ex: Throwable) {
             Log.d("on-stop", ex.message!!)
             Toast.makeText(this, "Problem occured on stop!...", Toast.LENGTH_LONG).show()
         }
+
+        super.onPause()
     }
 
     //...
