@@ -2,4 +2,8 @@ Yapılacaklar:
 - Bir toggle button'a basıldığında saat:dakika:saniye:milisaniye biçiminde bir sayaç başlatan ve tekrar
 basıldığında sayacı durduran programı yazınız. Bunun için Chronometer UI elemanını kullanınız
 
+- Activity invisible olup visible olduğunda (pause-resume) çalışıyorsa kaldığı yerden devam edecektir.
+Çalışmıyorsa herhangi bir işlem yapılmayacaktır
+
+
 
