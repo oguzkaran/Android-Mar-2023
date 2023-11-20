@@ -1,9 +1,13 @@
 Yapılacaklar:
 - MainActivity içerisinde aşağıdaki widget'lar olacaktır
     - EditText: Count değeri girilecektir
+    
     - EditText: Minimum değer girilecektir
+
     - EditText: Maximum değer girilecektir
+
     - EditText: Period değer girilecektir
+
     - RadioGroup
             - RadioButton: Her adımöda ekle
             - RadioButton: En son ekle
