@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.payment.databinding.ActivityMainBinding
 import org.csystem.android.app.payment.viewmodel.MainActivityListenerViewModel
 

@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         try {
             var loginInfo = m_binding.getLoginInfo();
+
             if (datService.checkAndSaveLoginInfo(loginInfo)) {
                 Toast.makeText(this, "Access granted", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, OperationsActivity.class).putExtra(LOGIN_INFO, loginInfo));
