@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="org.csystem.android.app.generator.random.viewmodel.listener.MainActivityListenerViewModel"/>
@@ -68,6 +67,7 @@
                 android:id="@+id/mainActivityRadioButtonAddPeriodically"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/radiobutton_add_periodically" />
 
             <RadioButton

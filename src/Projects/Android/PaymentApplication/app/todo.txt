@@ -1,13 +1,20 @@
-TODO: MakePaymentActivity içerisinde şu elemanlar bulunacaktır
+Yapılacaklar
+- MakePaymentActivity içerisinde şu elemanlar bulunacaktır
     - Button -> Ödeme Yapma buttonu -> İlgili alanların boş olup olmadıkları kontrol edilecek ve uygunsa
       ödeme yapılacaktır. Uygun değilse bir AlertDialog ile mesaj verilecektir. Ayrı birim fiyat ve
       miktar bilgileri de kontrol edilecektir. Birim fiyat sıfır olarak girilebilecektir
-    - Button -> Temizle -> Tüm alanlar bir AlertDialog ile onay alınarak temizlenecektir
+        - Button -> Temizle -> Tüm alanlar bir AlertDialog ile onay alınarak temizlenecektir
+
     - TextView -> Ödemenin yapılıp yapılmadığına ilişkin bilgi mesajı olacaktr. Mesajları dilediğiniz
     gibi belirleyebilirsiniz. Paid, Not Paid, amount needed vb.
 
-TODO:
-    - RegisterActivity içerisinde bulunan Clear button'u tüm alanları temizleyecektir. Temizleme için
-    AlertDialog'dan onay alınması gerekir
+- RegisterActivity içerisinde bulunan Clear button'u tüm alanları temizleyecektir. Temizleme için
+AlertDialog'dan onay alınması gerekir
+
+- MainActivity'den önce bir splash screen yapılacaktır
+
+- Olası zaman harcanan işlemler asenkron olarak yapılacaktor. Asenkron işlemler için Executors
+kullanılacaktır
+
 
 
