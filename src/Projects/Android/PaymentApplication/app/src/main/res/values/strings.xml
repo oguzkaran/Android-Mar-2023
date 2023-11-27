@@ -9,6 +9,7 @@
     <string name="button_make_payment_text">Make Payment</string>
     <string name="button_payments_text">Payments</string>
     <string name="button_pay_text">Pay</string>
+    <string name="button_list_payments_text">List Payments</string>
 
     <string name="button_clear_text">Clear</string>
     <string name="button_close_text">Close</string>

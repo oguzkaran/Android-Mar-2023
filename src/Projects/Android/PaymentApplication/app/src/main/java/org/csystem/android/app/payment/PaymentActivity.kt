@@ -38,18 +38,10 @@ class PaymentActivity : AppCompatActivity() {
         initialize()
     }
 
-    fun makePaymentButtonClicked()
-    {
-        Intent(this, MakePaymentActivity::class.java).apply{putExtra(LOGIN_INFO, mLoginInfo); startActivity(this)}
-    }
+    fun makePaymentButtonClicked() = Intent(this, MakePaymentActivity::class.java).apply{putExtra(LOGIN_INFO, mLoginInfo); startActivity(this)}
 
-    fun paymentsButtonClicked()
-    {
-        Intent(this, PaymentsActivity::class.java).apply{putExtra(LOGIN_INFO, mLoginInfo); startActivity(this)}
-    }
+    fun paymentsButtonClicked() = Intent(this, PaymentsActivity::class.java).apply{putExtra(LOGIN_INFO, mLoginInfo); startActivity(this)}
 
-    fun closeButtonClicked()
-    {
-        finish()
-    }
+
+    fun closeButtonClicked() = finish()
 }
