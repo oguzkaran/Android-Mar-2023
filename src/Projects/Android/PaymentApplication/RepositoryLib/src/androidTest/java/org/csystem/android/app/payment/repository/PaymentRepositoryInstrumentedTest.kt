@@ -8,7 +8,6 @@ import org.csystem.android.app.payment.repository.global.PAYMENT_FILE
 import org.csystem.android.app.payment.repository.global.USER_FILE
 import org.junit.Assert.*
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.File
@@ -20,7 +19,7 @@ import java.time.Month
 class PaymentRepositoryInstrumentedTest {
     companion object {
         val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
-        val userRepository = UserRepository(appContext)
+        val userRepository = UserDao(appContext)
         val paymentRepository = PaymentRepository(appContext)
     }
 

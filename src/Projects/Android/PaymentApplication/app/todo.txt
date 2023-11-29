@@ -17,4 +17,33 @@ AlertDialog'dan onay alınması gerekir
 kullanılacaktır
 
 
+CREATE TABLE users (
+    username      TEXT   PRIMARY KEY,
+    password      TEXT   NOT NULL,
+    first_name    TEXT   NOT NULL,
+    middle_name   TEXT,
+    last_name     TEXT   NOT NULL,
+    birth_date    BIGINT NOT NULL,
+    register_date BIGINT DEFAULT(CURRENT_TIMESTAMP) NOT NULL
+);
+
+
+CREATE TABLE payments (
+    payment_id  INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_name   TEXT    NOT NULL REFERENCES users(username),
+    unit_price  REAL    NOT NULL,
+    quantity    REAL    NOT NULL,
+    description TEXT    NOT NULL
+);
+
+
+CREATE TABLE login_info (
+    login_info_id   INTEGER PRIMARY KEY AUTOINCREMENT,
+    username        TEXT    NOT NULL REFERENCES users (username),
+    password        TEXT    NOT NULL,
+    success         BOOLEAN NOT NULL,
+    login_date_time BIGINT  DEFAULT(CURRENT_TIMESTAMP) NOT NULL
+);
+
+
 

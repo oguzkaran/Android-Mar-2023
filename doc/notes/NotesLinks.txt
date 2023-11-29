@@ -1,5 +1,3 @@
 Kotlin                  : 
 Basic Database          : https://www.dropbox.com/scl/fi/u59wgra518t1tk04j956r/Temel-Veritaban.docx?rlkey=3n40t2gcndd97puaxossjkbsp&dl=0
-Basic IP Protocol       : 
-Basic Algoritm Analysis : 
-Android Dependencies    : 
+Android Dependencies    : https://www.dropbox.com/scl/fi/7crsnbge500iowdd943j3/Android-dependencies.txt?rlkey=headnxeouzr90a49mbvfxx31p&dl=0

@@ -18,7 +18,7 @@ import java.time.Month
 class UserRepositoryInstrumentedTest {
     companion object {
         val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
-        val userRepository = UserRepository(appContext)
+        val userRepository = UserDao(appContext)
     }
 
     @Before
