@@ -20,7 +20,7 @@ class PaymentRepositoryInstrumentedTest {
     companion object {
         val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
         val userRepository = UserDao(appContext)
-        val paymentRepository = PaymentRepository(appContext)
+        val paymentRepository = PaymentDao(appContext)
     }
 
     private fun setUpUsers()

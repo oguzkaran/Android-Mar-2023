@@ -2,8 +2,8 @@ package org.csystem.android.app.payment.repository.dal
 
 import com.karandev.util.data.repository.exception.RepositoryException
 import org.csystem.android.app.payment.repository.ILoginInfoRepository
-import org.csystem.android.app.payment.repository.IPaymentRepository
-import org.csystem.android.app.payment.repository.IUserDao
+import org.csystem.android.app.payment.repository.dao.IPaymentDao
+import org.csystem.android.app.payment.repository.dao.IUserDao
 import org.csystem.android.app.payment.repository.entity.LoginInfo
 import org.csystem.android.app.payment.repository.entity.Payment
 import org.csystem.android.app.payment.repository.entity.User
@@ -17,7 +17,7 @@ class PaymentApplicationHelper @Inject constructor() {
     lateinit var loginInfoRepository: ILoginInfoRepository
 
     @Inject
-    lateinit var paymentRepository: IPaymentRepository
+    lateinit var paymentRepository: IPaymentDao
 
     fun existsUserByUserName(username: String?): Boolean
     {
