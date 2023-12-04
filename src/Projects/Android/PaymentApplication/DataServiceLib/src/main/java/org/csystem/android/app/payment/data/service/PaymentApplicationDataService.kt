@@ -27,16 +27,16 @@ class PaymentApplicationDataService @Inject constructor(
     {
         try { //Aşağıdaki kodlar DAL katmanına da eklenebilir
             if (!mPaymentApplicationHelper.existsUserByUserName(loginInfoDTO.username))
-                return false;
+                return false
 
-            val loginInfo = mLoginInfoMapper.toLoginInfo(loginInfoDTO);
+            val loginInfo = mLoginInfoMapper.toLoginInfo(loginInfoDTO)
 
             if (mPaymentApplicationHelper.existsUserByUserNameAndPassword(loginInfoDTO.username, loginInfoDTO.password))
                 mPaymentApplicationHelper.saveLoginInfo(loginInfo)
             else
                 mPaymentApplicationHelper.saveLoginInfo(loginInfo.also { it.success = false })
 
-            return loginInfo.success;
+            return loginInfo.success
         }
         catch (ex: RepositoryException) {
             throw DataServiceException("PaymentApplicationDataService.checkAndSaveLoginInfo", ex.cause)
@@ -50,7 +50,7 @@ class PaymentApplicationDataService @Inject constructor(
     {
         try {
             return mPaymentApplicationHelper.findLoginInfoByUserName(username)
-                .map { mLoginInfoMapper.toLoginInfoStatusDTO(it) };
+                .map { mLoginInfoMapper.toLoginInfoStatusDTO(it) }
         }
         catch (ex: RepositoryException) {
             throw DataServiceException("PaymentApplicationDataService.findLoginInfoByUserName", ex.cause)
@@ -64,7 +64,7 @@ class PaymentApplicationDataService @Inject constructor(
     {
         try {
             return mPaymentApplicationHelper.findSuccessLoginInfoByUserName(username)
-                .map { mLoginInfoMapper.toLoginInfoStatusDTO(it) };
+                .map { mLoginInfoMapper.toLoginInfoStatusDTO(it) }
         }
         catch (ex: RepositoryException) {
             throw DataServiceException("PaymentApplicationDataService.findSuccessLoginInfoByUserName", ex.cause)
@@ -78,7 +78,7 @@ class PaymentApplicationDataService @Inject constructor(
     {
         try {
             return mPaymentApplicationHelper.findFailLoginInfoByUserName(username)
-                .map { mLoginInfoMapper.toLoginInfoStatusDTO(it) };
+                .map { mLoginInfoMapper.toLoginInfoStatusDTO(it) }
         }
         catch (ex: RepositoryException) {
             throw DataServiceException("PaymentApplicationDataService.findFailLoginInfoByUserName", ex.cause)

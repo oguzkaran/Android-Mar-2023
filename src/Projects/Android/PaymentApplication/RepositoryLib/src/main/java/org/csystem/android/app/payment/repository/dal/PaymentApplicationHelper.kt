@@ -7,6 +7,7 @@ import org.csystem.android.app.payment.repository.dao.IUserDao
 import org.csystem.android.app.payment.repository.entity.LoginInfo
 import org.csystem.android.app.payment.repository.entity.Payment
 import org.csystem.android.app.payment.repository.entity.User
+import org.csystem.android.app.payment.repository.entity.join.UserToPayments
 import javax.inject.Inject
 
 class PaymentApplicationHelper @Inject constructor() {
@@ -22,7 +23,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun existsUserByUserName(username: String?): Boolean
     {
         try {
-            return userRepository.existsById(username)
+            return userRepository.existsById(username!!)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.existsUserByUserName", ex)
@@ -49,10 +50,10 @@ class PaymentApplicationHelper @Inject constructor() {
         }
     }
 
-    fun saveUser(user: User) : User?
+    fun saveUser(user: User)
     {
         try {
-            return userRepository.save(user)
+            userRepository.save(user)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.saveUser", ex)
@@ -99,7 +100,7 @@ class PaymentApplicationHelper @Inject constructor() {
         }
     }
 
-    fun findPaymentsByUserName(userName: String): List<Payment>
+    fun findPaymentsByUserName(userName: String): List<UserToPayments>
     {
         try {
             return paymentRepository.findByUserName(userName)
@@ -109,10 +110,10 @@ class PaymentApplicationHelper @Inject constructor() {
         }
     }
 
-    fun savePayment(payment: Payment) : Payment?
+    fun savePayment(payment: Payment)
     {
         try {
-            return paymentRepository.save(payment)
+            paymentRepository.save(payment)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.savePayment", ex)
