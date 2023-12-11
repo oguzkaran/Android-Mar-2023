@@ -3,9 +3,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="org.csystem.android.app.payment.viewmodel.LoginActivityListenerViewModel"/>
-        <import type="org.csystem.android.app.payment.data.service.dto.LoginInfoDTO"/>
+        <import type="org.csystem.android.app.payment.data.service.dto.LoginInfoSaveDTO"/>
         <variable name="viewModel" type="LoginActivityListenerViewModel" />
-        <variable name="loginInfo" type="org.csystem.android.app.payment.data.service.dto.LoginInfoDTO" />
+        <variable name="loginInfo" type="org.csystem.android.app.payment.data.service.dto.LoginInfoSaveDTO" />
     </data>
 
     <LinearLayout

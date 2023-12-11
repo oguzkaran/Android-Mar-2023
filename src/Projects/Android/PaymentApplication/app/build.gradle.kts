@@ -43,6 +43,8 @@ android {
 }
 
 dependencies {
+    val roomVersion = "2.6.1"
+
     implementation(project(path = ":RepositoryLib"))
     implementation(project(path = ":DataServiceLib"))
     implementation("androidx.core:core-ktx:1.12.0")
@@ -60,6 +62,11 @@ dependencies {
 
     implementation("org.csystem.android:org-csystem-android-datetime:21.0.0")
     implementation("com.karandev:com-karandev-util-data:20.0.0")
+    //Room dependencies
+    //noinspection GradleDependency
+    implementation("androidx.room:room-runtime:$roomVersion")
+    //noinspection GradleDependency
+    ksp("androidx.room:room-compiler:$roomVersion")
 }
 
 kapt {

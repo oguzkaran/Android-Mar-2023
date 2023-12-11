@@ -10,7 +10,7 @@ import com.karandev.util.data.service.DataServiceException
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.payment.data.service.PaymentApplicationDataService
 import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO
-import org.csystem.android.app.payment.data.service.dto.LoginInfoStatusDTO
+import org.csystem.android.app.payment.data.service.dto.LoginInfoSaveDTO
 import org.csystem.android.app.payment.databinding.ActivityLoginInformationBinding
 import org.csystem.android.app.payment.global.getLoginInfo
 import org.csystem.android.app.payment.viewmodel.LoginInformationActivityListenerViewModel
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginInformationActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityLoginInformationBinding
-    private lateinit var mLoginInfo: LoginInfoDTO
+    private lateinit var mLoginInfo: LoginInfoSaveDTO
 
     @Inject
     lateinit var dataService: PaymentApplicationDataService
@@ -71,7 +71,7 @@ class LoginInformationActivity : AppCompatActivity() {
     {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login_information)
         mBinding.viewModel = LoginInformationActivityListenerViewModel(this)
-        mBinding.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, ArrayList<LoginInfoStatusDTO>())
+        mBinding.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, ArrayList<LoginInfoDTO>())
     }
 
     private fun initialize()

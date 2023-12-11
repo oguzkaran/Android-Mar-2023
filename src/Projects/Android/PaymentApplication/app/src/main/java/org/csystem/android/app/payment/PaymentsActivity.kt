@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
-import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO
+import org.csystem.android.app.payment.data.service.dto.LoginInfoSaveDTO
 import org.csystem.android.app.payment.databinding.ActivityPaymentsBinding
 import org.csystem.android.app.payment.global.getLoginInfo
 import java.util.concurrent.ScheduledExecutorService
@@ -17,7 +17,7 @@ class PaymentsActivity : AppCompatActivity() {
     @Inject
     lateinit var threadPool: ScheduledExecutorService
 
-    private lateinit var mLoginInfo: LoginInfoDTO
+    private lateinit var mLoginInfo: LoginInfoSaveDTO
 
     private fun listPaymentsButtonClickedCallback()
     {

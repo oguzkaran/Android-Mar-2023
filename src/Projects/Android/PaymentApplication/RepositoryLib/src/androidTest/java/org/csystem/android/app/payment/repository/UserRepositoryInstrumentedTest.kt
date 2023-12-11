@@ -1,7 +1,9 @@
 package org.csystem.android.app.payment.repository
 
+import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import org.csystem.android.app.payment.repository.database.PaymentApplicationDatabase
 import org.csystem.android.app.payment.repository.entity.User
 import org.csystem.android.app.payment.repository.global.USER_FILE
 import org.junit.Assert.*
@@ -18,7 +20,8 @@ import java.time.Month
 class UserRepositoryInstrumentedTest {
     companion object {
         val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
-        val userRepository = UserDao(appContext)
+        var database = Room.databaseBuilder(LoginInfoRepositoryInstrumentedTest.appContext, PaymentApplicationDatabase::class.java, "paymentdb-test.sqlite3").build()
+        val iUserDao = database.createUserDao()
     }
 
     @Before
@@ -30,55 +33,55 @@ class UserRepositoryInstrumentedTest {
         val user1 = User("alican", "alican1234", "Alican", "Keçici", LocalDate.of(1989, Month.JANUARY, 5), LocalDate.now())
         val user2 = User("umut", "umut123", "Umut", "Utku", "Kırmızıgül", LocalDate.of(1995, Month.OCTOBER, 12), LocalDate.now())
 
-        userRepository.save(user1)
-        userRepository.save(user2)
+        iUserDao.save(user1)
+        iUserDao.save(user2)
     }
 
     @Test
     fun save_and_findByUserNameAndPasswordSuccessTest()
     {
-        assertNotNull(userRepository.findByUserNameAndPassword("umut", "umut123"))
+        assertNotNull(iUserDao.findByUserNameAndPassword("umut", "umut123"))
     }
 
     @Test
     fun save_and_findByUserNameAndPasswordPasswordFailTest()
     {
-        assertNull(userRepository.findByUserNameAndPassword("alican", "alican123"))
+        assertNull(iUserDao.findByUserNameAndPassword("alican", "alican123"))
     }
 
     @Test
     fun save_and_findByUserNameAndPasswordUsernameFailTest()
     {
-        assertNull(userRepository.findByUserNameAndPassword("baturhan", "alican1234"))
+        assertNull(iUserDao.findByUserNameAndPassword("baturhan", "alican1234"))
     }
 
     @Test
     fun save_and_findByUserNameAndPasswordBothFailTest()
     {
-        assertNull(userRepository.findByUserNameAndPassword("baturhan", "baturhan"))
+        assertNull(iUserDao.findByUserNameAndPassword("baturhan", "baturhan"))
     }
 
     @Test
     fun existsByUserNameAndPasswordSuccessTest()
     {
-        assertTrue(userRepository.existsByUserNameAndPassword("umut", "umut123"))
+        assertTrue(iUserDao.existsByUserNameAndPassword("umut", "umut123"))
     }
 
     @Test
     fun existsByUserNameAndPasswordPasswordFailTest()
     {
-        assertFalse(userRepository.existsByUserNameAndPassword("umut", "umut12"))
+        assertFalse(iUserDao.existsByUserNameAndPassword("umut", "umut12"))
     }
 
     @Test
     fun existsByUserNameAndPasswordUsernameFailTest()
     {
-        assertTrue(userRepository.existsByUserNameAndPassword("umu", "umut123"))
+        assertTrue(iUserDao.existsByUserNameAndPassword("umu", "umut123"))
     }
 
     @Test
     fun existsByUserNameAndPasswordBothFailTest()
     {
-        assertTrue(userRepository.existsByUserNameAndPassword("erkan", "erkan123"))
+        assertTrue(iUserDao.existsByUserNameAndPassword("erkan", "erkan123"))
     }
 }

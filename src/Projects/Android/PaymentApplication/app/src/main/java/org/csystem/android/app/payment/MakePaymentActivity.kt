@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.karandev.util.data.service.DataServiceException
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.payment.data.service.PaymentApplicationDataService
-import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO
+import org.csystem.android.app.payment.data.service.dto.LoginInfoSaveDTO
 import org.csystem.android.app.payment.data.service.dto.PaymentSaveDTO
 import org.csystem.android.app.payment.databinding.ActivityMakePaymentBinding
 import org.csystem.android.app.payment.global.getLoginInfo
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MakePaymentActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMakePaymentBinding
 
-    private lateinit var mLoginInfo: LoginInfoDTO
+    private lateinit var mLoginInfo: LoginInfoSaveDTO
 
     @Inject
     lateinit var paymentApplicationDataService: PaymentApplicationDataService

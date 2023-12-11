@@ -1,9 +1,10 @@
 package org.csystem.android.app.payment.repository.dal
 
 import com.karandev.util.data.repository.exception.RepositoryException
-import org.csystem.android.app.payment.repository.ILoginInfoRepository
+import org.csystem.android.app.payment.repository.dao.ILoginInfoDao
 import org.csystem.android.app.payment.repository.dao.IPaymentDao
 import org.csystem.android.app.payment.repository.dao.IUserDao
+
 import org.csystem.android.app.payment.repository.entity.LoginInfo
 import org.csystem.android.app.payment.repository.entity.Payment
 import org.csystem.android.app.payment.repository.entity.User
@@ -12,10 +13,10 @@ import javax.inject.Inject
 
 class PaymentApplicationHelper @Inject constructor() {
     @Inject
-    lateinit var userRepository: IUserDao
+    lateinit var userDao: IUserDao
 
     @Inject
-    lateinit var loginInfoRepository: ILoginInfoRepository
+    lateinit var loginInfoDao: ILoginInfoDao
 
     @Inject
     lateinit var paymentRepository: IPaymentDao
@@ -23,7 +24,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun existsUserByUserName(username: String?): Boolean
     {
         try {
-            return userRepository.existsById(username!!)
+            return userDao.existsById(username!!)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.existsUserByUserName", ex)
@@ -33,7 +34,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun existsUserByUserNameAndPassword(username: String, password: String): Boolean
     {
         try {
-            return userRepository.existsByUserNameAndPassword(username, password)
+            return userDao.existsByUserNameAndPassword(username, password)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.existsUserByUserNameAndPassword", ex)
@@ -43,7 +44,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun findUserByUserNameAndPassword(username: String, password: String): User?
     {
         try {
-            return userRepository.findByUserNameAndPassword(username, password)
+            return userDao.findByUserNameAndPassword(username, password)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findUserByUserNameAndPassword", ex)
@@ -53,7 +54,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun saveUser(user: User)
     {
         try {
-            userRepository.save(user)
+            userDao.save(user)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.saveUser", ex)
@@ -63,7 +64,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun findLoginInfoByUserName(username: String): List<LoginInfo>
     {
         try {
-            return loginInfoRepository.findByUserName(username)
+            return loginInfoDao.findByUserName(username)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findLoginInfoByUserName", ex)
@@ -73,7 +74,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun findSuccessLoginInfoByUserName(username: String): List<LoginInfo>
     {
         try {
-            return loginInfoRepository.findSuccessByUserName(username)
+            return loginInfoDao.findSuccessByUserName(username)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findSuccessLoginInfoByUserName", ex)
@@ -83,17 +84,17 @@ class PaymentApplicationHelper @Inject constructor() {
     fun findFailLoginInfoByUserName(userName: String): List<LoginInfo>
     {
         try {
-            return loginInfoRepository.findFailsByUserName(userName)
+            return loginInfoDao.findFailsByUserName(userName)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findFailLoginInfoByUserName", ex)
         }
     }
 
-    fun saveLoginInfo(loginInfo: LoginInfo) : LoginInfo
+    fun saveLoginInfo(loginInfo: LoginInfo)
     {
         try {
-            return loginInfoRepository.save(loginInfo)
+            loginInfoDao.save(loginInfo)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.saveLoginInfo", ex)

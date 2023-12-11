@@ -1,8 +1,9 @@
 package org.csystem.android.app.payment.repository
 
+import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.csystem.android.app.payment.repository.LoginInfoRepository.*
+import org.csystem.android.app.payment.repository.database.PaymentApplicationDatabase
 import org.csystem.android.app.payment.repository.entity.LoginInfo
 import org.csystem.android.app.payment.repository.global.LOGIN_INFO_FILE
 import org.junit.Assert.*
@@ -16,8 +17,9 @@ import java.io.File
 @Ignore("tested before")
 class LoginInfoRepositoryInstrumentedTest {
     companion object {
-        val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
-        val loginInfoRepository = LoginInfoRepository(appContext)
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        var database = Room.databaseBuilder(appContext, PaymentApplicationDatabase::class.java, "paymentdb-test.sqlite3").build()
+        val loginInfoDao = database.createLoginInfo()
     }
 
     @Before
@@ -31,32 +33,32 @@ class LoginInfoRepositoryInstrumentedTest {
         val loginInfo2 = LoginInfo(2, "umut123", success = true)
         val loginInfo4 = LoginInfo(3, "umut123", success = false)
 
-        loginInfoRepository.save(loginInfo1)
-        loginInfoRepository.save(loginInfo2)
-        loginInfoRepository.save(loginInfo4)
+        loginInfoDao.save(loginInfo1)
+        loginInfoDao.save(loginInfo2)
+        loginInfoDao.save(loginInfo4)
     }
 
     @Test
     fun findByUserNameAndSuccessLoginCountTest()
     {
-        assertEquals(1, loginInfoRepository.findSuccessByUserName("alican1234").size)
+        assertEquals(1, loginInfoDao.findSuccessByUserName("alican1234").size)
     }
 
     @Test
     fun findByUserNameAndFailLoginCountTest()
     {
-        assertEquals(1, loginInfoRepository.findFailsByUserName("umut123").size)
+        assertEquals(1, loginInfoDao.findFailsByUserName("umut123").size)
     }
 
     @Test
     fun findByUserName_UsernameTrueTest()
     {
-        assertEquals(2, loginInfoRepository.findByUserName("umut123").size)
+        assertEquals(2, loginInfoDao.findByUserName("umut123").size)
     }
 
     @Test
     fun findByUserName_UserNameFalseTest()
     {
-        assertEquals(0, loginInfoRepository.findByUserName("baturhan").size)
+        assertEquals(0, loginInfoDao.findByUserName("baturhan").size)
     }
 }

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import org.csystem.android.app.payment.data.service.dto.LoginInfoDTO
+import org.csystem.android.app.payment.data.service.dto.LoginInfoSaveDTO
 import org.csystem.android.app.payment.databinding.ActivityOperationsBinding
 import org.csystem.android.app.payment.global.getLoginInfo
 import org.csystem.android.app.payment.global.key.LOGIN_INFO
@@ -13,7 +13,7 @@ import org.csystem.android.app.payment.viewmodel.OperationsActivityListenerViewM
 class OperationsActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityOperationsBinding
 
-    private lateinit var mLoginInfo: LoginInfoDTO
+    private lateinit var mLoginInfo: LoginInfoSaveDTO
 
     private fun initLoginInfo()
     {

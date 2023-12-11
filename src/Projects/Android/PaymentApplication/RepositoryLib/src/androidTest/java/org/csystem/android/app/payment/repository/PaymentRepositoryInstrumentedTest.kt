@@ -1,7 +1,9 @@
 package org.csystem.android.app.payment.repository
 
+import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import org.csystem.android.app.payment.repository.database.PaymentApplicationDatabase
 import org.csystem.android.app.payment.repository.entity.Payment
 import org.csystem.android.app.payment.repository.entity.User
 import org.csystem.android.app.payment.repository.global.PAYMENT_FILE
@@ -19,8 +21,9 @@ import java.time.Month
 class PaymentRepositoryInstrumentedTest {
     companion object {
         val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
-        val userRepository = UserDao(appContext)
-        val paymentRepository = PaymentDao(appContext)
+        var database = Room.databaseBuilder(LoginInfoRepositoryInstrumentedTest.appContext, PaymentApplicationDatabase::class.java, "paymentdb-test.sqlite3").build()
+        val userDao = database.createUserDao()
+        val paymentDao = database.createPaymentDao()
     }
 
     private fun setUpUsers()
@@ -28,8 +31,8 @@ class PaymentRepositoryInstrumentedTest {
         val user1 = User("alican", "alican1234", "Alican", "Keçici", LocalDate.of(1989, Month.JANUARY, 5), LocalDate.now())
         val user2 = User("umut", "umut123", "Umut", "Utku", "Kırmızıgül", LocalDate.of(1995, Month.OCTOBER, 12), LocalDate.now())
 
-        userRepository.save(user1)
-        userRepository.save(user2)
+        userDao.save(user1)
+        userDao.save(user2)
     }
 
     private fun setUpPayments()
@@ -40,11 +43,11 @@ class PaymentRepositoryInstrumentedTest {
         val payment4 = Payment(4L,"umut", 240.4, 114.5, "Test4")
         val payment5 = Payment(5L,"umut", 340.4, 214.5, "Test5")
 
-        paymentRepository.save(payment1)
-        paymentRepository.save(payment2)
-        paymentRepository.save(payment3)
-        paymentRepository.save(payment4)
-        paymentRepository.save(payment5)
+        paymentDao.save(payment1)
+        paymentDao.save(payment2)
+        paymentDao.save(payment3)
+        paymentDao.save(payment4)
+        paymentDao.save(payment5)
     }
 
     private fun deleteFiles()
@@ -64,6 +67,6 @@ class PaymentRepositoryInstrumentedTest {
     @Test
     fun save_and_findByUserNameSizeTest()
     {
-        assertEquals(2, paymentRepository.findByUserName("alican").size)
+        assertEquals(2, paymentDao.findByUserName("alican").size)
     }
 }
