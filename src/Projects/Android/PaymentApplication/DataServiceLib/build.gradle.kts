@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
 }
 
 android {
@@ -37,8 +36,6 @@ android {
 }
 
 dependencies {
-    val roomVersion = "2.6.1"
-
     implementation(project(path = ":RepositoryLib"))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -56,9 +53,6 @@ dependencies {
 
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
     kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
-    implementation("androidx.room:room-runtime:$roomVersion")
-    //noinspection GradleDependency
-    ksp("androidx.room:room-compiler:$roomVersion")
 }
 
 kapt {

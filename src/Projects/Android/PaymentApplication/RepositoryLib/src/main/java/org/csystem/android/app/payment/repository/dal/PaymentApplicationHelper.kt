@@ -19,7 +19,7 @@ class PaymentApplicationHelper @Inject constructor() {
     lateinit var loginInfoDao: ILoginInfoDao
 
     @Inject
-    lateinit var paymentRepository: IPaymentDao
+    lateinit var paymentDao: IPaymentDao
 
     fun existsUserByUserName(username: String?): Boolean
     {
@@ -104,7 +104,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun findPaymentsByUserName(userName: String): List<UserToPayments>
     {
         try {
-            return paymentRepository.findByUserName(userName)
+            return paymentDao.findByUserName(userName)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.findPaymentsByUserName", ex)
@@ -114,7 +114,7 @@ class PaymentApplicationHelper @Inject constructor() {
     fun savePayment(payment: Payment)
     {
         try {
-            paymentRepository.save(payment)
+            paymentDao.save(payment)
         }
         catch (ex: Throwable) {
             throw RepositoryException("PaymentApplicationHelper.savePayment", ex)
