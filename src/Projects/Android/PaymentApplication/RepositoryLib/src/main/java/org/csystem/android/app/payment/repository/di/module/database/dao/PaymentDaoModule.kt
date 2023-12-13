@@ -1,3 +1,5 @@
+package org.csystem.android.app.payment.repository.di.module.database.dao
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

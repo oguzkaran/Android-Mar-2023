@@ -51,13 +51,12 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
 
     implementation("com.karandev:com-karandev-util-data:20.0.0")
 
 
     implementation("androidx.room:room-runtime:$roomVersion")
-    //noinspection GradleDependency
     ksp("androidx.room:room-compiler:$roomVersion")
 }
 
