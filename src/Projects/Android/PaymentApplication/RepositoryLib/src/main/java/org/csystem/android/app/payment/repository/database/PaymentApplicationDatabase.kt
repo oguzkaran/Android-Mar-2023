@@ -17,5 +17,5 @@ import org.csystem.android.app.payment.repository.entity.User
 abstract class PaymentApplicationDatabase : RoomDatabase() {
     abstract fun createUserDao() : IUserDao
     abstract fun createPaymentDao() : IPaymentDao
-    abstract fun createLoginInfo() : ILoginInfoDao
+    abstract fun createLoginInfoDao() : ILoginInfoDao
 }

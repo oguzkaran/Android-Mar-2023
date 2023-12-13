@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetDropDown">
+    <value>
+      <entry key="LoginInfoRepositoryInstrumentedTest">
+        <State />
+      </entry>
+      <entry key="PaymentRepositoryFindByUserNameSizeTest">
+        <State />
+      </entry>
+      <entry key="UserRepositoryInstrumentedTest">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
+      <entry key="findByUserNameAndSuccessLoginCountTest()">
+        <State />
+      </entry>
+      <entry key="save_and_findByUserNameAndPasswordUsernameFailTest()">
+        <State />
+      </entry>
+    </value>
+  </component>
+</project>

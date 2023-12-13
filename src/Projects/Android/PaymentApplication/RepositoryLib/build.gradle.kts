@@ -53,11 +53,10 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
     ksp("com.google.dagger:hilt-compiler:$hiltVersion")
 
-    implementation("com.karandev:com-karandev-util-data:20.0.0")
-
-
     implementation("androidx.room:room-runtime:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
+
+    implementation("com.karandev:com-karandev-util-data:20.0.0")
 }
 
 kapt {

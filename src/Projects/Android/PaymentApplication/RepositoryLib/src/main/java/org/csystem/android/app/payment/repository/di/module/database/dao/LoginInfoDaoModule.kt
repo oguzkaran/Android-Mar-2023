@@ -16,6 +16,6 @@ object LoginInfoDaoModule {
     @Singleton
     fun createLoginInfoDao(@PaymentApplicationDatabaseInterceptor paymentApplicationDatabase: PaymentApplicationDatabase) : ILoginInfoDao
     {
-        return paymentApplicationDatabase.createLoginInfo()
+        return paymentApplicationDatabase.createLoginInfoDao()
     }
 }

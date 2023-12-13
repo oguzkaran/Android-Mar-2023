@@ -6,8 +6,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import org.csystem.android.app.payment.repository.database.PaymentApplicationDatabase
 import org.csystem.android.app.payment.repository.entity.Payment
 import org.csystem.android.app.payment.repository.entity.User
-import org.csystem.android.app.payment.repository.global.PAYMENT_FILE
-import org.csystem.android.app.payment.repository.global.USER_FILE
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -17,13 +15,12 @@ import java.time.LocalDate
 import java.time.Month
 
 @RunWith(AndroidJUnit4::class)
-//@Ignore("tested before")
-class PaymentRepositoryInstrumentedTest {
+class PaymentRepositoryFindByUserNameSizeTest {
     companion object {
-        val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
-        var database = Room.databaseBuilder(LoginInfoRepositoryInstrumentedTest.appContext, PaymentApplicationDatabase::class.java, "paymentdb-test.sqlite3").build()
-        val userDao = database.createUserDao()
-        val paymentDao = database.createPaymentDao()
+        private val appContext  = InstrumentationRegistry.getInstrumentation().targetContext
+        private var database = Room.databaseBuilder(appContext, PaymentApplicationDatabase::class.java, "paymentdb-test.sqlite3").build()
+        private val userDao = database.createUserDao()
+        private val paymentDao = database.createPaymentDao()
     }
 
     private fun setUpUsers()
@@ -52,8 +49,11 @@ class PaymentRepositoryInstrumentedTest {
 
     private fun deleteFiles()
     {
-        File(appContext.filesDir, USER_FILE).delete()
-        File(appContext.filesDir, PAYMENT_FILE).delete()
+        val files = File(appContext.dataDir, "databases").listFiles()
+
+        if (files != null)
+            for (file in files)
+                file.delete()
     }
 
     @Before
@@ -65,7 +65,7 @@ class PaymentRepositoryInstrumentedTest {
     }
 
     @Test
-    fun save_and_findByUserNameSizeTest()
+    fun test()
     {
         assertEquals(2, paymentDao.findByUserName("alican").size)
     }

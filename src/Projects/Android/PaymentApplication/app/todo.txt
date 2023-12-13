@@ -17,6 +17,8 @@ AlertDialog'dan onay alınması gerekir
 kullanılacaktır
 
 
+- Kullanılan veritabanına ilişkin ddl komutları şunlardır:
+
 CREATE TABLE users (
     username      TEXT   PRIMARY KEY,
     password      TEXT   NOT NULL,
@@ -26,7 +28,6 @@ CREATE TABLE users (
     birth_date    BIGINT NOT NULL,
     register_date BIGINT DEFAULT(CURRENT_TIMESTAMP) NOT NULL
 );
-
 
 CREATE TABLE payments (
     payment_id  INTEGER PRIMARY KEY AUTOINCREMENT,

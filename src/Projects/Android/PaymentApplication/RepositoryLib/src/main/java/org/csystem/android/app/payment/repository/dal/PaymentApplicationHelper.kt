@@ -101,7 +101,8 @@ class PaymentApplicationHelper @Inject constructor() {
         }
     }
 
-    fun findPaymentsByUserName(userName: String): List<UserToPayments>
+    /*
+    fun findPaymentsByUserName(userName: String): List<User>
     {
         try {
             return paymentDao.findByUserName(userName)
@@ -110,6 +111,8 @@ class PaymentApplicationHelper @Inject constructor() {
             throw RepositoryException("PaymentApplicationHelper.findPaymentsByUserName", ex)
         }
     }
+
+     */
 
     fun savePayment(payment: Payment)
     {
