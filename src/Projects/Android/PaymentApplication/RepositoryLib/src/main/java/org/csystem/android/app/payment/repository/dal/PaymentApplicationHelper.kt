@@ -8,7 +8,7 @@ import org.csystem.android.app.payment.repository.dao.IUserDao
 import org.csystem.android.app.payment.repository.entity.LoginInfo
 import org.csystem.android.app.payment.repository.entity.Payment
 import org.csystem.android.app.payment.repository.entity.User
-import org.csystem.android.app.payment.repository.entity.join.UserToPayments
+
 import javax.inject.Inject
 
 class PaymentApplicationHelper @Inject constructor() {

@@ -6,7 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.csystem.android.app.payment.repository.dao.IUserDao
 import org.csystem.android.app.payment.repository.database.PaymentApplicationDatabase
-import org.csystem.android.app.payment.repository.di.module.database.PaymentApplicationDatabaseInterceptor
 import javax.inject.Singleton
 
 @Module
@@ -14,7 +13,7 @@ import javax.inject.Singleton
 object UserDaoModule {
     @Provides
     @Singleton
-    fun createUserDao(@PaymentApplicationDatabaseInterceptor paymentApplicationDatabase: PaymentApplicationDatabase) : IUserDao
+    fun createUserDao(paymentApplicationDatabase: PaymentApplicationDatabase) : IUserDao
     {
         return paymentApplicationDatabase.createUserDao()
     }

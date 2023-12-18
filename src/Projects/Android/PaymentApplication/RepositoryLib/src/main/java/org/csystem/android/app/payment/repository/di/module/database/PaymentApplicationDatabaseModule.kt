@@ -15,7 +15,6 @@ import javax.inject.Singleton
 object PaymentApplicationDatabaseModule {
     @Singleton
     @Provides
-    @PaymentApplicationDatabaseInterceptor
     fun createPaymentApplicationDatabase(@ApplicationContext context: Context) : PaymentApplicationDatabase
     {
         return Room.databaseBuilder(context, PaymentApplicationDatabase::class.java, "paymentdb.sqlite3").build()

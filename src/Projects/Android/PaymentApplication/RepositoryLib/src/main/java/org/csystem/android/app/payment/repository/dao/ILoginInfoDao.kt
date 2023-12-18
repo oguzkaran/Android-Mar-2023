@@ -23,7 +23,7 @@ interface ILoginInfoDao {
         li.success, 
         li.login_date_time 
         FROM users u INNER JOIN login_info li on u.username = li.username 
-        WHERE u.username = :username AND li.success = 1
+        WHERE u.username = :username AND li.success = 1 order by li.login_date_time desc
     """)
     fun findSuccessByUserName(username: String) : List<LoginInfo>
 
@@ -33,7 +33,7 @@ interface ILoginInfoDao {
         li.success, 
         li.login_date_time 
         FROM users u INNER JOIN login_info li on u.username = li.username 
-        WHERE u.username = :username AND li.success = 0
+        WHERE u.username = :username AND li.success = 0 order by li.login_date_time desc
     """)
     fun findFailsByUserName(username: String) : List<LoginInfo>
 
