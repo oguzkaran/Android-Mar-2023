@@ -57,6 +57,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
 
     implementation("com.karandev:com-karandev-util-data:20.0.0")
+    implementation("org.csystem:org-csystem-util-datetime:20.0.0")
 }
 
 kapt {
