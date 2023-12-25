@@ -1,19 +1,22 @@
 package org.csystem.android.app.payment;
 
+import static org.csystem.android.app.payment.global.key.BundleKeyKt.LOGIN_INFO;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.karandev.util.data.service.DataServiceException;
 
 import org.csystem.android.app.payment.data.service.PaymentApplicationDataService;
 import org.csystem.android.app.payment.data.service.dto.LoginInfoSaveDTO;
 import org.csystem.android.app.payment.databinding.ActivityLoginBinding;
-import static org.csystem.android.app.payment.global.key.BundleKeyKt.LOGIN_INFO;
-
 import org.csystem.android.app.payment.viewmodel.LoginActivityListenerViewModel;
 
 import java.util.concurrent.ScheduledExecutorService;
@@ -23,7 +26,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements OnMapReadyCallback {
     private ActivityLoginBinding m_binding;
 
     @Inject
@@ -66,6 +69,12 @@ public class LoginActivity extends AppCompatActivity {
     private void init()
     {
         initBinding();
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap)
+    {
+
     }
 
     @Override
