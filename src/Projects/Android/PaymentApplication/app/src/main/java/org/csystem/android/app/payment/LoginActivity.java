@@ -6,12 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.karandev.util.data.service.DataServiceException;
 
 import org.csystem.android.app.payment.data.service.PaymentApplicationDataService;
@@ -26,7 +23,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class LoginActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding m_binding;
 
     @Inject
@@ -71,11 +68,6 @@ public class LoginActivity extends AppCompatActivity implements OnMapReadyCallba
         initBinding();
     }
 
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap)
-    {
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
