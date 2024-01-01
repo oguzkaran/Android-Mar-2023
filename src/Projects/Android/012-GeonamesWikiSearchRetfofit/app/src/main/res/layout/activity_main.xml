@@ -8,9 +8,11 @@
         <import type="org.csystem.android.app.geonames.wikisearch.api.WikiInfo"/>
         <import type="android.widget.ArrayAdapter"/>
         <variable name="viewModel" type="MainActivityViewModel" />
+        <variable name="lastOpenBefore" type="String" />
         <variable name="q" type="String" />
         <variable name="maxRows" type="int" />
         <variable name="wikiInfoAdapter" type="ArrayAdapter&lt;WikiInfo&gt;" />
+
     </data>
 
     <LinearLayout
@@ -18,6 +20,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{lastOpenBefore}"
+            />
 
         <EditText
             android:layout_width="match_parent"
