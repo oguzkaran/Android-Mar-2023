@@ -3,11 +3,11 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <import type="org.csystem.android.app.geonames.wikisearch.viewmodel.MainActivityViewModel"/>
-        <import type="org.csystem.android.app.geonames.wikisearch.viewmodel.converter.MaxRowStringConverter"/>
-        <import type="org.csystem.android.app.geonames.wikisearch.api.WikiInfo"/>
+        <import type="org.csystem.android.app.geonames.search.viewmodel.MainActivityViewModel"/>
+        <import type="org.csystem.android.app.geonames.search.viewmodel.converter.MaxRowStringConverter"/>
+        <import type="org.csystem.android.app.geonames.search.api.WikiInfo"/>
         <import type="android.widget.ArrayAdapter"/>
-        <variable name="viewModel" type="MainActivityViewModel" />
+        <variable name="viewModel" type="org.csystem.android.app.geonames.search.viewmodel.MainActivityViewModel" />
         <variable name="lastOpenBefore" type="String" />
         <variable name="q" type="String" />
         <variable name="maxRows" type="int" />
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context="org.csystem.android.app.geonames.search.MainActivity">
 
         <TextView
             android:layout_width="match_parent"

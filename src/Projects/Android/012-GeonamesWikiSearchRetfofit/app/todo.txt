@@ -1,17 +1,52 @@
-Yapılacaklar: 01.01.2024
-- Web servis erişimi ayrı bir modüle alınacaktır.
+Yapılacaklar:
 
-- Listview'un bir elemanına click yapıldığında ayrı bir activity açılacak ve bilgiler orada
+- Uygulama bir splash screen ile açılacaktır.
+
+- MainActivity içerisinde şu button'lar olacaktır
+    - Settings
+    - WikiSearch
+    - PostalCode Search
+    - Close
+
+   Settings buttonun'a basıldığında bir activity açılacak ve geonames için username bilgisi country
+   bilgisi girilecektir ve kaydedilecektir. Kaydetme işlemini preferences kullanarak yapınız. Eğer
+   settings için konfigürasyon yapılmamışsa WikiSerach ve Postal Code Search buttonları disable
+   durumda olacaktır. Country kodları bir spinner widget ile verilecektir. Bir kaç ülke kodu ile
+   test edebilirsiniz. Ülkeler ve kod bilgilerini dilerseniz sqlite içerisinde tutabilirsiniz
+
+   WikiSearch button'u ile Geonames wikisearch servisi consume edilecek ve ilgili bilgiler o servisten
+   alonacaktır.
+
+   PostalCodeSearch button'u ile Geonames postalCodeSearch servisi consume edilecek ve ilgili bilgiler
+   o servisten alonacaktır.
+
+
+- Her bir web servis için işlemler ayrı modüllerde olacaktır. Base url gbi ortak bazı işlemler için
+ayrı bir ortak modül kullanılabilir.
+
+- İlgili Listview'un bir elemanına click yapıldığında ayrı bir activity açılacak ve bilgiler orada
 gösterilecektir.
 
-- MainActivity içerisinde bir save buttonu olacak ve s<ave button'una basıldığında sorgulanan bilgiler
+- İlgili activity içerisinde bir save buttonu olacak ve save button'una basıldığında sorgulanan bilgiler
 belirlenen bir sqlite veritabanına yazılacaktır. Yazılma işlemi bir AlertDialog ile onaylandığında
-yapılacaktır.
+yapılacaktır. Her iki servis için de aynı veritabanı kullanılacaktır.
 
 - Veritabanı dosyalarının kapladığı alan save işlemi yapıldığında 1GB'ı geçmiş olacaksa save işlemi
 için uyarı verilecek ve save işlemi yapılmayacaktır.
 
-- GET işlemi sırasında eğer sorgulanan bilgi daha önce sorgulanmış ve kaydedilmişse web servis yerine
-local veritabanından bilgiler elde edilecektir.
+- GET işlemi sırasında bilgiler, eğer sorgulanan bilgi daha önce sorgulanmış ve kaydedilmişse web
+servis yerine local veritabanından elde edilecektir. Sorgulama işlemi lokalden yaoılmışşsa yapılma
+zamanları da ayrı ayrı tutulacaktır.
+
+- MaxRow sayısı localde tutulan maxRow'dan büyükse veri servisten alınacaktır. Save işleminde veri
+daha önce kaydedilmişse, bir AlerDialof ile güncelleme yapılıp yapılmadığı sorulacak ve ona göre
+işlemler yapılacaktır. Güncelleme yapılacaksa eski veriler silinecektir. Şüphesiz Q'nun  ve posta kodu
+bilgisinin tutulduğu tablodan veri silinmesine gerek yoktur. Yapılma zamanlarına ilişkin veriler de
+silinmeyecektir.
 
 - Local veritabanında sorgulana tarih zaman bilgileri de tutulacaktır.
+
+- Posta kod için REST servisin genel biçimi şu şekildedir:
+    http://api.geonames.org/postalCodeSearchJSON?postalcode=67000&maxRows=10&username=csystem&country=tr
+
+- Tasarımlar minimal olarak belirtilmiştir. Bunlar dışında da görsel eklentiler yapılabilir

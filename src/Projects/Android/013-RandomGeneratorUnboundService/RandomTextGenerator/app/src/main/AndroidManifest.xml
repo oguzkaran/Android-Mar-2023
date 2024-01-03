@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
-        android:name="org.csystem.android.app.geonames.search.application.GeonamesWikiSearchApplication"
+        android:name=".application.RandomTextGeneratorApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,11 +11,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme._012GeonamesWikiSearchRetfofit"
+        android:theme="@style/Theme.RandomTextGenerator"
         tools:targetApi="31">
+
+        <service
+            android:name=".RandomGeneratorService"
+            android:enabled="true"
+            android:exported="true"/>
+
         <activity
-            android:name="org.csystem.android.app.geonames.search.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
