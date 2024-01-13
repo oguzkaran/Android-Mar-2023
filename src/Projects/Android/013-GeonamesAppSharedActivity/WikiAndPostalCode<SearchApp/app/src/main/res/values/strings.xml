@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">GeonamesApp</string>
+    <string name="button_get_text">GET</string>
+    <string name="edittext_q_hint">Input text</string>
+    <string name="edittext_max_rows_hint">Input Maximum Rows</string>
+</resources>
