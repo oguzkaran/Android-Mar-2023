@@ -1,4 +1,4 @@
-package org.csystem.android.app.service.geonames.search.api.di.module.excutor
+package org.csystem.android.app.service.geonames.search.api.di.module.executor
 
 import dagger.Module
 import dagger.Provides
