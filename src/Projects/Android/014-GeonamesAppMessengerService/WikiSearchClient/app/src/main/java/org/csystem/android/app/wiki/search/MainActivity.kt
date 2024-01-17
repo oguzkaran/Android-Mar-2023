@@ -18,6 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.wiki.search.databinding.ActivityMainBinding
 import org.csystem.android.app.wiki.search.viewmodel.MainActivityViewModel
 import org.csystem.android.app.wiki.search.viewmodel.WikiInfo
+import org.csystem.android.library.service.search.wiki.WikiSearchInfo
+import org.csystem.android.library.service.search.wiki.common.Common
 import java.io.BufferedWriter
 import java.io.IOException
 import java.time.LocalDateTime
@@ -28,10 +30,6 @@ const val SHARED_PREF_FILE_NAME = "geonames-input"
 const val LAST_OPEN_BEFORE = "LAST_OPEN_BEFORE"
 const val Q = "Q"
 const val MAX_ROWS = "MAX_ROWS"
-
-const val WIKI_SEARCH_SERVICE_ACTION_NAME = "org.csystem.app.service.geonames.search.WIKI"
-const val WIKI_SEARCH_SERVICE_PACKAGE_NAME = "org.csystem.android.app.service.geonames.search"
-const val WHAT_WIKI_SEARCH = 0
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -62,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindWikiSearchService()
     {
-        val intent = Intent(WIKI_SEARCH_SERVICE_ACTION_NAME).setPackage(WIKI_SEARCH_SERVICE_PACKAGE_NAME)
+        val intent = Intent(Common.WIKI_SEARCH_SERVICE_ACTION_NAME).setPackage(Common.WIKI_SEARCH_SERVICE_PACKAGE_NAME)
 
         if (!bindService(intent, mWikiServiceConnection, Context.BIND_AUTO_CREATE))
             throw RemoteException("Bind problem!...")
@@ -81,7 +79,10 @@ class MainActivity : AppCompatActivity() {
     private fun sendData()
     {
         try {
-            val message = Message.obtain(null, WHAT_WIKI_SEARCH, mBinding.maxRows, 0)
+            val message = Message.obtain(null, Common.WHAT_WIKI_SEARCH)
+
+            message.data.putInt("MAX", mBinding.maxRows)
+            message.data.putString("TEXT", mBinding.q)
 
             //message.replyTo = mReplyMessenger
             mRequestMessenger?.send(message)

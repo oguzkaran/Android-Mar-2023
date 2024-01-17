@@ -11,6 +11,8 @@ import android.widget.Toast
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.service.geonames.search.api.IGeonamesWikiSearchService
 import org.csystem.android.app.service.geonames.search.api.WikiSearch
+import org.csystem.android.library.service.search.wiki.WikiSearchInfo
+import org.csystem.android.library.service.search.wiki.common.Common
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +21,6 @@ import java.time.format.DateTimeFormatter
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-const val WHAT_WIKI_SEARCH = 0
 
 @AndroidEntryPoint
 class WikiSearchMessengerService : Service() {
@@ -42,7 +43,7 @@ class WikiSearchMessengerService : Service() {
         {
             val service = mWeakReference.get()!!
             val wikiService = service.wikiSearchService
-            val call = wikiService.findByQ("riva", maxRows, "csystem")
+            val call = wikiService.findByQ(text, maxRows, "csystem")
 
             call.enqueue(object: retrofit2.Callback<WikiSearch> {
                 override fun onResponse(call: Call<WikiSearch>, response: Response<WikiSearch>)
@@ -66,7 +67,7 @@ class WikiSearchMessengerService : Service() {
         override fun handleMessage(msg: Message)
         {
             when (msg.what) {
-                WHAT_WIKI_SEARCH -> wikiSearchCallback("", msg.arg1)
+                Common.WHAT_WIKI_SEARCH -> wikiSearchCallback(msg.data.getString("TEXT")!!, msg.data.getInt("MAX"))
             }
             super.handleMessage(msg)
         }
