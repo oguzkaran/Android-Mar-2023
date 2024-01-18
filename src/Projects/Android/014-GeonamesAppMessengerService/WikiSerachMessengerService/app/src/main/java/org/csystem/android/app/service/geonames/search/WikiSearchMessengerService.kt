@@ -11,10 +11,8 @@ import android.widget.Toast
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.service.geonames.search.api.IGeonamesWikiSearchService
 import org.csystem.android.app.service.geonames.search.api.WikiSearch
-import org.csystem.android.library.service.search.wiki.WikiSearchInfo
 import org.csystem.android.library.service.search.wiki.common.Common
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import java.lang.ref.WeakReference
 import java.time.format.DateTimeFormatter
@@ -67,7 +65,7 @@ class WikiSearchMessengerService : Service() {
         override fun handleMessage(msg: Message)
         {
             when (msg.what) {
-                Common.WHAT_WIKI_SEARCH -> wikiSearchCallback(msg.data.getString("TEXT")!!, msg.data.getInt("MAX"))
+                Common.WHAT_WIKI_SEARCH -> wikiSearchCallback(msg.data.getString(Common.BUNDLE_KEY_TEXT)!!, msg.data.getInt(Common.BUNDLE_KEY_MAX_ROWS))
             }
             super.handleMessage(msg)
         }

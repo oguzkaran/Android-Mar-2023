@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.wiki.search.databinding.ActivityMainBinding
 import org.csystem.android.app.wiki.search.viewmodel.MainActivityViewModel
 import org.csystem.android.app.wiki.search.viewmodel.WikiInfo
-import org.csystem.android.library.service.search.wiki.WikiSearchInfo
 import org.csystem.android.library.service.search.wiki.common.Common
 import java.io.BufferedWriter
 import java.io.IOException
@@ -81,8 +80,8 @@ class MainActivity : AppCompatActivity() {
         try {
             val message = Message.obtain(null, Common.WHAT_WIKI_SEARCH)
 
-            message.data.putInt("MAX", mBinding.maxRows)
-            message.data.putString("TEXT", mBinding.q)
+            message.data.putString(Common.BUNDLE_KEY_TEXT, mBinding.q)
+            message.data.putInt(Common.BUNDLE_KEY_MAX_ROWS, mBinding.maxRows)
 
             //message.replyTo = mReplyMessenger
             mRequestMessenger?.send(message)
@@ -194,7 +193,6 @@ class MainActivity : AppCompatActivity() {
         editorPrefs.apply()
         super.onDestroy()
     }
-
 
     fun searchButtonClicked()
     {
