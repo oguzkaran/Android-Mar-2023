@@ -202,7 +202,7 @@ class MainActivity : AppCompatActivity() {
         }
         catch (ex: Throwable) {
             Log.d("search-ex", ex.message ?: "General roblem occurred!!..")
-            Toast.makeText(this, "Problem occurred. Please try again later!...", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.problem_try_again_message, Toast.LENGTH_LONG).show()
         }
     }
 }

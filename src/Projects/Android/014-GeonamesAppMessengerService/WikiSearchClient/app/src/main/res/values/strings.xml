@@ -3,4 +3,5 @@
     <string name="button_search_text">SEARCH</string>
     <string name="edittext_q_hint">Input text</string>
     <string name="edittext_max_rows_hint">Input Maximum Rows</string>
+    <string name="problem_try_again_message">Problem occurred. Please try again later!</string>
 </resources>
