@@ -10,6 +10,7 @@ import android.os.Messenger
 import android.widget.Toast
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.service.geonames.search.api.IGeonamesWikiSearchService
+import org.csystem.android.app.service.geonames.search.api.WikiInfo
 import org.csystem.android.app.service.geonames.search.api.WikiSearch
 import org.csystem.android.library.service.search.wiki.common.Common
 import retrofit2.Call
@@ -37,8 +38,18 @@ class WikiSearchMessengerService : Service() {
     private class WikiSearchHandler(service: WikiSearchMessengerService) : Handler(Looper.myLooper()!!) {
         private val mWeakReference = WeakReference(service)
 
-        private fun wikiSearchCallback(text: String, maxRows: Int)
+        private fun replyCallback(wikiInfo: WikiInfo, replyTo: Messenger)
         {
+            val replyMessage = Message.obtain(null, Common.WHAT_WIKI_REPLY)
+
+            replyMessage.data.putString(Common.BUNDLE_KEY_REPLY, wikiInfo.summary)
+            replyTo.send(replyMessage)
+        }
+
+        private fun wikiSearchCallback(msg: Message, replyTo: Messenger)
+        {
+            val text = msg.data.getString(Common.BUNDLE_KEY_TEXT)!!
+            val maxRows = msg.data.getInt(Common.BUNDLE_KEY_MAX_ROWS)
             val service = mWeakReference.get()!!
             val wikiService = service.wikiSearchService
             val call = wikiService.findByQ(text, maxRows, "csystem")
@@ -48,9 +59,11 @@ class WikiSearchMessengerService : Service() {
                 {
                     val wikiSearch = response.body()
 
-                    if (wikiSearch?.wikiInfo != null) {
-                        wikiSearch.wikiInfo.forEach { Toast.makeText(service, it.summary, Toast.LENGTH_SHORT).show() }
-                    }
+                    if (wikiSearch?.wikiInfo != null)
+                        if (wikiSearch.wikiInfo.isNotEmpty())
+                            wikiSearch.wikiInfo.forEach{replyCallback(it, replyTo)}
+                        else
+                            Toast.makeText(service, "Not found", Toast.LENGTH_LONG).show()
                     else
                         Toast.makeText(service, "Error in geonames service", Toast.LENGTH_LONG).show()
                 }
@@ -64,8 +77,10 @@ class WikiSearchMessengerService : Service() {
 
         override fun handleMessage(msg: Message)
         {
+            val replyTo = msg.replyTo
+
             when (msg.what) {
-                Common.WHAT_WIKI_SEARCH -> wikiSearchCallback(msg.data.getString(Common.BUNDLE_KEY_TEXT)!!, msg.data.getInt(Common.BUNDLE_KEY_MAX_ROWS))
+                Common.WHAT_WIKI_SEARCH -> wikiSearchCallback(msg, replyTo)
             }
             super.handleMessage(msg)
         }

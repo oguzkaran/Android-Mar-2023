@@ -1,0 +1,15 @@
+- Uygulama içerisinde bir radio group oluşturunuz. Bu grupta aşağıdaki radio button'lar
+bulunanacaktır:
+    - Summary
+    - Lattitude/Longitude
+    - Title
+Bu radio group'a ilişkin seçili değer de servise gönderilecek ve servis isteğe göre uygun veriyi
+gönderecektir.
+
+- Elde edlen bilgiler bir listview'a eklenecektir. Enlam boylam bilgisi ikisini de gösterecek bir yazı
+biçiminde veya bir sınıf biçiminde eklenebilir.
+
+- Her istekte litview temizlenecektir.
+
+- Service ilgili bilgiler doğru gelmezse veya replyTo yapılacak şekilde client organize olmazsa servis
+herhangi bir şey yapmayacaktır. Kısacası servisin crash olabileceği durumlar kontrol edilecektir.

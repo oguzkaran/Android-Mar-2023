@@ -6,7 +6,9 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.DeadObjectException
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.os.Message
 import android.os.Messenger
 import android.os.RemoteException
@@ -21,6 +23,7 @@ import org.csystem.android.app.wiki.search.viewmodel.WikiInfo
 import org.csystem.android.library.service.search.wiki.common.Common
 import java.io.BufferedWriter
 import java.io.IOException
+import java.lang.ref.WeakReference
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private var mRequestMessenger: Messenger? = null
     private var mReplyMessenger: Messenger? = null
     private var mBound = false
+    private lateinit var mReplyHandler: Handler
 
     private val mWikiServiceConnection = object: ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?)
@@ -57,8 +61,24 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var dateTimeFormatter : DateTimeFormatter
 
+    private class WikiSearchHandler(activity: MainActivity) : Handler(Looper.myLooper()!!) {
+        private val mWeakReference = WeakReference(activity)
+
+        override fun handleMessage(msg: Message)
+        {
+            val activity = mWeakReference.get()!!
+
+            when (msg.what) {
+                Common.WHAT_WIKI_REPLY -> Toast.makeText(activity, "Summary:${msg.data.getString(Common.BUNDLE_KEY_REPLY)}", Toast.LENGTH_LONG).show()
+                //...
+            }
+            super.handleMessage(msg)
+        }
+    }
+
     private fun bindWikiSearchService()
     {
+        mReplyMessenger = Messenger(mReplyHandler)
         val intent = Intent(Common.WIKI_SEARCH_SERVICE_ACTION_NAME).setPackage(Common.WIKI_SEARCH_SERVICE_PACKAGE_NAME)
 
         if (!bindService(intent, mWikiServiceConnection, Context.BIND_AUTO_CREATE))
@@ -83,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             message.data.putString(Common.BUNDLE_KEY_TEXT, mBinding.q)
             message.data.putInt(Common.BUNDLE_KEY_MAX_ROWS, mBinding.maxRows)
 
-            //message.replyTo = mReplyMessenger
+            message.replyTo = mReplyMessenger
             mRequestMessenger?.send(message)
         }
         catch (ex: DeadObjectException) {
@@ -129,6 +149,7 @@ class MainActivity : AppCompatActivity() {
     {
         mBinding.viewModel = MainActivityViewModel(this)
         loadData()
+        mReplyHandler = WikiSearchHandler(this)
     }
 
     private fun initBinding()
