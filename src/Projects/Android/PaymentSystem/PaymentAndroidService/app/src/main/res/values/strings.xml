@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">PaymentApplication</string>
+    <string name="button_register_text">Register</string>
+    <string name="button_login_text">Login</string>
+    <string name="button_payment_text">Payment</string>
+    <string name="button_login_information_text">Login Information</string>
+    <string name="button_success_logins_information_text">Success Logins</string>
+    <string name="button_fail_logins_information_text">Fail Logins</string>
+    <string name="button_make_payment_text">Make Payment</string>
+    <string name="button_payments_text">Payments</string>
+    <string name="button_pay_text">Pay</string>
+    <string name="button_list_payments_text">List Payments</string>
+
+    <string name="button_clear_text">Clear</string>
+    <string name="button_close_text">Close</string>
+
+    <string name="edittext_user_name_hint_text">Input username</string>
+    <string name="edittext_password_hint_text">Input password</string>
+    <string name="edittext_first_name_hint_text">Input first name</string>
+    <string name="edittext_middle_name_hint_text">Input middle name</string>
+    <string name="edittext_last_name_hint_text">Input last name</string>
+    <string name="edittext_birth_date_hint_text">Input birth date (DD/MM/YYYY -> 13/10/1977)</string>
+    <string name="edittext_description_hint_text">Input description</string>
+    <string name="edittext_unit_price_text">Input unit price</string>
+    <string name="edittext_quantity_text">Input quantity</string>
+
+    <string name="textview_status_paid_text">Paid</string>
+    <string name="textview_status_not_paid_text">Not Paid</string>
+    <string name="textview_status_amount_needed_text">Amount Needed</string>
+    <string name="textview_status_unit_price_needed_text">Unit price needed</string>
+    <string name="textview_status_unit_desc_needed_text">Description needed</string>
+
+    <string name="alertdialog_login_info_title_text">Login Information</string>
+    <string name="alertdialog_login_info_ok_button_text">OK</string>
+    <string name="alertdialog_register_title_text">Alert</string>
+    <string name="alertdialog_register_message_text">You will lose all the information. Are you sure?</string>
+    <string name="alertdialog_register_yes_button_text">Yes</string>
+    <string name="alertdialog_register_no_button_text">No</string>
+</resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="org.csystem.android.app.payment.viewmodel.RegisterActivityListenerViewModel"/>
+        <import type="org.csystem.android.app.payment.converter.DateStringConverter"/>
+        <import type="org.csystem.android.app.payment.data.service.dto.UserSaveDTO"/>
+        <variable name="viewModel" type="RegisterActivityListenerViewModel" />
+        <variable name="user" type="org.csystem.android.app.payment.data.service.dto.UserSaveDTO" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".RegisterActivity">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/edittext_user_name_hint_text"
+            android:text="@={user.username}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/edittext_password_hint_text"
+            android:text="@={user.password}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/edittext_first_name_hint_text"
+            android:text="@={user.firstName}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/edittext_middle_name_hint_text"
+            android:text="@={user.middleName}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/edittext_last_name_hint_text"
+            android:text="@={user.lastName}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/edittext_birth_date_hint_text"
+            android:text = "@={DateStringConverter.INSTANCE.toStr(user.birthDate)}"
+            android:inputType="date" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_register_text"
+            android:onClick="@{() -> viewModel.handleRegisterButton()}"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_close_text"
+            android:onClick="@{() -> viewModel.handleCloseButton()}"
+            />
+    </LinearLayout>
+</layout>
