@@ -1,6 +1,5 @@
 package org.csystem.app.generator.text.server;
 
-import org.csystem.app.generator.text.server.configuration.random.RandomGeneratorConfig;
 import org.csystem.util.string.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +11,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.random.RandomGenerator;
+import java.util.stream.Stream;
 
 @Component
 public class Server {
@@ -24,6 +24,17 @@ public class Server {
 
     @Value("${server.tcp.max.len}")
     private int m_maxLength;
+
+    private void writeCallback(BufferedWriter bw, String text)
+    {
+        try {
+            bw.write(text + "\r\n");
+            bw.flush();
+        }
+        catch (IOException ex) {
+            System.err.printf("Error occurred while sending text%s%n", ex.getMessage());
+        }
+    }
 
     private void handleClient(Socket socket)
     {
@@ -40,17 +51,15 @@ public class Server {
             var min = dis.readInt();
             var bound = dis.readInt();
 
-            if (bound - min >= m_maxLength) {
+            if (min >= bound || bound - min >= m_maxLength || count <= 0) {
                 dos.writeInt(0);
                 return;
             }
 
             dos.writeInt(1);
 
-            for (var i = 0; i < count; ++i)
-                bw.write(StringUtil.getRandomTextEN(randomGenerator, randomGenerator.nextInt(min, bound)) + "\r\n");
-
-            bw.flush();
+            Stream.generate(() -> StringUtil.getRandomTextEN(randomGenerator, randomGenerator.nextInt(min, bound)))
+                    .limit(count).forEach(text -> writeCallback(bw, text));
         }
         catch (IOException ex) {
             System.err.printf("IO problem occurred:%s%n", ex.getMessage());

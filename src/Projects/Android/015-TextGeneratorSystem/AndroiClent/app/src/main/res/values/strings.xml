@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RandomGenerator</string>
+    <string name="button_generate_text">Generate</string>
+    <string name="button_save_text">Save</string>
+    <string name="button_clear_text">Clear</string>
+    <string name="edittext_count_hint">Input count</string>
+    <string name="edittext_minimum_hint">Input minimum length</string>
+    <string name="edittext_maximum_hint">Input maximum length</string>
+    <string name="edittext_period_hint">Input period as seconds</string>
+    <string name="radiobutton_add_periodically">add periodically</string>
+    <string name="radiobutton_add_last">Add last</string>
+</resources>
