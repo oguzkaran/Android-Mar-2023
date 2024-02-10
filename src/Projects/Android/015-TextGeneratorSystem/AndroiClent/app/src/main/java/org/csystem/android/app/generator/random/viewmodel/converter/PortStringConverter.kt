@@ -2,14 +2,14 @@ package org.csystem.android.app.generator.random.viewmodel.converter
 
 import androidx.databinding.InverseMethod
 
-object PeriodStringConverter {
+object PortStringConverter {
     @InverseMethod("toStr")
-    fun toPeriod(str: String) : Long
+    fun toPort(str: String) : Int
     {
-        var result = 0L
+        var result = 0
 
         try {
-            result = str.toULong().toLong();
+            result = str.toUInt().toInt()
         }
         catch (_: NumberFormatException) {
 
@@ -18,5 +18,5 @@ object PeriodStringConverter {
         return result
     }
 
-    fun toStr(value: Long) = value.toString()
+    fun toStr(value: Int) = value.toString()
 }

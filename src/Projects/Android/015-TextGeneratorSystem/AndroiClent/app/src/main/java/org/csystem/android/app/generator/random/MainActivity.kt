@@ -4,116 +4,109 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.generator.random.databinding.ActivityMainBinding
-import org.csystem.android.app.generator.random.global.what.WHAT_SCHEDULER_CALLBACK_EXCEPTION
-import org.csystem.android.app.generator.random.global.what.WHAT_SCHEDULER_TRACK_CALLBACK_EXCEPTION
-import org.csystem.android.app.generator.random.global.what.WHAT_TEXT_ADAPTER_ADD
-import org.csystem.android.app.generator.random.global.what.WHAT_WAIT_SCHEDULER_TIMEOUT
-import org.csystem.android.app.generator.random.string.generateRandomTextEN
+import org.csystem.android.app.generator.random.global.what.WHAT_ANY_EXCEPTION
+import org.csystem.android.app.generator.random.global.what.WHAT_GET_TEXT
+import org.csystem.android.app.generator.random.global.what.WHAT_INVALID_VALUES
+import org.csystem.android.app.generator.random.global.what.WHAT_IO_EXCEPTION
 import org.csystem.android.app.generator.random.viewmodel.data.GenerateInfo
+import org.csystem.android.app.generator.random.viewmodel.data.ServerInfo
 import org.csystem.android.app.generator.random.viewmodel.listener.MainActivityListenerViewModel
+import java.io.BufferedReader
+import java.io.DataInputStream
+import java.io.DataOutputStream
+import java.io.IOException
+import java.io.InputStreamReader
 import java.lang.ref.WeakReference
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.ScheduledFuture
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
+import java.net.Socket
+import java.nio.charset.StandardCharsets
+import java.util.concurrent.ExecutorService
 import javax.inject.Inject
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
-    private lateinit var mScheduledFuture: ScheduledFuture<*>
     private lateinit var mHandler: Handler
 
     @Inject
-    lateinit var executorService: ScheduledExecutorService
+    lateinit var threadPool: ExecutorService
 
-    private class SchedulerHandler(activity: MainActivity) : Handler(Looper.myLooper()!!) {
+    private class GetTextHandler(activity: MainActivity) : Handler(Looper.myLooper()!!) {
         private val mWeakReference = WeakReference(activity)
-
-        private fun handleTextAdapterAdd(text: String)
-        {
-            //...
-            mWeakReference.get()!!.mBinding.adapter!!.add(text)
-        }
-
-        private fun handleSchedulerTrackCallbackException(str: String)
-        {
-            //...
-            Toast.makeText(mWeakReference.get(), "Problem occurred in scheduler track thread:$str", Toast.LENGTH_LONG).show()
-        }
-
-        private fun handleSchedulerCallbackException(str: String)
-        {
-            //...
-            Toast.makeText(mWeakReference.get(), "Problem occurred in scheduler:$str", Toast.LENGTH_LONG).show()
-        }
-
-        private fun handleSchedulerTimeout()
-        {
-            //...
-            Toast.makeText(mWeakReference.get(), "Text(s) Generated!...", Toast.LENGTH_LONG).show()
-        }
 
         override fun handleMessage(msg: Message)
         {
+            val activity = mWeakReference.get()!!
             when (msg.what) {
-                WHAT_TEXT_ADAPTER_ADD -> handleTextAdapterAdd(msg.obj as String)
-                WHAT_SCHEDULER_TRACK_CALLBACK_EXCEPTION -> handleSchedulerTrackCallbackException(msg.obj as String)
-                WHAT_SCHEDULER_CALLBACK_EXCEPTION -> handleSchedulerCallbackException(msg.obj as String)
-                WHAT_WAIT_SCHEDULER_TIMEOUT -> handleSchedulerTimeout()
+                WHAT_GET_TEXT -> activity.handleGetText(msg.obj.toString())
+                WHAT_INVALID_VALUES-> activity.handleInvalidValues()
+                WHAT_IO_EXCEPTION -> activity.handleIOException(msg.obj.toString())
+                WHAT_ANY_EXCEPTION -> activity.handleAnyException(msg.obj.toString())
             }
         }
     }
 
-    private fun waitScheduler()
+    private fun handleGetText(text: String)
+    {
+        mBinding.adapter!!.add(text)
+    }
+
+    private fun handleInvalidValues()
+    {
+        Toast.makeText(this, "Invalid values!...", Toast.LENGTH_LONG).show()
+    }
+
+    private fun handleIOException(message: String)
+    {
+        Log.d("con-io-ex", message)
+        Toast.makeText(this, "IO problem occurred!...", Toast.LENGTH_LONG).show()
+    }
+
+    private fun handleAnyException(message: String)
+    {
+        Log.d("con-ex", message)
+        Toast.makeText(this, "Problem occurred!...", Toast.LENGTH_LONG).show()
+    }
+
+    private fun connectionCallback(socket: Socket)
     {
         try {
-            mScheduledFuture.get(mBinding.generateInfo!!.period * mBinding.generateInfo!!.count, TimeUnit.SECONDS)
+            val dos = DataOutputStream(socket.getOutputStream())
+            val dis = DataInputStream(socket.getInputStream())
+            val br = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8))
+            val count = mBinding.generateInfo!!.count
+
+            dos.writeInt(count)
+            dos.writeInt(mBinding.generateInfo!!.minimum)
+            dos.writeInt(mBinding.generateInfo!!.maximum + 1)
+            if (dis.readInt() == 0) {
+                mHandler.sendEmptyMessage(WHAT_INVALID_VALUES)
+                return
+            }
+
+            (0..<count).forEach { _ -> mHandler.sendMessage(mHandler.obtainMessage(WHAT_GET_TEXT, br.readLine())) }
         }
-        catch (_: TimeoutException) {
-            mScheduledFuture.cancel(false)
-            mHandler.sendEmptyMessage(WHAT_WAIT_SCHEDULER_TIMEOUT)
+        catch (ex: Throwable) {
+            mHandler.sendMessage(mHandler.obtainMessage(WHAT_ANY_EXCEPTION, ex.message))
         }
     }
 
-    private fun schedulerTrackCallback()
-    {
-        //Aslında burada scheduler yerine thread kullanılması daha uygundur. Örnek amaçlı bu şekilde yazılmıştır
-        try {
-            mBinding.enabled = false
-            mScheduledFuture = executorService.scheduleAtFixedRate(
-                { schedulerCallback() },
-                0L,
-                mBinding.generateInfo!!.period,
-                TimeUnit.SECONDS
-            )
-            waitScheduler()
-        }
-        catch (ex: Throwable) {
-            mHandler.sendMessage(mHandler.obtainMessage(WHAT_SCHEDULER_TRACK_CALLBACK_EXCEPTION, ex.message))
-        }
-        finally {
-            mBinding.enabled = true
-        }
-    }
-
-    private fun schedulerCallback()
+    private fun textGeneratorCallback()
     {
         try {
-            val count = Random.nextInt(mBinding.generateInfo!!.minimum, mBinding.generateInfo!!.maximum + 1)
-            val text = generateRandomTextEN(count)
-
-            mHandler.sendMessage(Message.obtain(mHandler, WHAT_TEXT_ADAPTER_ADD, text))
+            Socket(mBinding.serverInfo!!.host, mBinding.serverInfo!!.port).use{connectionCallback(it)}
+        }
+        catch (ex: IOException) {
+            mHandler.sendMessage(mHandler.obtainMessage(WHAT_IO_EXCEPTION, ex.message))
         }
         catch (ex: Throwable) {
-            mHandler.sendMessage(mHandler.obtainMessage(WHAT_SCHEDULER_CALLBACK_EXCEPTION, ex.message))
+            mHandler.sendMessage(mHandler.obtainMessage(WHAT_GET_TEXT, ex.message))
         }
     }
 
@@ -121,6 +114,7 @@ class MainActivity : AppCompatActivity() {
     {
         mBinding.viewModel = MainActivityListenerViewModel(this)
         mBinding.generateInfo = GenerateInfo()
+        mBinding.serverInfo = ServerInfo("192.168.1.107", 50527)
         mBinding.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, ArrayList<String>())
         mBinding.enabled = true
     }
@@ -134,7 +128,7 @@ class MainActivity : AppCompatActivity() {
     private fun initialize()
     {
         initBinding()
-        mHandler = SchedulerHandler(this)
+        mHandler = GetTextHandler(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -143,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         initialize()
     }
 
-    fun generateButtonClicked() = executorService.execute{schedulerTrackCallback()}
+    fun generateButtonClicked() = threadPool.execute{textGeneratorCallback()}
 
     fun saveButtonClicked()
     {

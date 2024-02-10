@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "011-RandomGenerator"
+rootProject.name = "RandomTextGenerator"
 include(":app")
  

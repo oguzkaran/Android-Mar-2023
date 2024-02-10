@@ -5,13 +5,15 @@
     <data>
         <import type="org.csystem.android.app.generator.random.viewmodel.listener.MainActivityListenerViewModel"/>
         <import type="org.csystem.android.app.generator.random.viewmodel.data.GenerateInfo"/>
+        <import type="org.csystem.android.app.generator.random.viewmodel.data.ServerInfo"/>
         <import type="org.csystem.android.app.generator.random.viewmodel.converter.CountStringConverter"/>
         <import type="org.csystem.android.app.generator.random.viewmodel.converter.MaximumStringConverter"/>
         <import type="org.csystem.android.app.generator.random.viewmodel.converter.MinimumStringConverter"/>
-        <import type="org.csystem.android.app.generator.random.viewmodel.converter.PeriodStringConverter"/>
+        <import type="org.csystem.android.app.generator.random.viewmodel.converter.PortStringConverter"/>
         <import type="android.widget.ArrayAdapter"/>
         <variable type="MainActivityListenerViewModel" name="viewModel"/>
         <variable type="GenerateInfo" name="generateInfo"/>
+        <variable type="ServerInfo" name="serverInfo"/>
         <variable type="ArrayAdapter&lt;String&gt;" name="adapter"/>
         <variable type="boolean" name="enabled"/>
     </data>
@@ -21,6 +23,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/edittext_host_hint"
+            android:text="@={serverInfo.host}" />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/edittext_port_hint"
+            android:text="@={PortStringConverter.INSTANCE.toStr(serverInfo.port)}"
+            />
 
         <EditText
             android:layout_width="match_parent"
@@ -48,34 +68,6 @@
             android:hint="@string/edittext_maximum_hint"
             android:text="@={MaximumStringConverter.INSTANCE.toStr(generateInfo.maximum)}"
             />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:hint="@string/edittext_period_hint"
-            android:text="@={PeriodStringConverter.INSTANCE.toStr(generateInfo.period)}"
-            />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/mainActivityRadioButtonAddPeriodically"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/radiobutton_add_periodically" />
-
-            <RadioButton
-                android:id="@+id/mainActivityRadioButtonAddLast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/radiobutton_add_last" />
-        </RadioGroup>
 
         <Button
             android:layout_width="match_parent"
