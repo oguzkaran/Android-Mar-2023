@@ -41,7 +41,7 @@ public class Client {
             dos.writeInt(bound);
 
             if (dis.readInt() == 0) {
-                System.out.println("Invalid values!...");
+                System.out.printf("Invalid values:%s%n", br.readLine());
                 return;
             }
 
@@ -68,6 +68,9 @@ public class Client {
             int bound = m_stdin.nextInt();
 
             doSendAndGetMessage(count, min, bound);
+
+            if (count == 0 && min == 0 && bound == 0)
+                break;
         }
     }
 }

@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             val activity = mWeakReference.get()!!
             when (msg.what) {
                 WHAT_GET_TEXT -> activity.handleGetText(msg.obj.toString())
-                WHAT_INVALID_VALUES-> activity.handleInvalidValues()
+                WHAT_INVALID_VALUES-> activity.handleInvalidValues(msg.obj.toString())
                 WHAT_IO_EXCEPTION -> activity.handleIOException(msg.obj.toString())
                 WHAT_ANY_EXCEPTION -> activity.handleAnyException(msg.obj.toString())
             }
@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
         mBinding.adapter!!.add(text)
     }
 
-    private fun handleInvalidValues()
+    private fun handleInvalidValues(text: String)
     {
-        Toast.makeText(this, "Invalid values!...", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Invalid values:$text", Toast.LENGTH_LONG).show()
     }
 
     private fun handleIOException(message: String)
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             dos.writeInt(mBinding.generateInfo!!.minimum)
             dos.writeInt(mBinding.generateInfo!!.maximum + 1)
             if (dis.readInt() == 0) {
-                mHandler.sendEmptyMessage(WHAT_INVALID_VALUES)
+                mHandler.sendMessage(mHandler.obtainMessage(WHAT_INVALID_VALUES, br.readLine()))
                 return
             }
 

@@ -9,8 +9,6 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ExecutorService;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
@@ -62,11 +60,7 @@ public class Server {
             var dos = new DataOutputStream(socket.getOutputStream());
             var bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
 
-            var formatter = m_applicationContext.getBean(DateTimeFormatter.class);
-            var now = m_applicationContext.getBean(LocalDateTime.class);
-
-            System.out.printf("Client connected -> %s:%d on %s\n", socket.getInetAddress().getHostAddress(),
-                    socket.getPort(), formatter.format(now));
+            System.out.printf("Client connected -> %s:%d\n", socket.getInetAddress().getHostAddress(), socket.getPort());
 
             var count = dis.readInt();
             var min = dis.readInt();
