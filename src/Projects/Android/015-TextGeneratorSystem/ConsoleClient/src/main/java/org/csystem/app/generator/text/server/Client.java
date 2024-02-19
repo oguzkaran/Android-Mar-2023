@@ -1,5 +1,6 @@
 package org.csystem.app.generator.text.server;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class Client {
 
     private void doSendAndGetMessage(int count, int min, int bound)
     {
-        try (var socket = m_applicationContext.getBean(Socket.class)) {
+        try (var socket = m_applicationContext.getBean("generate.Socket", Socket.class)) {
             var dos = new DataOutputStream(socket.getOutputStream());
             var dis = new DataInputStream(socket.getInputStream());
             var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
@@ -52,6 +53,77 @@ public class Client {
         }
     }
 
+    private void doGetConfig()
+    {
+        try (var socket = m_applicationContext.getBean("config.Socket", Socket.class)) {
+            var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+
+            System.out.println(br.readLine().trim());
+        }
+        catch (IOException ex) {
+            System.err.printf("Error occurred:%s%n", ex.getMessage());
+        }
+    }
+
+    private void printMenu()
+    {
+        System.out.println("1.Generate");
+        System.out.println("2.Config");
+        System.out.println("3.Quit");
+        System.out.print("Option:");
+    }
+
+    private int getOption()
+    {
+        while (true) {
+            try {
+                return Integer.parseInt(m_stdin.nextLine());
+            }
+            catch (NumberFormatException ignore) {
+                System.err.println("Invalid value!...");
+                printMenu();
+            }
+        }
+    }
+
+    private void generateCallback()
+    {
+        try {
+            System.out.print("Input count:");
+            int count = Integer.parseInt(m_stdin.nextLine());
+
+            System.out.print("Input min:");
+            int min = Integer.parseInt(m_stdin.nextLine());
+
+            System.out.print("Input bound:");
+            int bound = Integer.parseInt(m_stdin.nextLine());
+
+            doSendAndGetMessage(count, min, bound);
+        }
+        catch (NumberFormatException ignore) {
+            System.err.println("Invalid values!...");
+        }
+    }
+
+    private void configCallback()
+    {
+        doGetConfig();
+    }
+
+    private void quitCallback()
+    {
+        System.exit(SpringApplication.exit(Application.context, () -> 0));
+    }
+
+    private void doOption(int option)
+    {
+        switch (option) {
+            case 1 -> generateCallback();
+            case 2 -> configCallback();
+            case 3 -> quitCallback();
+            default -> System.out.println("Invalid option!...");
+        }
+    }
 
     public Client(ApplicationContext applicationContext, Scanner stdin)
     {
@@ -62,15 +134,8 @@ public class Client {
     public void run() throws IOException
     {
         while (true) {
-            System.out.print("Input count, min and bound:");
-            int count = m_stdin.nextInt();
-            int min = m_stdin.nextInt();
-            int bound = m_stdin.nextInt();
-
-            doSendAndGetMessage(count, min, bound);
-
-            if (count == 0 && min == 0 && bound == 0)
-                break;
+            printMenu();
+            doOption(getOption());
         }
     }
 }

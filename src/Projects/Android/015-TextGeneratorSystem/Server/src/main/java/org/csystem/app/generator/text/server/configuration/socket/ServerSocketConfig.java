@@ -9,8 +9,14 @@ import java.net.ServerSocket;
 
 @Configuration
 public class ServerSocketConfig {
-    @Bean
-    public ServerSocket createServerSocket(@Value("${server.tcp.port}")int port, @Value("${server.tcp.backlog}") int backlog) throws IOException
+    @Bean("generate.ServerSocket")
+    public ServerSocket createGenerateServerSocket(@Value("${server.generate.port}")int port, @Value("${server.generate.backlog}") int backlog) throws IOException
+    {
+        return new ServerSocket(port, backlog);
+    }
+
+    @Bean("generate.config.ServerSocket")
+    public ServerSocket createConfigerverSocket(@Value("${server.config.generate.port}")int port, @Value("${server.config.generate.backlog}") int backlog) throws IOException
     {
         return new ServerSocket(port, backlog);
     }

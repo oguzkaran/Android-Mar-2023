@@ -10,9 +10,16 @@ import java.net.Socket;
 
 @Configuration
 public class SocketConfig {
-    @Bean
+    @Bean("generate.Socket")
     @Scope("prototype")
-    public Socket createSocket(@Value("${client.tcp.host}") String host, @Value("${client.tcp.port}")int port) throws IOException
+    public Socket createGenerateSocket(@Value("${client.generator.host}") String host, @Value("${client.generator.port}")int port) throws IOException
+    {
+        return new Socket(host, port);
+    }
+
+    @Bean("config.Socket")
+    @Scope("prototype")
+    public Socket createConfiggSocket(@Value("${client.config.generator.host}") String host, @Value("${client.config.generator.port}")int port) throws IOException
     {
         return new Socket(host, port);
     }

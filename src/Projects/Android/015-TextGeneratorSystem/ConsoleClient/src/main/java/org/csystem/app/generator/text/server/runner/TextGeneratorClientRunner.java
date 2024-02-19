@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 
 @Component
 public class TextGeneratorClientRunner implements ApplicationRunner {
+
     private final ExecutorService m_threadPool;
     private final Client m_client;
 

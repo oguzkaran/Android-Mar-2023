@@ -1,6 +1,7 @@
 package org.csystem.app.generator.text.server;
 
 import org.csystem.util.string.StringUtil;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -16,18 +17,18 @@ import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
 @Component
-public class Server {
+public class GenerateServer {
     private final ApplicationContext m_applicationContext;
     private final ServerSocket m_serverSocket;
     private final ExecutorService m_threadPool;
 
-    @Value("${server.tcp.timeout}")
+    @Value("${server.generate.timeout}")
     private int m_timeout;
 
-    @Value("${server.tcp.max.len}")
+    @Value("${server.generate.max.len}")
     private int m_maxLength;
 
-    @Value("${server.tcp.port}")
+    @Value("${server.generate.port}")
     private int m_port;
 
     private void writeCallback(BufferedWriter bw, String text)
@@ -91,7 +92,9 @@ public class Server {
         }
     }
 
-    public Server(ApplicationContext applicationContext, ServerSocket serverSocket, ExecutorService threadPool)
+    public GenerateServer(ApplicationContext applicationContext,
+                          @Qualifier("generate.ServerSocket") ServerSocket serverSocket,
+                          ExecutorService threadPool)
     {
         m_applicationContext = applicationContext;
         m_serverSocket = serverSocket;
@@ -102,7 +105,7 @@ public class Server {
     {
         try (m_serverSocket) {
             while (true) {
-                System.out.printf("Server is waiting for a client on port %d%n", m_port);
+                System.out.printf("Generator Server is waiting for a client on port %d%n", m_port);
                 var clientSocket = m_serverSocket.accept();
                 m_threadPool.execute(() -> handleClient(clientSocket));
             }
