@@ -44,6 +44,11 @@ public class ConfigServer {
     private void handleClient(Socket socket)
     {
         try (socket) {
+            var formatter = m_applicationContext.getBean(DateTimeFormatter.class);
+            var now = m_applicationContext.getBean(LocalDateTime.class);
+
+            System.out.printf("Config Server: Client connected -> %s:%d on %s\n", socket.getInetAddress().getHostAddress(),
+                    socket.getPort(), formatter.format(now));
             sendValues(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8)));
         }
         catch (IOException ex) {

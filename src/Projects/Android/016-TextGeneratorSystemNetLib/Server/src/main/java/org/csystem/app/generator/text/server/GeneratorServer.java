@@ -1,15 +1,16 @@
 package org.csystem.app.generator.text.server;
 
+import com.karandev.util.net.TcpUtil;
+import com.karandev.util.net.exception.NetworkException;
 import org.csystem.util.string.StringUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ExecutorService;
@@ -17,7 +18,7 @@ import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
 @Component
-public class GenerateServer {
+public class GeneratorServer {
     private final ApplicationContext m_applicationContext;
     private final ServerSocket m_serverSocket;
     private final ExecutorService m_threadPool;
@@ -31,58 +32,51 @@ public class GenerateServer {
     @Value("${server.generate.port}")
     private int m_port;
 
-    private void writeCallback(BufferedWriter bw, String text)
+    private void writeCallback(Socket socket, String text)
     {
         try {
-            bw.write(text + "\r\n");
-            bw.flush();
+            TcpUtil.sendStringViaLength(socket, text + "\r\n");
         }
-        catch (IOException ex) {
+        catch (NetworkException ex) {
             System.err.printf("Error occurred while sending text%s%n", ex.getMessage());
         }
     }
 
-    private void sendValues(BufferedWriter bw)
+    private void sendValues(Socket socket)
     {
         try {
-            bw.write(String.format("Maximum Length:%d, Send Timeout:%d\r\n", m_maxLength, m_timeout));
-            bw.flush();
+            TcpUtil.sendStringViaLength(socket, String.format("Maximum Length:%d, Send Timeout:%d\r\n", m_maxLength, m_timeout));
         }
-        catch (IOException ex) {
+        catch (NetworkException ex) {
             System.err.printf("Error occurred while sending values%s%n", ex.getMessage());
         }
     }
-
 
     private void handleClient(Socket socket)
     {
         try (socket) {
             var randomGenerator = m_applicationContext.getBean(RandomGenerator.class);
             socket.setSoTimeout(m_timeout);
-            var dis = new DataInputStream(socket.getInputStream());
-            var dos = new DataOutputStream(socket.getOutputStream());
-            var bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
-
             var formatter = m_applicationContext.getBean(DateTimeFormatter.class);
             var now = m_applicationContext.getBean(LocalDateTime.class);
 
-            System.out.printf("Client connected -> %s:%d on %s\n", socket.getInetAddress().getHostAddress(),
+            System.out.printf("Generator Server: Client connected -> %s:%d on %s\n", socket.getInetAddress().getHostAddress(),
                     socket.getPort(), formatter.format(now));
 
-            var count = dis.readInt();
-            var min = dis.readInt();
-            var bound = dis.readInt();
+            var count = TcpUtil.receiveInt(socket);
+            var min = TcpUtil.receiveInt(socket);
+            var bound = TcpUtil.receiveInt(socket);
 
             if (min >= bound || bound - min >= m_maxLength || count <= 0) {
-                dos.writeInt(0);
-                sendValues(bw);
+                TcpUtil.sendInt(socket, 0);
+                sendValues(socket);
                 return;
             }
 
-            dos.writeInt(1);
+            TcpUtil.sendInt(socket, 1);
 
             Stream.generate(() -> StringUtil.getRandomTextEN(randomGenerator, randomGenerator.nextInt(min, bound)))
-                    .limit(count).forEach(text -> writeCallback(bw, text));
+                    .limit(count).forEach(text -> writeCallback(socket, text));
         }
         catch (IOException ex) {
             System.err.printf("IO problem occurred:%s%n", ex.getMessage());
@@ -92,9 +86,9 @@ public class GenerateServer {
         }
     }
 
-    public GenerateServer(ApplicationContext applicationContext,
-                          @Qualifier("generate.ServerSocket") ServerSocket serverSocket,
-                          ExecutorService threadPool)
+    public GeneratorServer(ApplicationContext applicationContext,
+                           @Qualifier("generate.ServerSocket") ServerSocket serverSocket,
+                           ExecutorService threadPool)
     {
         m_applicationContext = applicationContext;
         m_serverSocket = serverSocket;
