@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.karandev.util.net.TcpUtil
 import dagger.hilt.android.AndroidEntryPoint
 import org.csystem.android.app.generator.random.databinding.ActivityMainBinding
 import org.csystem.android.app.generator.random.global.what.WHAT_ANY_EXCEPTION
@@ -18,14 +19,9 @@ import org.csystem.android.app.generator.random.global.what.WHAT_IO_EXCEPTION
 import org.csystem.android.app.generator.random.viewmodel.data.GenerateInfo
 import org.csystem.android.app.generator.random.viewmodel.data.ServerInfo
 import org.csystem.android.app.generator.random.viewmodel.listener.MainActivityListenerViewModel
-import java.io.BufferedReader
-import java.io.DataInputStream
-import java.io.DataOutputStream
 import java.io.IOException
-import java.io.InputStreamReader
 import java.lang.ref.WeakReference
 import java.net.Socket
-import java.nio.charset.StandardCharsets
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
@@ -77,20 +73,18 @@ class MainActivity : AppCompatActivity() {
     private fun generatorConnectionCallback(socket: Socket)
     {
         try {
-            val dos = DataOutputStream(socket.getOutputStream())
-            val dis = DataInputStream(socket.getInputStream())
-            val br = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8))
+
             val count = mBinding.generateInfo!!.count
 
-            dos.writeInt(count)
-            dos.writeInt(mBinding.generateInfo!!.minimum)
-            dos.writeInt(mBinding.generateInfo!!.maximum + 1)
-            if (dis.readInt() == 0) {
-                mHandler.sendMessage(mHandler.obtainMessage(WHAT_INVALID_VALUES, br.readLine()))
+            TcpUtil.sendInt(socket, count)
+            TcpUtil.sendInt(socket, mBinding.generateInfo!!.minimum)
+            TcpUtil.sendInt(socket, mBinding.generateInfo!!.maximum + 1)
+            if (TcpUtil.receiveInt(socket) == 0) {
+                mHandler.sendMessage(mHandler.obtainMessage(WHAT_INVALID_VALUES, TcpUtil.receiveStringViaLength(socket)))
                 return
             }
 
-            (0..<count).forEach { _ -> mHandler.sendMessage(mHandler.obtainMessage(WHAT_GET_TEXT, br.readLine())) }
+            (0..<count).forEach { _ -> mHandler.sendMessage(mHandler.obtainMessage(WHAT_GET_TEXT, TcpUtil.receiveStringViaLength(socket))) }
         }
         catch (ex: Throwable) {
             mHandler.sendMessage(mHandler.obtainMessage(WHAT_ANY_EXCEPTION, ex.message))
@@ -100,8 +94,8 @@ class MainActivity : AppCompatActivity() {
     private fun configurationConnectionCallback(socket: Socket)
     {
         try {
-            val br = BufferedReader(InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8))
-            val configText = br.readLine().trim()
+
+            val configText = TcpUtil.receiveStringViaLength(socket).trim()
 
             runOnUiThread{Toast.makeText(this, configText, Toast.LENGTH_LONG).show()}
         }

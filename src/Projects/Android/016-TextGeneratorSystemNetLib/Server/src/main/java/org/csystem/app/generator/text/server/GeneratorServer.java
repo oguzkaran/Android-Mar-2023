@@ -42,7 +42,7 @@ public class GeneratorServer {
         }
     }
 
-    private void sendValues(Socket socket)
+    private void sendLimits(Socket socket)
     {
         try {
             TcpUtil.sendStringViaLength(socket, String.format("Maximum Length:%d, Send Timeout:%d\r\n", m_maxLength, m_timeout));
@@ -69,7 +69,7 @@ public class GeneratorServer {
 
             if (min >= bound || bound - min >= m_maxLength || count <= 0) {
                 TcpUtil.sendInt(socket, 0);
-                sendValues(socket);
+                sendLimits(socket);
                 return;
             }
 

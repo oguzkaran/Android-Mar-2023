@@ -29,7 +29,7 @@ public class ConfigServer {
     @Value("${server.config.generate.port}")
     private int m_port;
 
-    private void sendValues(Socket socket)
+    private void sendLimits(Socket socket)
     {
         try {
             TcpUtil.sendStringViaLength(socket, String.format("Maximum Length:%d, Send Timeout:%d\r\n", m_maxLength, m_timeout));
@@ -47,7 +47,7 @@ public class ConfigServer {
 
             System.out.printf("Config Server: Client connected -> %s:%d on %s\n", socket.getInetAddress().getHostAddress(),
                     socket.getPort(), formatter.format(now));
-            sendValues(socket);
+            sendLimits(socket);
         }
         catch (IOException ex) {
             System.err.printf("IO problem occurred:%s%n", ex.getMessage());
