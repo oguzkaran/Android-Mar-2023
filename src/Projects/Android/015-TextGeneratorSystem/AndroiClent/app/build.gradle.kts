@@ -59,7 +59,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
 
-    implementation("com.karandev:com-karandev-util-net:20.0.0")
+    implementation("com.karandev:com-karandev-util-net:20.0.1")
 }
 
 kapt {
