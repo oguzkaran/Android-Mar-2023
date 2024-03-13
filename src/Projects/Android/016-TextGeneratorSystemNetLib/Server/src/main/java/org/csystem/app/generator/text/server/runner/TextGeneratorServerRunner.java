@@ -2,6 +2,7 @@ package org.csystem.app.generator.text.server.runner;
 
 import org.csystem.app.generator.text.server.ConfigServer;
 import org.csystem.app.generator.text.server.GeneratorServer;
+import org.csystem.app.generator.text.server.receiver.PeriodicMessageReceiver;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,8 @@ public class TextGeneratorServerRunner implements ApplicationRunner {
     private final ExecutorService m_threadPool;
     private final GeneratorServer m_generatorServer;
     private final ConfigServer m_configServer;
+
+    private final PeriodicMessageReceiver m_periodicMessageReceiver;
 
     private void generateServerThreadCallback()
     {
@@ -38,11 +41,12 @@ public class TextGeneratorServerRunner implements ApplicationRunner {
         }
     }
 
-    public TextGeneratorServerRunner(ExecutorService threadPool, GeneratorServer generatorServer, ConfigServer configServer)
+    public TextGeneratorServerRunner(ExecutorService threadPool, GeneratorServer generatorServer, ConfigServer configServer, PeriodicMessageReceiver periodicMessageReceiver)
     {
         m_threadPool = threadPool;
         m_generatorServer = generatorServer;
         m_configServer = configServer;
+        m_periodicMessageReceiver = periodicMessageReceiver;
     }
 
     @Override
@@ -50,5 +54,6 @@ public class TextGeneratorServerRunner implements ApplicationRunner {
     {
         m_threadPool.execute(this::generateServerThreadCallback);
         m_threadPool.execute(this::configServerThreadCallback);
+        m_threadPool.execute(m_periodicMessageReceiver::run);
     }
 }

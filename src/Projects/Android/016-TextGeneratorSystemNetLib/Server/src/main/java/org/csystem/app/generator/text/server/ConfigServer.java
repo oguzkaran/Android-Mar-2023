@@ -68,9 +68,11 @@ public class ConfigServer {
     public void run() throws IOException
     {
         try (m_serverSocket) {
+            System.out.printf("Configuration Server is waiting for a client on port %d%n", m_port);
+
             while (true) {
-                System.out.printf("Configuration Server is waiting for a client on port %d%n", m_port);
                 var clientSocket = m_serverSocket.accept();
+
                 m_threadPool.execute(() -> handleClient(clientSocket));
             }
         }

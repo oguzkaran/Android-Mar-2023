@@ -1,6 +1,7 @@
 package org.csystem.app.generator.text.server.runner;
 
 import org.csystem.app.generator.text.server.Client;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class TextGeneratorClientRunner implements ApplicationRunner {
         }
     }
 
-    public TextGeneratorClientRunner(ExecutorService threadPool, Client client)
+    public TextGeneratorClientRunner(@Qualifier("threadpool") ExecutorService threadPool, Client client)
     {
         m_threadPool = threadPool;
         m_client = client;
