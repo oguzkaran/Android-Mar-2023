@@ -18,7 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<kotlin.code.style>official</kotlin.code.style>
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
-        <kotlin.version>1.9.0</kotlin.version>
+        <kotlin.version>1.9.22</kotlin.version>
     </properties>
 
 	<repositories>
@@ -39,6 +39,13 @@
 			<artifactId>org-csystem-util-data-test</artifactId>
 			<version>6.1.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jetbrains.kotlinx</groupId>
+			<artifactId>kotlinx-coroutines-core</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>

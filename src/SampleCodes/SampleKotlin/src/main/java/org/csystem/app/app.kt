@@ -1,28 +1,36 @@
 /*----------------------------------------------------------------------------------------------------------------------
-
+    Aşağıdaki demo örnekte runBlocking scope içerisinde coroutine yaratılmıştır
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.csystem.util.console.kotlin.readInt
+import kotlin.random.Random
 
-fun main()
-{
-    val pool = Executors.newScheduledThreadPool(1)
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm:ss")
+suspend fun main() = run().apply { println("run çağrıldı") }.join()
 
-    val future = pool.scheduleAtFixedRate({print("%s\r".format(formatter.format(LocalDateTime.now())))}, 0L, 1, TimeUnit.SECONDS)
 
-    try {
-        future.get(3, TimeUnit.SECONDS)
+fun doJob() = runBlocking {
+    var total = 0
+    val count = readInt("Input a number:")
+
+    val job = launch { //runBlocking scope: runBlocking fonksiyonunun callback fonksiyonuna ilişkin scope
+        for (i in 1..count) {
+            val value = Random.nextInt(100)
+            print("$value ")
+            total += value
+            delay(Random.nextLong(1, 1000))
+        }
+        println()
     }
-    catch (_: TimeoutException) {
-        future.cancel(false)
-    }
 
-    pool.shutdown()
+    job.join()
+    println("Total:$total")
 }
 
+fun run() = GlobalScope.launch {
+    doJob()
+}
