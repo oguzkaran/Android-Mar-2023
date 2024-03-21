@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.csystem.android.app.generator.random.databinding.ActivityMainBinding
 import org.csystem.android.app.generator.random.global.what.WHAT_ANY_EXCEPTION
 import org.csystem.android.app.generator.random.global.what.WHAT_GET_TEXT
@@ -34,8 +37,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mHandler: Handler
 
-    @Inject
-    lateinit var threadPool: ExecutorService
 
     private class GetTextHandler(activity: MainActivity) : Handler(Looper.myLooper()!!) {
         private val mWeakReference = WeakReference(activity)
@@ -163,9 +164,9 @@ class MainActivity : AppCompatActivity() {
         initialize()
     }
 
-    fun generateButtonClicked() = threadPool.execute{textGeneratorCallback()}
+    fun generateButtonClicked() = GlobalScope.launch{textGeneratorCallback()}
 
-    fun configurationButtonClicked() = threadPool.execute{configurationCallback()}
+    fun configurationButtonClicked() = GlobalScope.launch{configurationCallback()}
 
     fun saveButtonClicked()
     {
