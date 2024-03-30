@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 13th March 2024
+	LAST UPDATE : 25th March 2024
 
 	Utility class for TCP socket operations
 
@@ -344,10 +344,30 @@ public final class TcpUtil {
 			return br.readLine();
 		}
 		catch (NetworkException ex) {
-			throw new NetworkException("TcpUtil.receiveString", ex.getCause());
+			throw new NetworkException("TcpUtil.receiveLine", ex.getCause());
 		}
 		catch (Throwable ex) {
-			throw new NetworkException("TcpUtil.receiveString", ex);
+			throw new NetworkException("TcpUtil.receiveLine", ex);
+		}
+	}
+
+	public static Optional<String> receiveLineOptional(Socket socket)
+	{
+		return receiveLineOptional(socket, StandardCharsets.UTF_8);
+	}
+
+	public static Optional<String> receiveLineOptional(Socket socket, Charset charset)
+	{
+		try {
+			var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), charset));
+
+			return Optional.ofNullable(br.readLine());
+		}
+		catch (NetworkException ex) {
+			throw new NetworkException("TcpUtil.receiveLine", ex.getCause());
+		}
+		catch (Throwable ex) {
+			throw new NetworkException("TcpUtil.receiveLine", ex);
 		}
 	}
 
@@ -519,10 +539,10 @@ public final class TcpUtil {
 	public static void sendLine(Socket socket, String str, Charset charset)
 	{
 		try {
-			var bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), charset));
+			var pw = new PrintWriter(socket.getOutputStream(), true, charset);
 
-			bw.write(String.format("%s\r\n", str));
-			bw.flush();
+			pw.print(str + "\r\n");
+			pw.flush();
 		}
 		catch (NetworkException ex) {
 			throw new NetworkException("TcpUtil.sendLine", ex.getCause());
@@ -531,8 +551,6 @@ public final class TcpUtil {
 			throw new NetworkException("TcpUtil.sendLine", ex);
 		}
 	}
-
-	//...
 
 	public static void sendFile(Socket socket, File file, int blockSize)
 	{

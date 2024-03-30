@@ -1,8 +1,10 @@
 package org.csystem.app.chat.server
 
 import com.karandev.util.net.TcpUtil
-import kotlinx.coroutines.*
-import org.csystem.app.chat.server.configuration.constant.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import org.csystem.app.chat.server.configuration.constant.ERR_LOGIN
+import org.csystem.app.chat.server.configuration.constant.SUC_LOGIN
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -11,42 +13,27 @@ import java.net.Socket
 import java.util.concurrent.ExecutorService
 
 @Component
-class RegisterServer(private val threadPool: ExecutorService,
-                     @Qualifier("app.chat.server.config.register.port.ServerSocket")
+class LoginServer(private val threadPool: ExecutorService,
+                  @Qualifier("app.chat.server.config.login.port.ServerSocket")
                      private val serverSocket: ServerSocket) {
-    @Value("\${app.chat.server.config.register.timeout}")
+    @Value("\${app.chat.server.config.login.timeout}")
     private var mTimeout: Int = 0;
+
+    private fun checkInfo(nickname: String, password: String): Boolean
+    {
+        return true
+    }
 
     private fun clientOperationCallback(socket: Socket)
     {
         socket.soTimeout = mTimeout
-        val name = TcpUtil.receiveLine(socket) ?: return
         val nickname = TcpUtil.receiveLine(socket) ?: return
         val password = TcpUtil.receiveLine(socket) ?: return
-        val confirmPassword = TcpUtil.receiveLine(socket) ?: return
 
-        if (name.isBlank()) {
-            TcpUtil.sendLine(socket, ERR_NAME_BLANK)
-            return
-        }
-
-        if (nickname.isBlank()) {
-            TcpUtil.sendLine(socket, ERR_NICKNAME_BLANK)
-            return
-        }
-
-        if (password.isBlank()) {
-            TcpUtil.sendLine(socket, ERR_PASSWORD_BLANK)
-            return
-        }
-
-        if (password != confirmPassword) {
-            TcpUtil.sendLine(socket, ERR_CONFIRM_PASSWORD)
-            return
-        }
-
-        //Save user information to database
-        TcpUtil.sendLine(socket, SUC_REGISTER)
+        val statusMessage = if (checkInfo(nickname, password)) SUC_LOGIN else ERR_LOGIN
+        //Save login information to database
+        //...
+        TcpUtil.sendLine(socket, statusMessage)
     }
 
     private fun handleClient(socket: Socket)
@@ -62,7 +49,7 @@ class RegisterServer(private val threadPool: ExecutorService,
     private fun serverCallback()
     {
         try {
-            println("Register server waiting for a client")
+            println("Login server waiting for a client")
 
             while (true) {
                 val socket = serverSocket.accept()

@@ -15,4 +15,13 @@ open class ServerSocketConfig {
     {
         return ServerSocket(port, backlog)
     }
+
+    @Bean("app.chat.server.config.login.port.ServerSocket")
+    open fun createLoginServerSocket(
+        @Value("\${app.chat.server.config.login.port}") port: Int,
+        @Value("\${app.chat.server.config.login.port}") backlog: Int
+    ): ServerSocket
+    {
+        return ServerSocket(port, backlog)
+    }
 }
