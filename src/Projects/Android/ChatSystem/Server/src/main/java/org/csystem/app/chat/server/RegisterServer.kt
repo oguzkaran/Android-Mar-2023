@@ -1,8 +1,12 @@
 package org.csystem.app.chat.server
 
 import com.karandev.util.net.TcpUtil
-import kotlinx.coroutines.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import org.csystem.app.chat.server.configuration.constant.*
+import org.csystem.app.chatsystem.service.ChatSystemService
+import org.csystem.app.chatsystem.service.dto.UserDTO
+import org.csystem.app.chatsystem.service.dto.UserSaveDTO
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -13,7 +17,8 @@ import java.util.concurrent.ExecutorService
 @Component
 class RegisterServer(private val threadPool: ExecutorService,
                      @Qualifier("app.chat.server.config.register.port.ServerSocket")
-                     private val serverSocket: ServerSocket) {
+                     private val serverSocket: ServerSocket,
+                     private val chatSystemService: ChatSystemService) {
     @Value("\${app.chat.server.config.register.timeout}")
     private var mTimeout: Int = 0;
 
@@ -45,7 +50,9 @@ class RegisterServer(private val threadPool: ExecutorService,
             return
         }
 
-        //Save user information to database
+        val user = UserSaveDTO(nickname, name, password)
+
+        chatSystemService.saveUser(user)
         TcpUtil.sendLine(socket, SUC_REGISTER)
     }
 
