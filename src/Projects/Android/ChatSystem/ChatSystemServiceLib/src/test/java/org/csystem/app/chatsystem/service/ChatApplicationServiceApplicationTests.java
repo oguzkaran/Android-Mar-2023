@@ -38,8 +38,8 @@ class ChatApplicationServiceApplicationTests {
     void setUp()
     {
         var saveDTO = new UserSaveDTO("Nuri Can", "nuricanozturk", "pass123");
-        m_chatSystemService.saveUser(saveDTO);
 
+        m_chatSystemService.saveUser(saveDTO);
         rangeClosed(1, 6).forEach(i -> m_chatSystemService.saveLoginInfoByNickNameAndPassword("nuricanozturk", "pass123"));
     }
 
@@ -50,7 +50,6 @@ class ChatApplicationServiceApplicationTests {
         var userDTO = m_chatSystemService.saveUser(saveDTO);
 
         assertNotNull(userDTO);
-
         assertEquals("halilcanozturk", userDTO.nickName());
         assertEquals("Halil Can", userDTO.name());
     }
@@ -63,7 +62,6 @@ class ChatApplicationServiceApplicationTests {
         var result = m_chatSystemService.saveUser(saveDTO);
 
         assertNotNull(result);
-
         assertTrue(m_chatSystemService.saveLoginInfoByNickNameAndPassword("alican", "pass123"));
     }
 
@@ -73,7 +71,6 @@ class ChatApplicationServiceApplicationTests {
         var userInfo = m_chatSystemService.findUserByNickName("nuricanozturk");
 
         assertTrue(userInfo.isPresent());
-
         assertNotNull(userInfo.get());
         assertEquals("nuricanozturk", userInfo.get().nickName());
     }
@@ -85,7 +82,6 @@ class ChatApplicationServiceApplicationTests {
         var userInfo = m_chatSystemService.findUserByNickNameAndPassword("nuricanozturk", "pass123");
 
         assertTrue(userInfo.isPresent());
-
         assertNotNull(userInfo.get());
         assertEquals("nuricanozturk", userInfo.get().nickName());
     }
