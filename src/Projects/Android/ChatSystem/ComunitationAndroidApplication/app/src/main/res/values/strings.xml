@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ComunitationAndroidApplication</string>
+    <string name="button_text_register">Register</string>
+    <string name="button_text_login">Login</string>
+    <string name="edit_text_nickname">Nick Name</string>
+    <string name="edit_text_name">Name</string>
+    <string name="edit_text_password">Password</string>
+    <string name="edit_text_confirmedpass">ConfirmedPassword</string>
+    <string name="button_text_close">Close</string>
+    <string name="button_text_get">Get</string>
+</resources>

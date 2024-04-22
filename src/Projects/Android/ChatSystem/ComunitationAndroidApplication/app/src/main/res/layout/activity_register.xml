@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.ahbap.android.app.comunitationandroidapplication.register.User"/>
+        <import type="com.ahbap.android.app.comunitationandroidapplication.register.view.ActivityRegisterListener"/>
+        <variable name="user" type="User" />
+        <variable name="view" type="ActivityRegisterListener" />
+    </data>
+<LinearLayout
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Register">
+
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@={user.name}"
+        android:hint="@string/edit_text_name"
+        />
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@={user.nickname}"
+        android:hint="@string/edit_text_nickname" />
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/edit_text_password"
+        android:text="@={user.password}"
+        />
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/edit_text_confirmedpass"
+        android:text="@={user.confirmedPassword}"
+        />
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_text_register"
+        android:onClick="@{() -> view.HandlerRegisterButton()}"
+        />
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_text_close"
+        android:onClick="@{() -> view.HandlerCloseButton()}"
+        />
+
+</LinearLayout>
+</layout>

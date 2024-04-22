@@ -1,11 +1,11 @@
 package org.csystem.app.chat.server
 
 import com.karandev.util.net.TcpUtil
+import com.karandev.util.net.exception.NetworkException
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.csystem.app.chat.server.configuration.constant.*
 import org.csystem.app.chatsystem.service.ChatSystemService
-import org.csystem.app.chatsystem.service.dto.UserDTO
 import org.csystem.app.chatsystem.service.dto.UserSaveDTO
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
@@ -24,36 +24,41 @@ class RegisterServer(private val threadPool: ExecutorService,
 
     private fun clientOperationCallback(socket: Socket)
     {
-        socket.soTimeout = mTimeout
-        val name = TcpUtil.receiveLine(socket) ?: return
-        val nickname = TcpUtil.receiveLine(socket) ?: return
-        val password = TcpUtil.receiveLine(socket) ?: return
-        val confirmPassword = TcpUtil.receiveLine(socket) ?: return
+        try {
+            socket.soTimeout = mTimeout
+            val name = TcpUtil.receiveLine(socket)
+            val nickname = TcpUtil.receiveLine(socket)
+            val password = TcpUtil.receiveLine(socket)
+            val confirmPassword = TcpUtil.receiveLine(socket)
 
-        if (name.isBlank()) {
-            TcpUtil.sendLine(socket, ERR_NAME_BLANK)
-            return
+            if (name.isBlank()) {
+                TcpUtil.sendLine(socket, ERR_NAME_BLANK)
+                return
+            }
+
+            if (nickname.isBlank()) {
+                TcpUtil.sendLine(socket, ERR_NICKNAME_BLANK)
+                return
+            }
+
+            if (password.isBlank()) {
+                TcpUtil.sendLine(socket, ERR_PASSWORD_BLANK)
+                return
+            }
+
+            if (password != confirmPassword) {
+                TcpUtil.sendLine(socket, ERR_CONFIRM_PASSWORD)
+                return
+            }
+
+            val user = UserSaveDTO(nickname, name, password)
+
+            chatSystemService.saveUser(user)
+            TcpUtil.sendLine(socket, SUC_REGISTER)
         }
-
-        if (nickname.isBlank()) {
-            TcpUtil.sendLine(socket, ERR_NICKNAME_BLANK)
-            return
+        catch (ex: NetworkException) {
+            println("Network Error:${ex.message}")
         }
-
-        if (password.isBlank()) {
-            TcpUtil.sendLine(socket, ERR_PASSWORD_BLANK)
-            return
-        }
-
-        if (password != confirmPassword) {
-            TcpUtil.sendLine(socket, ERR_CONFIRM_PASSWORD)
-            return
-        }
-
-        val user = UserSaveDTO(nickname, name, password)
-
-        chatSystemService.saveUser(user)
-        TcpUtil.sendLine(socket, SUC_REGISTER)
     }
 
     private fun handleClient(socket: Socket)

@@ -1,6 +1,7 @@
 package org.csystem.app.chat.server
 
 import com.karandev.util.net.TcpUtil
+import com.karandev.util.net.exception.NetworkException
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.csystem.app.chat.server.configuration.constant.ERR_LOGIN
@@ -21,16 +22,20 @@ class LoginServer(private val threadPool: ExecutorService,
     @Value("\${app.chat.server.config.login.timeout}")
     private var mTimeout: Int = 0;
 
-    private fun clientOperationCallback(socket: Socket)
-    {
-        socket.soTimeout = mTimeout
-        val nickname = TcpUtil.receiveLine(socket) ?: return
-        val password = TcpUtil.receiveLine(socket) ?: return
-        val status = chatSystemService.saveLoginInfoByNickNameAndPassword(nickname, password)
-        val statusMessage = if (status) SUC_LOGIN else ERR_LOGIN
+    private fun clientOperationCallback(socket: Socket) {
+        try {
+            socket.soTimeout = mTimeout
+            val nickname = TcpUtil.receiveLine(socket)
+            val password = TcpUtil.receiveLine(socket)
+            val status = chatSystemService.saveLoginInfoByNickNameAndPassword(nickname, password)
+            val statusMessage = if (status) SUC_LOGIN else ERR_LOGIN
 
-        TcpUtil.sendLine(socket, statusMessage)
-        //...
+            TcpUtil.sendLine(socket, statusMessage)
+            //...
+        }
+        catch (ex: NetworkException) {
+            println("Network Error:${ex.message}")
+        }
     }
 
     private fun handleClient(socket: Socket)

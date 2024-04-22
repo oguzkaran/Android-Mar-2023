@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+    <import type="com.ahbap.android.app.comunitationandroidapplication.login.view.ActivityLoginListener"/>
+    <import type="com.ahbap.android.app.comunitationandroidapplication.login.NickNameAndPassword"/>
+    <variable name="view" type="ActivityLoginListener" />
+    <variable name="user" type="NickNameAndPassword" />
+</data>
+<LinearLayout
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Login">
+
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@={user.nickname}"
+        android:hint="@string/edit_text_nickname" />
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="@={user.password}"
+        android:hint="@string/edit_text_password"
+        />
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_text_get"
+        android:onClick="@{() -> view.HandlerGetButton()}"
+        />
+</LinearLayout>
+</layout>

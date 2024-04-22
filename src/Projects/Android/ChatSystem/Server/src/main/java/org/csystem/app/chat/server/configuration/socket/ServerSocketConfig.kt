@@ -10,7 +10,7 @@ open class ServerSocketConfig {
     @Bean("app.chat.server.config.register.port.ServerSocket")
     open fun createRegisterServerSocket(
         @Value("\${app.chat.server.config.register.port}") port: Int,
-        @Value("\${app.chat.server.config.register.port}") backlog: Int
+        @Value("\${app.chat.server.config.register.backlog}") backlog: Int
     ): ServerSocket
     {
         return ServerSocket(port, backlog)
@@ -19,7 +19,7 @@ open class ServerSocketConfig {
     @Bean("app.chat.server.config.login.port.ServerSocket")
     open fun createLoginServerSocket(
         @Value("\${app.chat.server.config.login.port}") port: Int,
-        @Value("\${app.chat.server.config.login.port}") backlog: Int
+        @Value("\${app.chat.server.config.login.backlog}") backlog: Int
     ): ServerSocket
     {
         return ServerSocket(port, backlog)
