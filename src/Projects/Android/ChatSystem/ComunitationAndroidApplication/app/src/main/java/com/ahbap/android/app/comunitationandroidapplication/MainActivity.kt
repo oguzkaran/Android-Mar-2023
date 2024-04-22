@@ -2,10 +2,7 @@ package com.ahbap.android.app.comunitationandroidapplication
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.ahbap.android.app.comunitationandroidapplication.databinding.ActivityMainBinding
 import com.ahbap.android.app.comunitationandroidapplication.view.MainActivityListener
@@ -27,13 +24,13 @@ class MainActivity : AppCompatActivity() {
 
     fun RegisterButton()
     {
-        Intent(this,Register::class.java).apply {
+        Intent(this,RegisterActivity::class.java).apply {
             startActivity(this)
         }
     }
     fun LoginButton()
     {
-        Intent(this,Login::class.java)
+        Intent(this,LoginActivity::class.java)
             .apply { startActivity(this) }
     }
 }

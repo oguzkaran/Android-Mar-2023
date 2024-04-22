@@ -1,9 +1,9 @@
 package com.ahbap.android.app.comunitationandroidapplication.register.view
 
-import com.ahbap.android.app.comunitationandroidapplication.Register
+import com.ahbap.android.app.comunitationandroidapplication.RegisterActivity
 import java.lang.ref.WeakReference
 
-class ActivityRegisterListener (activity : Register)
+class ActivityRegisterListener (activity : RegisterActivity)
 {
     private val mWeakReference = WeakReference(activity)
 
