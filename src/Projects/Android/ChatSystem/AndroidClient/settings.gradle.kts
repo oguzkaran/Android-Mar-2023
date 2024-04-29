@@ -16,9 +16,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main")
+        }
     }
 }
 
-rootProject.name = "ComunitationAndroidApplication"
+rootProject.name = "ChatSystemApp"
 include(":app")
  

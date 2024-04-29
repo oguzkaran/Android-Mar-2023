@@ -25,13 +25,13 @@ class LoginServer(private val threadPool: ExecutorService,
     private fun clientOperationCallback(socket: Socket) {
         try {
             socket.soTimeout = mTimeout
-            val nickname = TcpUtil.receiveLine(socket)
-            val password = TcpUtil.receiveLine(socket)
+            val nickname = TcpUtil.receiveStringViaLength(socket)
+            val password = TcpUtil.receiveStringViaLength(socket)
             val status = chatSystemService.saveLoginInfoByNickNameAndPassword(nickname, password)
             val statusMessage = if (status) SUC_LOGIN else ERR_LOGIN
 
-            TcpUtil.sendLine(socket, statusMessage)
-            //...
+            TcpUtil.sendStringViaLength(socket, statusMessage)
+            //..
         }
         catch (ex: NetworkException) {
             println("Network Error:${ex.message}")

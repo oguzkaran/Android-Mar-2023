@@ -26,38 +26,36 @@ class RegisterServer(private val threadPool: ExecutorService,
     {
         try {
             socket.soTimeout = mTimeout
-            val name = TcpUtil.receiveLine(socket)
-            val nickname = TcpUtil.receiveLine(socket)
-            val password = TcpUtil.receiveLine(socket)
-            val confirmPassword = TcpUtil.receiveLine(socket)
+            val name = TcpUtil.receiveStringViaLength(socket)
+            val nickname = TcpUtil.receiveStringViaLength(socket)
+            val password = TcpUtil.receiveStringViaLength(socket)
+            val confirmPassword = TcpUtil.receiveStringViaLength(socket)
 
-            if (name.isBlank()) {
-                TcpUtil.sendLine(socket, ERR_NAME_BLANK)
+            var statusMessage = SUC_REGISTER
+
+            if (name.isBlank())
+                statusMessage = ERR_NAME_BLANK
+
+            if (nickname.isBlank())
+                statusMessage += " $ERR_NICKNAME_BLANK"
+
+            if (password.isBlank())
+                statusMessage += " $ERR_PASSWORD_BLANK"
+            
+            if (statusMessage != SUC_REGISTER)
                 return
-            }
-
-            if (nickname.isBlank()) {
-                TcpUtil.sendLine(socket, ERR_NICKNAME_BLANK)
-                return
-            }
-
-            if (password.isBlank()) {
-                TcpUtil.sendLine(socket, ERR_PASSWORD_BLANK)
-                return
-            }
-
-            if (password != confirmPassword) {
-                TcpUtil.sendLine(socket, ERR_CONFIRM_PASSWORD)
-                return
-            }
-
+            
             val user = UserSaveDTO(nickname, name, password)
 
             chatSystemService.saveUser(user)
-            TcpUtil.sendLine(socket, SUC_REGISTER)
+            TcpUtil.sendStringViaLength(socket, SUC_REGISTER)
         }
         catch (ex: NetworkException) {
             println("Network Error:${ex.message}")
+        }
+        catch (ignore: Throwable) {
+            println("Problem occurred!...:")
+            TcpUtil.sendStringViaLength(socket, ERR_REGISTER)
         }
     }
 

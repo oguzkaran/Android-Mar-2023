@@ -55,6 +55,7 @@ dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs.configuration)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.com.karandev.util.net)
 }
 kapt {
     correctErrorTypes = true
