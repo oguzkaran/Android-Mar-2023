@@ -22,7 +22,8 @@ class LoginServer(private val threadPool: ExecutorService,
     @Value("\${app.chat.server.config.login.timeout}")
     private var mTimeout: Int = 0;
 
-    private fun clientOperationCallback(socket: Socket) {
+    private fun clientOperationCallback(socket: Socket)
+    {
         try {
             socket.soTimeout = mTimeout
             val nickname = TcpUtil.receiveStringViaLength(socket)
@@ -31,10 +32,14 @@ class LoginServer(private val threadPool: ExecutorService,
             val statusMessage = if (status) SUC_LOGIN else ERR_LOGIN
 
             TcpUtil.sendStringViaLength(socket, statusMessage)
-            //..
+            //...
         }
         catch (ex: NetworkException) {
             println("Network Error:${ex.message}")
+        }
+        catch (ex: Throwable) {
+            println("Error:${ex.message}")
+            TcpUtil.sendStringViaLength(socket, ERR_LOGIN)
         }
     }
 
