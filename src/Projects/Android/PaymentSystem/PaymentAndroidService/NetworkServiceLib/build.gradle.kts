@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "org.csystem.android.app.payment.repository"
+    namespace = "org.csystem.android.app.payment.network"
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 26
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -31,7 +31,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -39,7 +38,6 @@ android {
 
 dependencies {
     val hiltVersion = "2.48"
-    val roomVersion = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -53,11 +51,7 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
     ksp("com.google.dagger:hilt-compiler:$hiltVersion")
 
-    implementation("androidx.room:room-runtime:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
-
-    implementation("com.karandev:com-karandev-util-data:20.0.0")
-    implementation("org.csystem:org-csystem-util-datetime:20.0.0")
+    implementation("com.karandev:com-karandev-net:1.0.0")
 }
 
 kapt {
