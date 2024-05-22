@@ -1,12 +1,12 @@
 package org.csystem.android.app.payment.network
 
+
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
 import org.junit.Test
 import org.junit.runner.RunWith
-
 import org.junit.Assert.*
+
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -15,10 +15,14 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
+    fun useAppContext()
+    {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("org.csystem.android.app.payment.network.test", appContext.packageName)
+        assertEquals("com.karandev.util.net", appContext.packageName)
     }
+
+
+
 }
