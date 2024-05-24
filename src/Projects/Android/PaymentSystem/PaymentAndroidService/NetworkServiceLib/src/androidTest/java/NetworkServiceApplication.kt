@@ -10,11 +10,13 @@ import javax.inject.Inject
 
 const val HOST = "161.97.141.113"
 const val PORT = 50540
+
 class NetworkServiceApplication @Inject constructor() {
 
     private fun socketConnect(id : Byte) : String
     {
         var msg : String
+
         try {
             Socket(HOST, PORT).use {
                 TcpUtil.sendByte(it, id)
@@ -33,6 +35,7 @@ class NetworkServiceApplication @Inject constructor() {
         }
         return msg
     }
+
     private fun statusMessage(status : Byte, socket: Socket ) : String
     {
 
@@ -56,7 +59,7 @@ class NetworkServiceApplication @Inject constructor() {
 
     }
     @OptIn(DelicateCoroutinesApi::class)
-     fun run(id : Byte) : String
+    fun run(id : Byte) : String
     {
         var msg : String = ""
         runBlocking {
