@@ -25,12 +25,10 @@ class NetworkServiceApplication @Inject constructor() {
             }
 
         }
-        catch (ex : IOException)
-        {
+        catch (ex : IOException) {
             throw IOException("socketConnect IoException failed")
         }
-        catch (ex : Throwable)
-        {
+        catch (ex : Throwable) {
             throw  Throwable("socketConnect Throwable  failed")
         }
         return msg
@@ -38,7 +36,6 @@ class NetworkServiceApplication @Inject constructor() {
 
     private fun statusMessage(status : Byte, socket: Socket ) : String
     {
-
         try {
             return if (status == 1.toByte())
                 TcpUtil.receiveStringViaLength(socket)
@@ -47,17 +44,16 @@ class NetworkServiceApplication @Inject constructor() {
             else
                  "Bilinmeyen bir hata oluştu"
         }
-        catch (ex : IOException)
-        {
+        catch (ex : IOException) {
             throw IOException("statusMessage IoException")
         }
-        catch (ex : Throwable)
-        {
+        catch (ex : Throwable) {
             throw  Throwable("statusMessage ThrowableException")
         }
 
 
     }
+
     @OptIn(DelicateCoroutinesApi::class)
     fun run(id : Byte) : String
     {
@@ -70,9 +66,5 @@ class NetworkServiceApplication @Inject constructor() {
 
 
         return msg
-
-
     }
-
-
 }
