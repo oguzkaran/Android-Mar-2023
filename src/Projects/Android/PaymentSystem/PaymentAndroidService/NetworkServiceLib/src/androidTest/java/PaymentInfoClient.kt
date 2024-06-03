@@ -11,8 +11,7 @@ import javax.inject.Inject
 const val HOST = "161.97.141.113"
 const val PORT = 50540
 
-class NetworkServiceApplication @Inject constructor() {
-
+class PaymentInfoClient @Inject constructor() {
     private fun socketConnect(id : Byte) : String
     {
         var msg : String
@@ -21,7 +20,7 @@ class NetworkServiceApplication @Inject constructor() {
             Socket(HOST, PORT).use {
                 TcpUtil.sendByte(it, id)
                 val status = TcpUtil.receiveByte(it)
-                 msg = statusMessage(status,it)
+                msg = statusMessage(status,it)
             }
 
         }
@@ -40,7 +39,7 @@ class NetworkServiceApplication @Inject constructor() {
             return if (status == 1.toByte())
                 TcpUtil.receiveStringViaLength(socket)
             else if (status == 0.toByte())
-                     "yanlış bilgi"
+                "yanlış bilgi"
             else
                  "Bilinmeyen bir hata oluştu"
         }
@@ -48,10 +47,8 @@ class NetworkServiceApplication @Inject constructor() {
             throw IOException("statusMessage IoException")
         }
         catch (ex : Throwable) {
-            throw  Throwable("statusMessage ThrowableException")
+            throw Throwable("statusMessage ThrowableException")
         }
-
-
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -63,7 +60,6 @@ class NetworkServiceApplication @Inject constructor() {
                 msg = socketConnect(id)
             }
         }
-
 
         return msg
     }
