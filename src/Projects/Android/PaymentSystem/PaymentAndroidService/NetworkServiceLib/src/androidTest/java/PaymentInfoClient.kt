@@ -20,9 +20,8 @@ class PaymentInfoClient @Inject constructor() {
             Socket(HOST, PORT).use {
                 TcpUtil.sendByte(it, id)
                 val status = TcpUtil.receiveByte(it)
-                msg = statusMessage(status,it)
+                msg = statusMessage(status, it)
             }
-
         }
         catch (ex : IOException) {
             throw IOException("socketConnect IoException failed")
